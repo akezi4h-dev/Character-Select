@@ -34,9 +34,9 @@ export default function GameMenu() {
         </div>
       </div>
 
-      {/* Main two-panel content — overflow visible so kart is never clipped */}
-      <div className="relative z-10 flex flex-1 px-8 pt-4 pb-16 gap-8">
-        {/* Left panel */}
+      {/* Main two-panel content */}
+      <div className="relative z-10 flex flex-1 px-8 pt-4 gap-8">
+        {/* Left panel — grid centered, untouched */}
         <div className="w-2/5 flex items-center justify-center">
           <CharacterGrid
             characters={CHARACTERS}
@@ -47,10 +47,10 @@ export default function GameMenu() {
           />
         </div>
 
-        {/* Right panel — padding gives kart breathing room, overflow visible */}
+        {/* Right panel — even padding, fills full height, kart centered within */}
         <div
           className="w-3/5 flex items-center justify-center"
-          style={{ padding: '20px 40px 20px 20px', boxSizing: 'border-box' }}
+          style={{ padding: '20px', boxSizing: 'border-box', alignSelf: 'stretch' }}
         >
           <CharacterPreview character={selected} />
         </div>
