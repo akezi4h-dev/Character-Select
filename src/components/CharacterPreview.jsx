@@ -1,29 +1,48 @@
 import KartDisplay from './KartDisplay'
 import CustomizeButton from './CustomizeButton'
 
-// Right panel layout (top to bottom):
-// 1. Character name in pixel font
-// 2. Large centered kart — main focal point, no portrait
-// 3. Kart name label
-// 4. Customize button
+// Right panel — full rewrite.
+// Layout top to bottom, all centered: name → kart → kart label → customize button
+// No portrait. Kart is the main focal point.
 export default function CharacterPreview({ character }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 w-full h-full">
+    <div style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      padding: '24px',
+      boxSizing: 'border-box',
+      overflow: 'hidden',
+    }}>
 
-      {/* Character name or idle prompt */}
-      <div style={{ minHeight: '24px', textAlign: 'center' }}>
+      {/* Character name */}
+      <div style={{ textAlign: 'center', minHeight: '24px' }}>
         {character ? (
-          <p style={{ fontSize: '13px', color: character.color.text, letterSpacing: '0.08em' }}>
+          <p style={{
+            fontSize: '13px',
+            color: character.color.text,
+            letterSpacing: '0.08em',
+            fontFamily: "'Press Start 2P', monospace",
+          }}>
             {character.name.toUpperCase()}
           </p>
         ) : (
-          <p style={{ fontSize: '10px', color: '#f9a8d4', letterSpacing: '0.05em' }}>
+          <p style={{
+            fontSize: '10px',
+            color: '#f9a8d4',
+            letterSpacing: '0.05em',
+            fontFamily: "'Press Start 2P', monospace",
+          }}>
             SELECT A RACER
           </p>
         )}
       </div>
 
-      {/* Kart — keyed to character id, remounts on every new selection to retrigger animation */}
+      {/* Kart — keyed to character.id so animation retrigggers on every new selection */}
       <KartDisplay key={character?.id ?? 'empty'} character={character} />
 
       <CustomizeButton />
