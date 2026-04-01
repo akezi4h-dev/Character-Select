@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
 import BackgroundLayer from './BackgroundLayer'
+import NavTabs from './NavTabs'
 import CharacterGrid from './CharacterGrid'
 import CharacterPreview from './CharacterPreview'
 import BackButton from './BackButton'
@@ -23,6 +24,11 @@ export default function GameMenu() {
         <h1 className="text-3xl font-bold tracking-widest text-pink-400 drop-shadow-sm">
           SELECT YOUR RACER
         </h1>
+      </div>
+
+      {/* Nav tabs — ITEMS / POWER UPS / KARTS */}
+      <div className="relative z-10 px-8 pt-2 pb-1">
+        <NavTabs />
       </div>
 
       {/* Main two-panel content */}
