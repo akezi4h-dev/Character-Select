@@ -1,36 +1,19 @@
-// Start button — retro pixel style. Disabled until a character is selected.
+// Start button — bottom right. Big, rounded, pastel pink/mint, soft glow.
+// Disabled until a character is selected.
 export default function StartButton({ disabled }) {
   return (
     <button
       disabled={disabled}
-      className="px-8 py-3 text-white border-4 transition-all duration-100"
-      style={{
-        fontSize: '11px',
-        borderRadius: '4px',
-        backgroundColor: disabled ? '#f9a8d4' : '#f472b6',
-        borderColor: disabled ? '#fbcfe8' : '#ec4899',
-        boxShadow: disabled ? 'none' : '4px 4px 0px rgba(0,0,0,0.25)',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.6 : 1,
-      }}
-      onMouseDown={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.transform = 'translate(3px, 3px)'
-          e.currentTarget.style.boxShadow = 'none'
+      className={`
+        px-10 py-3 rounded-full text-white font-bold text-lg tracking-wide
+        transition-all duration-200
+        ${disabled
+          ? 'bg-pink-200 cursor-not-allowed opacity-50'
+          : 'bg-pink-400 shadow-[0_0_16px_4px_rgba(244,114,182,0.4)] hover:scale-105 hover:shadow-[0_0_24px_6px_rgba(244,114,182,0.5)] active:scale-95'
         }
-      }}
-      onMouseUp={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.transform = ''
-          e.currentTarget.style.boxShadow = '4px 4px 0px rgba(0,0,0,0.25)'
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = ''
-        if (!disabled) e.currentTarget.style.boxShadow = '4px 4px 0px rgba(0,0,0,0.25)'
-      }}
+      `}
     >
-      START &gt;&gt;
+      START ▶
     </button>
   )
 }
