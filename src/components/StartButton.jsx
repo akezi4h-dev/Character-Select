@@ -1,5 +1,5 @@
 // START button — fixed, centered at the bottom of the screen.
-export default function StartButton({ disabled }) {
+export default function StartButton({ disabled, activeColor = '#6CC2EE' }) {
   return (
     <button
       disabled={disabled}
@@ -15,11 +15,11 @@ export default function StartButton({ disabled }) {
         borderRadius: '999px',
         border: 'none',
         cursor: disabled ? 'not-allowed' : 'pointer',
-        backgroundColor: disabled ? '#f9a8d4' : '#f472b6',
+        backgroundColor: disabled ? '#b0d4e8' : activeColor,
         color: 'white',
-        opacity: disabled ? 0.5 : 1,
-        boxShadow: disabled ? 'none' : '0 0 16px 4px rgba(244,114,182,0.4)',
-        transition: 'all 0.2s',
+        opacity: disabled ? 0.6 : 1,
+        boxShadow: disabled ? 'none' : `0 0 16px 4px ${activeColor}88`,
+        transition: 'background-color 0.3s, box-shadow 0.3s',
       }}
       onMouseEnter={(e) => {
         if (!disabled) e.currentTarget.style.boxShadow = '0 0 24px 6px rgba(244,114,182,0.6)'

@@ -21,7 +21,11 @@ export default function GameMenu() {
       {/* Title + nav — moved up 40px from previous 100px → now 60px */}
       <div className="relative z-10" style={{ marginTop: '60px' }}>
         <div className="text-center pb-2">
-          <h1 style={{ fontSize: '44px', color: '#f472b6', letterSpacing: '0.1em' }}>
+          <h1 style={{
+            fontSize: '44px',
+            letterSpacing: '0.1em',
+            color: selected ? selected.color.text : '#6CC2EE',
+          }}>
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           </h1>
         </div>
@@ -57,8 +61,8 @@ export default function GameMenu() {
         <BackButton />
       </div>
 
-      {/* START — fixed, centered at bottom */}
-      <StartButton disabled={!selected} />
+      {/* START — fixed, centered at bottom, color matches selected character */}
+      <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
     </div>
   )
 }
