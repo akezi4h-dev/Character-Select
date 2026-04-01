@@ -1,38 +1,39 @@
 import KartDisplay from './KartDisplay'
 import CustomizeButton from './CustomizeButton'
 
+// Right panel layout (top to bottom):
+// 1. Large floating character portrait — no box, no border
+// 2. Character name in pixel font
+// 3. Kart sliding in from right — key={character?.id} remounts on selection, restarting animation
+// 4. Kart name label
+// 5. Customize button
 export default function CharacterPreview({ character }) {
   return (
-    <div className="flex flex-col items-center gap-5">
-      {/* Large character display */}
-      <div
-        className="
-          w-44 h-44 rounded-3xl border-4 border-white/60
-          bg-white/40 backdrop-blur-sm shadow-xl
-          flex items-center justify-center text-8xl
-          character-idle
-        "
-      >
-        {character ? character.emoji : '❓'}
+    <div className="flex flex-col items-center gap-4 w-full">
+
+      {/* Character portrait — free-floating, no card/box/border */}
+      <div className="character-idle" style={{ lineHeight: 1 }}>
+        <span style={{ fontSize: '110px' }}>
+          {character ? character.emoji : '❓'}
+        </span>
       </div>
 
-      {/* Name or prompt */}
-      <div className="text-center">
+      {/* Name or idle prompt */}
+      <div className="text-center" style={{ minHeight: '28px' }}>
         {character ? (
-          <h2
-            className="text-2xl font-bold tracking-widest drop-shadow-sm"
-            style={{ color: character.color.text }}
-          >
+          <p style={{ fontSize: '12px', color: character.color.text, letterSpacing: '0.08em' }}>
             {character.name.toUpperCase()}
-          </h2>
+          </p>
         ) : (
-          <p className="text-lg font-semibold text-pink-300 tracking-wide">
-            Select a Racer
+          <p style={{ fontSize: '10px', color: '#f9a8d4', letterSpacing: '0.05em' }}>
+            SELECT A RACER
           </p>
         )}
       </div>
 
-      <KartDisplay character={character} />
+      {/* Kart — keyed to character id so it remounts (and re-animates) on every new selection */}
+      <KartDisplay key={character?.id ?? 'empty'} character={character} />
+
       <CustomizeButton />
     </div>
   )

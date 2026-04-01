@@ -43,3 +43,13 @@ body {
 .btn-squish:active {
   transform: scale(0.92);
 }
+
+/* Kart slide-in from the right on character select */
+.kart-slide-in {
+  animation: slideInKart 0.6s ease-out forwards;
+}
+
+@keyframes slideInKart {
+  from { transform: translateX(100px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
