@@ -1,5 +1,5 @@
 // Character selection card.
-// Hover: scale up, per-character border glow, soft bounce.
+// Hover: scale up, per-character border glow.
 // Selected: highlighted border + persistent glow.
 export default function CharacterCard({ character, isSelected, onSelect, onHover }) {
   const { color } = character
@@ -9,22 +9,20 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
       onClick={() => onSelect(character)}
       onMouseEnter={() => onHover(character)}
       className="
-        flex flex-col items-center gap-3 p-4 rounded-2xl border-4
+        flex flex-col items-center gap-4 p-5 rounded-2xl border-4
         transition-all duration-200 cursor-pointer select-none
         bg-white/50 backdrop-blur-sm
-        w-32 h-36
+        w-48 h-56
       "
       style={{
         borderColor: isSelected ? color.border : 'rgba(255,255,255,0.6)',
-        boxShadow: isSelected
-          ? `0 0 20px 6px ${color.glow}`
-          : 'none',
+        boxShadow: isSelected ? `0 0 24px 8px ${color.glow}` : 'none',
         transform: isSelected ? 'scale(1.06)' : '',
       }}
       onMouseOver={(e) => {
         if (!isSelected) {
           e.currentTarget.style.borderColor = color.border
-          e.currentTarget.style.boxShadow = `0 0 14px 4px ${color.glow}`
+          e.currentTarget.style.boxShadow = `0 0 18px 5px ${color.glow}`
           e.currentTarget.style.transform = 'scale(1.06)'
         }
       }}
@@ -38,18 +36,18 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
     >
       {/* Avatar */}
       <div
-        className="w-14 h-14 rounded-xl flex items-center justify-center text-4xl"
+        className="w-24 h-24 rounded-2xl flex items-center justify-center text-6xl flex-shrink-0"
         style={{ backgroundColor: color.pastel }}
       >
         {character.emoji}
       </div>
 
-      {/* Name */}
+      {/* Name — always below the avatar, never overlapping */}
       <span
-        className="text-sm font-bold tracking-wide"
+        className="text-base font-bold tracking-widest mt-auto"
         style={{ color: color.text }}
       >
-        {character.name}
+        {character.name.toUpperCase()}
       </span>
     </button>
   )
