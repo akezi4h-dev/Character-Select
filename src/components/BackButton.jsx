@@ -1,12 +1,27 @@
-// Back button — bottom left. Small, rounded, pastel, arrow icon.
+// Back button — retro pixel style. Bottom left.
 export default function BackButton() {
   return (
-    <button className="
-      flex items-center gap-2 px-5 py-2 rounded-full
-      bg-sky-100 border-2 border-sky-200 text-sky-400 font-semibold text-sm
-      hover:scale-105 hover:border-sky-300 transition-all duration-200
-    ">
-      ← Back
+    <button
+      className="px-5 py-2 text-sky-600 bg-sky-100 border-4 border-sky-300 transition-all duration-100"
+      style={{
+        fontSize: '10px',
+        borderRadius: '4px',
+        boxShadow: '4px 4px 0px rgba(0,0,0,0.2)',
+      }}
+      onMouseDown={(e) => {
+        e.currentTarget.style.transform = 'translate(3px, 3px)'
+        e.currentTarget.style.boxShadow = 'none'
+      }}
+      onMouseUp={(e) => {
+        e.currentTarget.style.transform = ''
+        e.currentTarget.style.boxShadow = '4px 4px 0px rgba(0,0,0,0.2)'
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = ''
+        e.currentTarget.style.boxShadow = '4px 4px 0px rgba(0,0,0,0.2)'
+      }}
+    >
+      &lt;&lt; BACK
     </button>
   )
 }
