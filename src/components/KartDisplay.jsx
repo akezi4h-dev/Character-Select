@@ -1,18 +1,23 @@
-// Kart display — main focal point of the right panel.
-// Constrained to panel width, centered, never overflows.
+// Kart display — main focal point, 350–400px wide, centered, free-floating.
 // Slide-in animation retriggered by parent via key={character.id}.
 export default function KartDisplay({ character }) {
   if (!character) {
     return (
       <div style={{
-        width: '100%',
-        maxWidth: '320px',
-        height: '200px',
+        width: '380px',
+        height: '280px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <span style={{ fontSize: '10px', color: '#cbd5e1', letterSpacing: '0.05em' }}>— — —</span>
+        <span style={{
+          fontSize: '10px',
+          color: '#cbd5e1',
+          letterSpacing: '0.05em',
+          fontFamily: "'Press Start 2P', monospace",
+        }}>
+          — — —
+        </span>
       </div>
     )
   }
@@ -21,23 +26,23 @@ export default function KartDisplay({ character }) {
     <div
       className="kart-slide-in"
       style={{
-        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '12px',
+        gap: '14px',
+        width: '100%',
         overflow: 'hidden',
       }}
     >
-      {/* Kart image — constrained to panel, centered, never overflows */}
+      {/* Kart image — 350–400px wide, constrained, never overflows */}
       <div style={{
         width: '100%',
-        maxWidth: '320px',
+        maxWidth: '380px',
         display: 'flex',
         justifyContent: 'center',
         overflow: 'hidden',
       }}>
-        <span style={{ fontSize: '220px', lineHeight: 1 }}>🏎️</span>
+        <span style={{ fontSize: '280px', lineHeight: 1 }}>🏎️</span>
       </div>
 
       {/* Kart name label */}

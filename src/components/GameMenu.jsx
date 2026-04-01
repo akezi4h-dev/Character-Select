@@ -11,28 +11,30 @@ export default function GameMenu() {
   const [selected, setSelected] = useState(null)
   const [hovered, setHovered] = useState(null)
 
-  // Background follows hover, falls back to selected, then default
   const activeTheme = hovered?.theme ?? selected?.theme ?? 'default'
 
   return (
     <div className="relative w-screen h-screen overflow-hidden flex flex-col">
-      {/* Background — absolute, behind everything */}
+      {/* Background */}
       <BackgroundLayer activeTheme={activeTheme} />
 
-      {/* Page title */}
-      <div className="relative z-10 pt-6 text-center">
-        <h1 className="text-3xl font-bold tracking-widest text-pink-400 drop-shadow-sm">
-          SELECT YOUR RACER
-        </h1>
-      </div>
+      {/* Title + nav tabs pushed down 100px together */}
+      <div className="relative z-10" style={{ marginTop: '100px' }}>
+        {/* Title — shows character name when selected */}
+        <div className="text-center pb-2">
+          <h1 style={{ fontSize: '14px', color: '#f472b6', letterSpacing: '0.1em' }}>
+            {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
+          </h1>
+        </div>
 
-      {/* Nav tabs — ITEMS / POWER UPS / KARTS */}
-      <div className="relative z-10 px-8 pt-2 pb-1">
-        <NavTabs />
+        {/* Nav tabs */}
+        <div className="px-8 pt-2 pb-1">
+          <NavTabs />
+        </div>
       </div>
 
       {/* Main two-panel content */}
-      <div className="relative z-10 flex flex-1 overflow-hidden px-8 pt-4 pb-2 gap-8">
+      <div className="relative z-10 flex flex-1 overflow-hidden px-8 pt-4 pb-16 gap-8">
         {/* Left panel — character grid */}
         <div className="w-2/5 flex items-center justify-center">
           <CharacterGrid
@@ -44,17 +46,19 @@ export default function GameMenu() {
           />
         </div>
 
-        {/* Right panel — character preview */}
-        <div className="w-3/5 flex items-center justify-center">
+        {/* Right panel — kart preview */}
+        <div className="w-3/5 flex items-center justify-center overflow-hidden">
           <CharacterPreview character={selected} />
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="relative z-10 flex justify-between items-center px-8 py-4">
+      {/* Bottom bar — Back button only, START is fixed centered */}
+      <div className="relative z-10 flex items-center px-8 py-4">
         <BackButton />
-        <StartButton disabled={!selected} />
       </div>
+
+      {/* START button — fixed, centered at bottom */}
+      <StartButton disabled={!selected} />
     </div>
   )
 }

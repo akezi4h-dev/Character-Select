@@ -1,17 +1,38 @@
-// Start button — bottom right. Big, rounded, pastel pink/mint, soft glow.
-// Disabled until a character is selected.
+// START button — fixed, centered at the bottom of the screen.
 export default function StartButton({ disabled }) {
   return (
     <button
       disabled={disabled}
-      className={`
-        px-10 py-3 rounded-full text-white font-bold text-lg tracking-wide
-        transition-all duration-200
-        ${disabled
-          ? 'bg-pink-200 cursor-not-allowed opacity-50'
-          : 'bg-pink-400 shadow-[0_0_16px_4px_rgba(244,114,182,0.4)] hover:scale-105 hover:shadow-[0_0_24px_6px_rgba(244,114,182,0.5)] active:scale-95'
-        }
-      `}
+      style={{
+        position: 'fixed',
+        bottom: '24px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 50,
+        fontFamily: "'Press Start 2P', monospace",
+        fontSize: '11px',
+        padding: '14px 40px',
+        borderRadius: '999px',
+        border: 'none',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        backgroundColor: disabled ? '#f9a8d4' : '#f472b6',
+        color: 'white',
+        opacity: disabled ? 0.5 : 1,
+        boxShadow: disabled ? 'none' : '0 0 16px 4px rgba(244,114,182,0.4)',
+        transition: 'all 0.2s',
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled) e.currentTarget.style.boxShadow = '0 0 24px 6px rgba(244,114,182,0.6)'
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled) e.currentTarget.style.boxShadow = '0 0 16px 4px rgba(244,114,182,0.4)'
+      }}
+      onMouseDown={(e) => {
+        if (!disabled) e.currentTarget.style.transform = 'translateX(-50%) scale(0.95)'
+      }}
+      onMouseUp={(e) => {
+        if (!disabled) e.currentTarget.style.transform = 'translateX(-50%)'
+      }}
     >
       START ▶
     </button>
