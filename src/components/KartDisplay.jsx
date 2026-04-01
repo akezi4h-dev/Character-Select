@@ -31,18 +31,18 @@ export default function KartDisplay({ character }) {
         alignItems: 'center',
         gap: '14px',
         width: '100%',
-        overflow: 'hidden',
       }}
     >
-      {/* Kart image — 350–400px wide, constrained, never overflows */}
+      {/* Kart image — padding gives emoji room so overflow:hidden doesn't clip edges */}
       <div style={{
         width: '100%',
-        maxWidth: '380px',
+        maxWidth: '420px',
         display: 'flex',
         justifyContent: 'center',
-        overflow: 'hidden',
+        padding: '0 24px',
+        boxSizing: 'border-box',
       }}>
-        <span style={{ fontSize: '280px', lineHeight: 1 }}>🏎️</span>
+        <span style={{ fontSize: '240px', lineHeight: 1.2 }}>🏎️</span>
       </div>
 
       {/* Kart name label */}

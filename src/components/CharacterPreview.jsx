@@ -5,14 +5,10 @@ import KartDisplay from './KartDisplay'
 export default function CharacterPreview({ character }) {
   return (
     <div style={{
-      width: '100%',
-      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '16px',
-      boxSizing: 'border-box',
       overflow: 'hidden',
     }}>
       <KartDisplay key={character?.id ?? 'empty'} character={character} />

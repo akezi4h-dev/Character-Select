@@ -22,7 +22,7 @@ export default function GameMenu() {
       <div className="relative z-10" style={{ marginTop: '100px' }}>
         {/* Title — shows character name when selected */}
         <div className="text-center pb-2">
-          <h1 style={{ fontSize: '14px', color: '#f472b6', letterSpacing: '0.1em' }}>
+          <h1 style={{ fontSize: '22px', color: '#f472b6', letterSpacing: '0.1em' }}>
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           </h1>
         </div>
