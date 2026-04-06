@@ -123,7 +123,7 @@ export default function GameMenu() {
       {/* Kart — exact position per spec */}
       <div style={{
         position: 'absolute',
-        left: '760px',
+        left: '800px',
         top: '30px',
         width: '426px',
         height: '240px',
