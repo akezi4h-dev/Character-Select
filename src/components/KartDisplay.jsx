@@ -27,33 +27,33 @@ export default function KartDisplay({ character }) {
       overflow: 'visible',
     }}>
 
-      {/* Kart — slides in, ~350px wide */}
+      {/* Kart — slides in, ~700px wide */}
       <div
         className="kart-slide-in"
         style={{ overflow: 'visible', zIndex: 1, position: 'relative' }}
       >
-        <span style={{ fontSize: '300px', lineHeight: 1, display: 'block' }}>🏎️</span>
+        <span style={{ fontSize: '600px', lineHeight: 1.1, display: 'block' }}>🏎️</span>
       </div>
 
       {/* Static ellipse shadow — does not animate */}
       <div style={{
-        width: '200px',
-        height: '20px',
+        width: '340px',
+        height: '35px',
         background: 'rgba(0,0,0,0.15)',
         borderRadius: '50%',
-        marginTop: '-10px',
+        marginTop: '-15px',
         zIndex: 0,
         flexShrink: 0,
+        position: 'relative',
       }} />
 
       {/* Kart label */}
       <p style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '7px',
+        fontSize: '9px',
         color: character.color.text,
         letterSpacing: '0.06em',
         textAlign: 'center',
-        marginTop: '8px',
         margin: '8px 0 0 0',
       }}>
         {character.name.toUpperCase()}'S KART
