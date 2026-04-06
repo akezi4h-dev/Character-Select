@@ -109,7 +109,7 @@ export default function GameMenu() {
             {DETAILS.map(({ label, value }) => (
               <p key={label} style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: '9.6px',
+                fontSize: '16px',
                 margin: 0,
                 color: selected.color.text,
                 letterSpacing: '0.04em',
