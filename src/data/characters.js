@@ -11,6 +11,7 @@ export const CHARACTERS = [
       text: '#6286FE',
     },
     stats: { strength: 80, ability: 60 },
+    subheader: 'bewildered seagull',
   },
   {
     id: 'gurchen',
@@ -24,6 +25,7 @@ export const CHARACTERS = [
       text: '#6BF26B',
     },
     stats: { strength: 40, ability: 90 },
+    subheader: 'beloved croc',
   },
   {
     id: 'gerald',
@@ -37,6 +39,7 @@ export const CHARACTERS = [
       text: '#FFDA69',
     },
     stats: { strength: 70, ability: 50 },
+    subheader: 'wild card monkey',
   },
   {
     id: 'barry',
@@ -50,5 +53,6 @@ export const CHARACTERS = [
       text: '#FF8651',
     },
     stats: { strength: 60, ability: 75 },
+    subheader: 'lovable platypus',
   },
 ]

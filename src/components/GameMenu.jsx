@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
 import BackgroundLayer from './BackgroundLayer'
-import StatBars from './StatBars'
 import CharacterGrid from './CharacterGrid'
 import CharacterPreview from './CharacterPreview'
 import BackButton from './BackButton'
@@ -17,25 +16,37 @@ export default function GameMenu() {
     <div className="relative w-screen h-screen overflow-hidden flex flex-col">
       <BackgroundLayer activeTheme={activeTheme} />
 
-      {/* Title + nav — fixed height so layout never shifts when text changes */}
+      {/* Title + subheader — fixed height so layout never shifts */}
       <div className="relative z-10 flex-shrink-0" style={{ marginTop: '60px' }}>
         <div style={{
-          height: '80px',
+          height: '120px',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
+          gap: '10px',
         }}>
           <h1 style={{
-            fontSize: '44px',
+            fontSize: '57px',
             letterSpacing: '0.1em',
             whiteSpace: 'nowrap',
             color: selected ? selected.color.text : '#6CC2EE',
+            margin: 0,
           }}>
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           </h1>
-        </div>
-        <div className="px-8 pt-2 pb-1" style={{ display: 'flex', justifyContent: 'center' }}>
-          <StatBars character={selected} />
+          {selected && (
+            <p style={{
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: '9px',
+              color: selected.color.text,
+              opacity: 0.7,
+              margin: 0,
+              letterSpacing: '0.05em',
+            }}>
+              {selected.subheader}
+            </p>
+          )}
         </div>
       </div>
 
