@@ -15,15 +15,20 @@ export default function GameMenu() {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden flex flex-col">
-      {/* Background */}
       <BackgroundLayer activeTheme={activeTheme} />
 
-      {/* Title + nav — moved up 40px from previous 100px → now 60px */}
-      <div className="relative z-10" style={{ marginTop: '60px' }}>
-        <div className="text-center pb-2">
+      {/* Title + nav — fixed height so layout never shifts when text changes */}
+      <div className="relative z-10 flex-shrink-0" style={{ marginTop: '60px' }}>
+        <div style={{
+          height: '80px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
           <h1 style={{
             fontSize: '44px',
             letterSpacing: '0.1em',
+            whiteSpace: 'nowrap',
             color: selected ? selected.color.text : '#6CC2EE',
           }}>
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
@@ -34,10 +39,14 @@ export default function GameMenu() {
         </div>
       </div>
 
-      {/* Main two-panel content */}
-      <div className="relative z-10 flex flex-1 px-8 pt-4 gap-8">
-        {/* Left panel — grid centered, untouched */}
-        <div className="w-2/5 flex items-center justify-center">
+      {/* Left panel only — right panel is absolutely positioned and outside flex flow */}
+      <div className="relative z-10 flex flex-1 px-8 pt-4">
+        <div style={{
+          width: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
           <CharacterGrid
             characters={CHARACTERS}
             selected={selected}
@@ -46,22 +55,31 @@ export default function GameMenu() {
             onLeave={() => setHovered(null)}
           />
         </div>
+      </div>
 
-        {/* Right panel — even padding, fills full height, kart centered within */}
-        <div
-          className="w-3/5 flex items-center justify-center"
-          style={{ padding: '20px', boxSizing: 'border-box', alignSelf: 'stretch' }}
-        >
-          <CharacterPreview character={selected} />
-        </div>
+      {/* Right panel — absolutely positioned, perfectly centered in right half, never clips */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '50%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'visible',
+        zIndex: 15,
+      }}>
+        <CharacterPreview character={selected} />
       </div>
 
       {/* Bottom bar */}
-      <div className="relative z-10 flex items-center px-8 py-4">
+      <div className="relative z-20 flex items-center px-8 py-4 flex-shrink-0">
         <BackButton />
       </div>
 
-      {/* START — fixed, centered at bottom, color matches selected character */}
+      {/* START — fixed, centered at bottom */}
       <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
     </div>
   )
