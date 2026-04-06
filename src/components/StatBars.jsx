@@ -23,9 +23,9 @@ function StatRow({ label, fill, color }) {
       {/* Label */}
       <span style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '8px',
-        color: '#fff',
-        textShadow: '1px 1px 0px rgba(0,0,0,0.3)',
+        fontSize: '8.8px',
+        color: color,
+        textShadow: '1px 1px 0px rgba(0,0,0,0.2)',
         whiteSpace: 'nowrap',
         width: '76px',
         flexShrink: 0,
@@ -38,10 +38,10 @@ function StatRow({ label, fill, color }) {
       <div style={{
         flex: 1,
         height: '14px',
-        background: 'rgba(255,255,255,0.15)',
+        background: 'rgba(255,255,255,0.4)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
-        border: '1px solid rgba(255,255,255,0.3)',
+        border: '2px solid rgba(255,255,255,0.7)',
         borderRadius: '999px',
         overflow: 'hidden',
         position: 'relative',
