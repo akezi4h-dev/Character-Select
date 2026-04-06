@@ -7,11 +7,11 @@ import StartButton from './StartButton'
 import StatBars from './StatBars'
 import KartDisplay from './KartDisplay'
 
-const DETAILS = [
-  { label: 'AGE',             value: '???' },
-  { label: 'FAVORITE FOOD',   value: '???' },
-  { label: 'FAVORITE ANIMAL', value: '???' },
-  { label: 'CATCHPHRASE',     value: '???' },
+const DETAIL_KEYS = [
+  { label: 'Age',            key: 'age' },
+  { label: 'Favorite Food',  key: 'food' },
+  { label: 'Favorite Place', key: 'place' },
+  { label: 'Catchphrase',    key: 'catchphrase' },
 ]
 
 export default function GameMenu() {
@@ -86,8 +86,8 @@ export default function GameMenu() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: '200px',
+        justifyContent: 'flex-start',
+        paddingTop: '260px',
         paddingLeft: '20px',
         paddingRight: '20px',
         paddingBottom: '20px',
@@ -106,15 +106,15 @@ export default function GameMenu() {
             width: '100%',
             maxWidth: '300px',
           }}>
-            {DETAILS.map(({ label, value }) => (
-              <p key={label} style={{
+            {DETAIL_KEYS.map(({ label, key }) => (
+              <p key={key} style={{
                 fontFamily: "'Press Start 2P', monospace",
                 fontSize: '16px',
                 margin: 0,
                 color: selected.color.text,
                 letterSpacing: '0.04em',
               }}>
-                {label}: {value}
+                {label}: {selected.details[key]}
               </p>
             ))}
           </div>

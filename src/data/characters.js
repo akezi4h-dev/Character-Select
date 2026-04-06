@@ -12,6 +12,7 @@ export const CHARACTERS = [
     },
     stats: { strength: 80, ability: 60 },
     subheader: 'bewildered seagull',
+    details: { age: '1 year', food: 'French Fry', place: 'Beach', catchphrase: 'SQWA' },
   },
   {
     id: 'gurchen',
@@ -26,6 +27,7 @@ export const CHARACTERS = [
     },
     stats: { strength: 40, ability: 90 },
     subheader: 'beloved croc',
+    details: { age: '5 months', food: 'Pizza', place: 'Jungle', catchphrase: 'GRRR' },
   },
   {
     id: 'gerald',
@@ -40,6 +42,7 @@ export const CHARACTERS = [
     },
     stats: { strength: 70, ability: 50 },
     subheader: 'wild card monkey',
+    details: { age: '1 month', food: 'Freeze Dried Bananas', place: 'Outer Space', catchphrase: 'Hmmm' },
   },
   {
     id: 'barry',
@@ -54,5 +57,6 @@ export const CHARACTERS = [
     },
     stats: { strength: 60, ability: 75 },
     subheader: 'lovable platypus',
+    details: { age: '3 months', food: 'Fish', place: 'River', catchphrase: "I'm not Perry, I'm Barry" },
   },
 ]
