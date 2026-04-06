@@ -6,6 +6,7 @@ import BackButton from './BackButton'
 import StartButton from './StartButton'
 import StatBars from './StatBars'
 import KartDisplay from './KartDisplay'
+import DevGrid from './DevGrid'
 
 const DETAIL_KEYS = [
   { label: 'Age',            key: 'age' },
@@ -139,6 +140,9 @@ export default function GameMenu() {
 
       {/* START — fixed, centered at bottom */}
       <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
+
+      {/* Dev grid overlay */}
+      <DevGrid />
     </div>
   )
 }
