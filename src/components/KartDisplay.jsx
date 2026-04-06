@@ -23,14 +23,6 @@ export default function KartDisplay({ character }) {
         <span style={{ fontSize: '640px', lineHeight: 1, display: 'block' }}>🏎️</span>
       </div>
 
-      {/* Static oval shadow */}
-      <div style={{
-        width: '280px',
-        height: '24px',
-        background: 'rgba(0,0,0,0.15)',
-        borderRadius: '50%',
-        flexShrink: 0,
-      }} />
 
       {/* Kart label */}
       <p style={{

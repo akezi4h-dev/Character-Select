@@ -134,6 +134,21 @@ export default function GameMenu() {
         <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
       </div>
 
+      {/* Kart shadow — fixed position x:995 y:720 */}
+      {selected && (
+        <div style={{
+          position: 'fixed',
+          left: '995px',
+          top: '720px',
+          width: '280px',
+          height: '24px',
+          background: 'rgba(0,0,0,0.15)',
+          borderRadius: '50%',
+          zIndex: 19,
+          pointerEvents: 'none',
+        }} />
+      )}
+
       {/* Back button */}
       <BackButton />
 
