@@ -13,8 +13,8 @@ export default function KartDisplay({ character }) {
       {/* Fixed-size container — kart overflows visually but never shifts layout */}
       <div style={{
         position: 'relative',
-        width: '420px',
-        height: '240px',
+        width: '500px',
+        height: '280px',
         flexShrink: 0,
         overflow: 'visible',
       }}>
@@ -24,11 +24,11 @@ export default function KartDisplay({ character }) {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: '420px',
+            width: '500px',
             overflow: 'visible',
           }}
         >
-          <span style={{ fontSize: '380px', lineHeight: 1, display: 'block' }}>🏎️</span>
+          <span style={{ fontSize: '460px', lineHeight: 1, display: 'block' }}>🏎️</span>
         </div>
       </div>
 

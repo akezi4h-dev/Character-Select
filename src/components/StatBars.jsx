@@ -17,7 +17,7 @@ function StatRow({ label, fill, color, id }) {
       {/* Label above bar */}
       <span style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '16px',
+        fontSize: '9.6px',
         color: color,
         textShadow: '1px 1px 0 rgba(0,0,0,0.15)',
       }}>
@@ -27,7 +27,7 @@ function StatRow({ label, fill, color, id }) {
       {/* Glass bar */}
       <div style={{
         width: '100%',
-        height: '14px',
+        height: '8px',
         background: 'rgba(255,255,255,0.4)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
