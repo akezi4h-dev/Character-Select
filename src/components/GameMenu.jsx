@@ -139,7 +139,7 @@ export default function GameMenu() {
         <div style={{
           position: 'fixed',
           left: '995px',
-          top: '720px',
+          top: '900px',
           width: '280px',
           height: '24px',
           background: 'rgba(0,0,0,0.15)',
