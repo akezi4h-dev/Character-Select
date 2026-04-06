@@ -16,23 +16,20 @@ export default function CharacterPreview({ character }) {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingTop: '48px',
+      paddingTop: '150px',
       paddingBottom: '24px',
+      paddingLeft: '20px',
+      paddingRight: '20px',
       boxSizing: 'border-box',
     }}>
 
-      {/* Stat bars — upper portion */}
-      <div style={{ width: '80%', flexShrink: 0, marginBottom: '20px' }}>
-        <StatBars character={character} />
-      </div>
-
-      {/* Character details — hidden when nothing selected */}
+      {/* Character details — top of right panel, hidden when nothing selected */}
       {character && (
         <div style={{
           flexShrink: 0,
           display: 'flex',
           flexDirection: 'column',
-          gap: '6px',
+          gap: '8px',
           width: '80%',
           marginBottom: '16px',
         }}>
@@ -50,15 +47,21 @@ export default function CharacterPreview({ character }) {
         </div>
       )}
 
-      {/* Kart — centered in remaining space */}
+      {/* Stat bars — below character details */}
+      <div style={{ width: '80%', flexShrink: 0, marginBottom: '8px' }}>
+        <StatBars character={character} />
+      </div>
+
+      {/* Kart — takes remaining space, bottom-aligned to match card grid level */}
       <div style={{
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         overflow: 'visible',
         width: '100%',
+        paddingBottom: '60px',
       }}>
         <KartDisplay key={character?.id ?? 'empty'} character={character} />
       </div>
