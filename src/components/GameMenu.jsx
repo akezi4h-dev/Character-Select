@@ -124,9 +124,9 @@ export default function GameMenu() {
       <div style={{
         position: 'absolute',
         left: '915px',
-        top: '450px',
-        width: '355px',
-        height: '355px',
+        top: '400px',
+        width: '710px',
+        height: '400px',
         background: 'transparent',
         overflow: 'visible',
         zIndex: 20,

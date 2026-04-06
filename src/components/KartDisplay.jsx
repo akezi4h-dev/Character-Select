@@ -14,14 +14,13 @@ export default function KartDisplay({ character }) {
         className="kart-slide-in"
         style={{
           width: '100%',
-          height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'visible',
         }}
       >
-        <span style={{ fontSize: '320px', lineHeight: 1, display: 'block' }}>🏎️</span>
+        <span style={{ fontSize: '640px', lineHeight: 1, display: 'block' }}>🏎️</span>
       </div>
 
       {/* Static oval shadow */}
