@@ -17,7 +17,7 @@ function StatRow({ label, fill, color, id }) {
       {/* Label above bar */}
       <span style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '9.6px',
+        fontSize: '16px',
         color: color,
         textShadow: '1px 1px 0 rgba(0,0,0,0.15)',
       }}>
