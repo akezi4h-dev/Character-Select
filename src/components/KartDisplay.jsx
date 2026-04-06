@@ -7,35 +7,27 @@ export default function KartDisplay({ character }) {
       flexDirection: 'column',
       alignItems: 'center',
       gap: '8px',
-      flexShrink: 0,
     }}>
 
-      {/* Fixed-size container — kart overflows visually but never shifts layout */}
-      <div style={{
-        position: 'relative',
-        width: '500px',
-        height: '280px',
-        flexShrink: 0,
-        overflow: 'visible',
-      }}>
-        <div
-          className="kart-slide-in"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '500px',
-            overflow: 'visible',
-          }}
-        >
-          <span style={{ fontSize: '460px', lineHeight: 1, display: 'block' }}>🏎️</span>
-        </div>
+      {/* Kart image — fills container width/height */}
+      <div
+        className="kart-slide-in"
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'visible',
+        }}
+      >
+        <span style={{ fontSize: '320px', lineHeight: 1, display: 'block' }}>🏎️</span>
       </div>
 
       {/* Static oval shadow */}
       <div style={{
-        width: '320px',
-        height: '28px',
+        width: '280px',
+        height: '24px',
         background: 'rgba(0,0,0,0.15)',
         borderRadius: '50%',
         flexShrink: 0,

@@ -120,13 +120,16 @@ export default function GameMenu() {
         </div>
       )}
 
-      {/* Kart — exact position x:915, y:450 */}
+      {/* Kart — exact position per spec */}
       <div style={{
-        position: 'fixed',
-        left: '915px',
+        position: 'absolute',
+        left: '420px',
         top: '450px',
-        zIndex: 20,
+        width: '355px',
+        height: '355px',
+        background: 'transparent',
         overflow: 'visible',
+        zIndex: 20,
       }}>
         <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
       </div>
