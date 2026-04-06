@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
 import BackgroundLayer from './BackgroundLayer'
-import NavTabs from './NavTabs'
+import StatBars from './StatBars'
 import CharacterGrid from './CharacterGrid'
 import CharacterPreview from './CharacterPreview'
 import BackButton from './BackButton'
@@ -34,8 +34,8 @@ export default function GameMenu() {
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           </h1>
         </div>
-        <div className="px-8 pt-2 pb-1">
-          <NavTabs />
+        <div className="px-8 pt-2 pb-1" style={{ display: 'flex', justifyContent: 'center' }}>
+          <StatBars character={selected} />
         </div>
       </div>
 

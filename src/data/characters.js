@@ -10,6 +10,7 @@ export const CHARACTERS = [
       glow: 'rgba(125,211,252,0.6)',
       text: '#6286FE',
     },
+    stats: { strength: 80, ability: 60 },
   },
   {
     id: 'gurchen',
@@ -22,6 +23,7 @@ export const CHARACTERS = [
       glow: 'rgba(134,239,172,0.6)',
       text: '#6BF26B',
     },
+    stats: { strength: 40, ability: 90 },
   },
   {
     id: 'gerald',
@@ -34,6 +36,7 @@ export const CHARACTERS = [
       glow: 'rgba(253,224,71,0.6)',
       text: '#FFDA69',
     },
+    stats: { strength: 70, ability: 50 },
   },
   {
     id: 'barry',
@@ -46,5 +49,6 @@ export const CHARACTERS = [
       glow: 'rgba(253,186,116,0.6)',
       text: '#FF8651',
     },
+    stats: { strength: 60, ability: 75 },
   },
 ]
