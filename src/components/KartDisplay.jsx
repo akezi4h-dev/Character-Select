@@ -53,7 +53,7 @@ export default function KartDisplay({ character }) {
             justifyContent: 'center',
           }}
         >
-          <span style={{ fontSize: '600px', lineHeight: 1.1, display: 'block' }}>🏎️</span>
+          <span style={{ fontSize: '340px', lineHeight: 1.1, display: 'block' }}>🏎️</span>
         </div>
 
         {/* Shadow — static, never animates, sits at bottom edge of kart */}
