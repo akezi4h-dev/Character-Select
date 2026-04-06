@@ -42,18 +42,26 @@ export default function KartDisplay({ character }) {
         width: '100%',
         maxWidth: '720px',
       }}>
-        {/* Kart — slides in, sits above shadow */}
-        <div
-          className="kart-slide-in"
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            width: '90%',
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          <span style={{ fontSize: '340px', lineHeight: 1.1, display: 'block' }}>🏎️</span>
+        {/* Kart — fixed-size container so image never shifts layout */}
+        <div style={{
+          position: 'relative',
+          width: '450px',
+          height: '250px',
+          flexShrink: 0,
+        }}>
+          <div
+            className="kart-slide-in"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '450px',
+              zIndex: 1,
+              overflow: 'visible',
+            }}
+          >
+            <span style={{ fontSize: '390px', lineHeight: 1.1, display: 'block' }}>🏎️</span>
+          </div>
         </div>
 
         {/* Shadow — static, never animates, sits at bottom edge of kart */}
