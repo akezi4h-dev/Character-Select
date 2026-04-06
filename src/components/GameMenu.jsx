@@ -1,122 +1,115 @@
 import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
-import CharacterCard from './CharacterCard'
+import BackgroundLayer from './BackgroundLayer'
+import CharacterGrid from './CharacterGrid'
+import BackButton from './BackButton'
+import StartButton from './StartButton'
 import StatBars from './StatBars'
 import KartDisplay from './KartDisplay'
-import StartButton from './StartButton'
-import BackButton from './BackButton'
 
 const DETAILS = [
-  ['AGE', '???'],
-  ['FAVORITE FOOD', '???'],
-  ['FAVORITE ANIMAL', '???'],
-  ['CATCHPHRASE', '???'],
+  { label: 'AGE',             value: '???' },
+  { label: 'FAVORITE FOOD',   value: '???' },
+  { label: 'FAVORITE ANIMAL', value: '???' },
+  { label: 'CATCHPHRASE',     value: '???' },
 ]
-
-const CARD_NAME_SIZE = '10px'
 
 export default function GameMenu() {
   const [selected, setSelected] = useState(null)
-  const [hovered,  setHovered]  = useState(null)
+  const [hovered, setHovered] = useState(null)
+
+  const activeTheme = hovered?.theme ?? selected?.theme ?? 'default'
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      overflow: 'hidden',
-      background: 'linear-gradient(to bottom, #87CEEB 0%, #FEF9C3 60%, #FDE68A 100%)',
-    }}>
+    <div className="relative w-screen h-screen overflow-hidden flex flex-col">
+      <BackgroundLayer activeTheme={activeTheme} />
 
-      {/* ── LEFT PANEL ── */}
-      <div style={{
-        position: 'fixed',
-        top: 0, left: 0,
-        width: '50%', height: '100%',
-        display: 'flex', flexDirection: 'column', alignItems: 'center',
-        paddingTop: '40px', gap: '20px',
-        boxSizing: 'border-box',
-        zIndex: 10,
-      }}>
-
-        {/* Title — fixed height, never shifts */}
+      {/* Title + subheader — fixed height so layout never shifts */}
+      <div className="relative z-10 flex-shrink-0" style={{ marginTop: '60px' }}>
         <div style={{
-          height: '80px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          height: '120px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
         }}>
           <h1 style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: '26px',
+            fontSize: '57px',
+            letterSpacing: '0.1em',
             whiteSpace: 'nowrap',
             color: selected ? selected.color.text : '#6CC2EE',
             margin: 0,
-            textShadow: '2px 2px 0 rgba(0,0,0,0.08)',
           }}>
             {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           </h1>
-        </div>
-
-        {/* Subheader — fixed height so grid never moves */}
-        <div style={{ height: '30px', display: 'flex', alignItems: 'center' }}>
           {selected && (
             <p style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '11px',
+              fontSize: '16px',
               color: selected.color.text,
-              opacity: 0.65,
+              opacity: 0.7,
               margin: 0,
-              letterSpacing: '0.04em',
+              letterSpacing: '0.05em',
             }}>
               {selected.subheader}
             </p>
           )}
         </div>
-
-        {/* Card grid — 2×2, NEVER moves */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 200px)',
-          gap: '20px',
-          flexShrink: 0,
-        }}>
-          {CHARACTERS.map((char) => (
-            <CharacterCard
-              key={char.id}
-              character={char}
-              isSelected={selected?.id === char.id}
-              onSelect={setSelected}
-              onHover={setHovered}
-              onLeave={() => setHovered(null)}
-              nameFontSize={CARD_NAME_SIZE}
-            />
-          ))}
-        </div>
-
       </div>
 
-      {/* ── RIGHT PANEL ── */}
+      {/* Left panel — card grid only, in normal flow */}
+      <div className="relative z-10 flex flex-1 px-8 pt-4">
+        <div style={{
+          width: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <CharacterGrid
+            characters={CHARACTERS}
+            selected={selected}
+            onSelect={setSelected}
+            onHover={setHovered}
+            onLeave={() => setHovered(null)}
+          />
+        </div>
+      </div>
+
+      {/* RIGHT PANEL — fixed, fully independent, never touches left panel */}
       <div style={{
         position: 'fixed',
-        top: 0, right: 0,
-        width: '50%', height: '100%',
-        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        top: 0,
+        right: 0,
+        width: '50%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'center',
-        gap: '16px',
-        padding: '20px',
-        boxSizing: 'border-box',
-        zIndex: 10,
+        paddingTop: '200px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        paddingBottom: '20px',
+        gap: '12px',
+        zIndex: 15,
         overflow: 'visible',
+        boxSizing: 'border-box',
       }}>
 
-        {/* Stats block — hidden until a character is selected */}
+        {/* Character details — hidden when nothing selected */}
         {selected && (
           <div style={{
-            display: 'flex', flexDirection: 'column', gap: '8px',
-            width: '100%', maxWidth: '360px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+            width: '100%',
+            maxWidth: '300px',
           }}>
-            {DETAILS.map(([label, value]) => (
+            {DETAILS.map(({ label, value }) => (
               <p key={label} style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: CARD_NAME_SIZE,
+                fontSize: '9.6px',
                 margin: 0,
                 color: selected.color.text,
                 letterSpacing: '0.04em',
@@ -128,23 +121,24 @@ export default function GameMenu() {
         )}
 
         {/* Stat bars */}
-        <div style={{ width: '100%', maxWidth: '360px', flexShrink: 0 }}>
+        <div style={{ width: '100%', maxWidth: '300px' }}>
           <StatBars character={selected} />
         </div>
 
-        {/* Kart — key forces remount + animation retrigger on each selection */}
-        <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
+        {/* Kart */}
+        <div style={{ overflow: 'visible' }}>
+          <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
+        </div>
 
       </div>
 
-      {/* Back button — fixed bottom left */}
-      <BackButton />
+      {/* Bottom bar */}
+      <div className="relative z-20 flex items-center px-8 py-4 flex-shrink-0">
+        <BackButton />
+      </div>
 
-      {/* START — fixed bottom center */}
-      <StartButton
-        disabled={!selected}
-        activeColor={selected ? selected.color.text : '#6CC2EE'}
-      />
+      {/* START — fixed, centered at bottom */}
+      <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
     </div>
   )
 }

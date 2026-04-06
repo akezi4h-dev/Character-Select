@@ -1,28 +1,35 @@
 export default function StatBars({ character }) {
   const color = character ? character.color.text : '#6CC2EE'
   const strength = character ? character.stats.strength : 0
-  const ability  = character ? character.stats.ability  : 0
+  const ability = character ? character.stats.ability : 0
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <StatRow label="STRENGTH" fill={strength} color={color} id={character?.id} />
-      <StatRow label="ABILITY"  fill={ability}  color={color} id={character?.id} />
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '10px',
+      width: '100%',
+      maxWidth: '360px',
+    }}>
+      <StatRow label="STRENGTH" fill={strength} color={color} key={`str-${character?.id ?? 'empty'}`} />
+      <StatRow label="ABILITY"  fill={ability}  color={color} key={`abl-${character?.id ?? 'empty'}`} />
     </div>
   )
 }
 
-function StatRow({ label, fill, color, id }) {
+function StatRow({ label, fill, color }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      {/* Label */}
       <span style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '8px',
+        fontSize: '8.8px',
         color: color,
+        textShadow: '1px 1px 0px rgba(0,0,0,0.2)',
         whiteSpace: 'nowrap',
-        width: '72px',
+        width: '76px',
         flexShrink: 0,
         textAlign: 'right',
-        textShadow: '1px 1px 0 rgba(0,0,0,0.15)',
       }}>
         {label}
       </span>
@@ -32,29 +39,30 @@ function StatRow({ label, fill, color, id }) {
         flex: 1,
         height: '14px',
         background: 'rgba(255,255,255,0.4)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         border: '2px solid rgba(255,255,255,0.7)',
         borderRadius: '999px',
         overflow: 'hidden',
         position: 'relative',
       }}>
-        {/* Animated fill */}
-        <div
-          key={`${id}-${label}`}
-          style={{
-            position: 'relative',
-            height: '100%',
-            backgroundColor: color,
-            borderRadius: '999px',
-            '--fill': `${fill}%`,
-            animation: 'fillBar 0.6s ease-out forwards',
-            width: 0,
-          }}
-        >
-          {/* Gloss shine */}
+        {/* Fill */}
+        <div style={{
+          position: 'relative',
+          height: '100%',
+          backgroundColor: color,
+          borderRadius: '999px',
+          '--fill': `${fill}%`,
+          animation: 'fillBar 0.6s ease-out forwards',
+          width: 0,
+        }}>
+          {/* Gloss highlight */}
           <div style={{
             position: 'absolute',
-            top: 0, left: 0,
-            width: '100%', height: '50%',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '50%',
             background: 'rgba(255,255,255,0.3)',
             borderRadius: '999px',
           }} />
