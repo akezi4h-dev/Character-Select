@@ -46,7 +46,7 @@ export default function GameMenu() {
           {selected && (
             <p style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '16px',
+              fontSize: '9.6px',
               color: selected.color.text,
               opacity: 0.7,
               margin: 0,
