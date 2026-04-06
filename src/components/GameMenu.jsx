@@ -2,9 +2,17 @@ import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
 import BackgroundLayer from './BackgroundLayer'
 import CharacterGrid from './CharacterGrid'
-import CharacterPreview from './CharacterPreview'
 import BackButton from './BackButton'
 import StartButton from './StartButton'
+import StatBars from './StatBars'
+import KartDisplay from './KartDisplay'
+
+const DETAILS = [
+  { label: 'AGE',             value: '???' },
+  { label: 'FAVORITE FOOD',   value: '???' },
+  { label: 'FAVORITE ANIMAL', value: '???' },
+  { label: 'CATCHPHRASE',     value: '???' },
+]
 
 export default function GameMenu() {
   const [selected, setSelected] = useState(null)
@@ -50,7 +58,7 @@ export default function GameMenu() {
         </div>
       </div>
 
-      {/* Left panel only — right panel is absolutely positioned and outside flex flow */}
+      {/* Left panel — card grid only, in normal flow */}
       <div className="relative z-10 flex flex-1 px-8 pt-4">
         <div style={{
           width: '50%',
@@ -68,9 +76,9 @@ export default function GameMenu() {
         </div>
       </div>
 
-      {/* Right panel — absolutely positioned, perfectly centered in right half, never clips */}
+      {/* RIGHT PANEL — fixed, fully independent, never touches left panel */}
       <div style={{
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         right: 0,
         width: '50%',
@@ -79,10 +87,46 @@ export default function GameMenu() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'visible',
+        padding: '20px',
+        gap: '12px',
         zIndex: 15,
+        overflow: 'visible',
+        boxSizing: 'border-box',
       }}>
-        <CharacterPreview character={selected} />
+
+        {/* Character details — hidden when nothing selected */}
+        {selected && (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+            width: '100%',
+            maxWidth: '300px',
+          }}>
+            {DETAILS.map(({ label, value }) => (
+              <p key={label} style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: '7px',
+                margin: 0,
+                color: selected.color.text,
+                letterSpacing: '0.04em',
+              }}>
+                {label}: {value}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {/* Stat bars */}
+        <div style={{ width: '100%', maxWidth: '300px' }}>
+          <StatBars character={selected} />
+        </div>
+
+        {/* Kart */}
+        <div style={{ overflow: 'visible' }}>
+          <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
+        </div>
+
       </div>
 
       {/* Bottom bar */}
