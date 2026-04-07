@@ -54,7 +54,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
           <img
             src={character.characterImage}
             alt={character.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', imageRendering: 'pixelated' }}
           />
         ) : (
           <span className="text-6xl" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>{character.emoji}</span>
