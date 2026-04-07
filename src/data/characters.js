@@ -45,7 +45,7 @@ export const CHARACTERS = [
       pastel: '#fef08a',
       border: '#fde047',
       glow: 'rgba(253,224,71,0.6)',
-      text: '#142341',
+      text: '#FFFAD9',
       cardName: '#FFFCE5',
     },
     kartImage: '/Character-Select/images/karts/gerald-kart.png',
