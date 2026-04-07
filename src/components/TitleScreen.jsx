@@ -30,7 +30,7 @@ export default function TitleScreen({ onPlay }) {
       {/* Background image */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: "url('/Character-Select/images/backgrounds/Default-Image.png')",
+        backgroundImage: "url('/Character-Select/images/backgrounds/Title-BG.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         imageRendering: 'pixelated',
