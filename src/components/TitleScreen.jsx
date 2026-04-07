@@ -69,8 +69,8 @@ export default function TitleScreen({ onPlay }) {
       {/* Karts — drive in from right to left, staggered */}
       <div style={{
         position: 'absolute',
-        top: '380px',
-        left: '30px',
+        top: '430px',
+        left: '10px',
         display: 'flex',
         gap: '80px',
         alignItems: 'flex-end',
@@ -96,7 +96,7 @@ export default function TitleScreen({ onPlay }) {
       {/* PLAY button */}
       <div style={{
         position: 'absolute',
-        top: '300px',
+        top: '250px',
         left: '50%',
         transform: 'translateX(-50%)',
         animation: 'titleFadeIn 0.6s ease forwards',
