@@ -73,7 +73,7 @@ export default function TitleScreen({ onPlay }) {
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
-        gap: '20px',
+        gap: '40px',
         alignItems: 'flex-end',
         zIndex: 2,
       }}>
@@ -83,7 +83,7 @@ export default function TitleScreen({ onPlay }) {
             src={kart.src}
             alt={kart.id}
             style={{
-              width: '150px',
+              width: '300px',
               height: 'auto',
               display: 'block',
               imageRendering: 'pixelated',
