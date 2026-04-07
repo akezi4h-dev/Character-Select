@@ -20,6 +20,8 @@ I feel like youth and plushies have been forgotten — like Toy Story — so my 
 
 ---
 
+> This design intent was written before any AI-assisted development began. It serves as the evaluative standard against which all AI output was judged throughout the project.
+
 The app should feel like a **cute pixelated pastel racing game lobby** inspired by Japanese kawaii UI and casual Nintendo-style game menus.
 
 The experience should feel playful, soft and dreamy, friendly and collectible, lighthearted and whimsical — somewhere between **Mario Kart and Sanrio aesthetics**.
@@ -31,6 +33,23 @@ The experience should feel playful, soft and dreamy, friendly and collectible, l
 - Rounded corners, pill-shaped buttons, per-character glow effects
 - Character artwork fills card frames edge to edge
 - `image-rendering: pixelated` on all pixel art images — no browser smoothing
+
+### Type Hierarchy
+
+> Established before development. All AI output was evaluated against these rules.
+
+| Role | Size | Font | Color Rule |
+|------|------|------|------------|
+| Screen title ("SELECT YOUR RACER" / character name) | 57px | Press Start 2P | `#51A0C8` default → character `color.text` when selected |
+| Character subheader (tagline) | 16px | Press Start 2P | character `color.text` |
+| Detail stats (Age, Food, Place, Catchphrase, labels) | 16px | Press Start 2P | character `color.text` |
+| Stat bar labels (STRENGTH / ABILITY) | 16px | Press Start 2P | character `color.text` |
+| Card name | 16px | Press Start 2P | white (unselected) → character `color.border` (selected) |
+| Kart label ("[Name]'S KART") | 8px | Press Start 2P | white |
+| GET READY! (transition screen) | 24px | Press Start 2P | character `color.text` |
+| START button | 16px | Press Start 2P | white |
+
+Single typeface throughout. Hierarchy is established by size only — no weight variation, no serif/sans mixing. Smaller text (8px kart label) is intentionally subordinate and decorative.
 
 ### Interaction Model
 - Hover a card → background fades to character's theme
