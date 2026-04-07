@@ -96,9 +96,9 @@ export default function TitleScreen({ onPlay }) {
       {/* PLAY button */}
       <div style={{
         position: 'absolute',
-        top: '50%',
+        top: '700px',
         left: '50%',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translateX(-50%)',
         animation: 'titleFadeIn 0.6s ease forwards',
         animationDelay: '1.5s',
         opacity: 0,
@@ -108,8 +108,8 @@ export default function TitleScreen({ onPlay }) {
           onClick={handlePlay}
           style={{
             fontFamily: "'Press Start 2P', monospace",
-            fontSize: '26px',
-            padding: '34px 96px',
+            fontSize: '13px',
+            padding: '17px 48px',
             borderRadius: '999px',
             border: 'none',
             cursor: 'pointer',
