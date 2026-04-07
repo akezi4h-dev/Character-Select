@@ -82,8 +82,8 @@ export default function TitleScreen({ onPlay }) {
             src={kart.src}
             alt={kart.id}
             style={{
-              width: '250px',
-              height: 'auto',
+              width: 'auto',
+              height: '250px',
               display: 'block',
               imageRendering: 'pixelated',
               animation: `driveInFromRight 0.6s ease-out ${kart.delay} forwards`,
