@@ -54,11 +54,9 @@ export default function TitleScreen({ onPlay }) {
         opacity: 0,
         zIndex: 2,
       }}>
-        <h1 style={{
+        <h1 className="critter-title" style={{
           fontFamily: "'Press Start 2P', monospace",
-          fontSize: '64px',
-          color: 'white',
-          WebkitTextFillColor: 'white',
+          fontSize: '96px',
           margin: 0,
           letterSpacing: '0.05em',
         }}>
@@ -108,8 +106,8 @@ export default function TitleScreen({ onPlay }) {
           onClick={handlePlay}
           style={{
             fontFamily: "'Press Start 2P', monospace",
-            fontSize: '13px',
-            padding: '17px 48px',
+            fontSize: '19.5px',
+            padding: '25.5px 72px',
             borderRadius: '999px',
             border: 'none',
             cursor: 'pointer',
@@ -146,6 +144,25 @@ export default function TitleScreen({ onPlay }) {
         @keyframes driveInFromRight {
           from { transform: translateX(120vw); }
           to   { transform: translateX(0);     }
+        }
+        @keyframes shine {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
+        .critter-title {
+          background: linear-gradient(
+            105deg,
+            #6CC2EE 0%,
+            #D3F0FF 40%,
+            white   50%,
+            #D3F0FF 60%,
+            #6CC2EE 100%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shine 3s linear infinite;
         }
       `}</style>
     </div>
