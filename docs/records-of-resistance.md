@@ -24,7 +24,7 @@ I told Claude: *"I don't like it, please revert everything back except the font 
 Claude used `git checkout [hash] -- [specific files]` to selectively revert only the component files, leaving the font in `index.html` and `index.css` intact. The Nav Tabs that had been bundled into that commit were later re-added as a standalone change.
 
 **Why this rejection matters:**
-This was the clearest moment where my aesthetic vision diverged from Claude's interpretation. Claude made an assumption: pixel font = pixel art UI = full retro treatment. My Design Intent was always Mario Kart × Sanrio — soft, pastel, kawaii, bubbly. The font was a retro *touch*, not an invitation to go full 8-bit. Letting that restyle ship would have broken the emotional register the whole project is built on. The rejection was fast, deliberate, and completely mine.
+This was the clearest moment where my aesthetic vision diverged from Claude's interpretation. Claude made an assumption: pixel font = pixel art UI = full retro treatment. My Design Intent was always Mario Kart × Sanrio — soft, pastel, kawaii, bubbly. The font was the right retro touch; the pixel shadows and sharp corners broke the emotional register the whole project is built on. The rejection was fast, deliberate, and completely mine.
 
 ---
 
@@ -106,8 +106,6 @@ This was a layout architecture decision. The default behavior (two flex children
 
 ---
 
----
-
 ## Record 6 — CSS Gradient Borders Don't Support Border-Radius (4/7)
 
 **Date:** 2026-04-07
@@ -165,6 +163,29 @@ Pushed the worktree branch directly to `origin/main` using `git push origin clau
 
 **Why this works:**
 Git allows pushing any local branch to any remote branch ref regardless of what's checked out. The `source:destination` ref syntax (`claude/competent-haibt:main`) bypasses the local checkout requirement entirely and deploys directly from the worktree branch.
+
+---
+
+## Record 10 — Pixel Art Blurry at Card and Screen Scale (4/7)
+
+**Date:** 2026-04-07
+
+**What happened:**
+Both the character card images and the full-screen background images appeared blurry when loaded in the browser. The images were correctly placed and sized — the problem was in how the browser renders images when scaling them up.
+
+**Root cause:**
+Browser default behavior applies bilinear filtering to all scaled images. For photographs this looks smooth; for pixel art it blurs the hard pixel edges, destroying the aesthetic entirely.
+
+**What we did instead:**
+Applied `image-rendering: pixelated` to both:
+1. The `<img>` tags in `CharacterCard.jsx` — forces nearest-neighbor on the card portraits
+2. The background `<div>` elements in `BackgroundLayer.jsx` — the property works on CSS `background-image` as well as `<img>` elements
+
+**Why this works:**
+`image-rendering: pixelated` instructs the browser to use nearest-neighbor interpolation when scaling. Every pixel maps to a clean, sharp block at any display size. No blurring, no smoothing — the pixel grid is preserved exactly as drawn.
+
+**Why this matters beyond the fix:**
+This was not just a technical correction — it was a prerequisite for the entire aesthetic working. Blurry pixel art defeats the purpose of commissioning pixel art. The crispness of each pixel is the visual language of the project.
 
 ---
 

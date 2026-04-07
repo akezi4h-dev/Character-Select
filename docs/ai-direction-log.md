@@ -97,8 +97,6 @@ Boxes make interfaces feel safe and contained. I wanted the selected character t
 
 ---
 
----
-
 ## Entry 6 — Emoji Karts Replaced with Real PNG Artwork (4/7)
 
 **Date:** 2026-04-07
@@ -193,6 +191,85 @@ After I specified the transition screen concept, Claude implemented it with the 
 
 **Why this was my decision:**
 Every timing and directional choice in an animation is a feel decision. Right-to-left reads as "driving away" which suited the "GET READY" moment better. 3 seconds is long enough to register the character and feel the anticipation without overstaying its welcome. These micro-decisions define the emotional pacing of the transition.
+
+---
+
+## Entry 12 — Character Card Portraits: Second Round of Artwork (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+The first-round character card images had been placed in the correct slots. The images were functional but not final — the art was still being iterated on.
+
+**What I chose instead:**
+I provided a second round of pixel art character portraits, fully replacing the previous set. Final character identities: Steve as a white duck/seagull in a blue kart, Gurchen as a green crocodile, Gerald as a monkey in a spacesuit, Barry as an orange platypus. Each image was matched to the correct character by name and overwritten in place.
+
+**Why this was my decision:**
+Character visual identity is a creative decision entirely outside Claude's scope. The artwork reflects each character's personality and backstory. The matching of image to character — seagull to Steve, croc to Gurchen, monkey to Gerald, platypus to Barry — was my authorship. Claude only handled the file wiring.
+
+---
+
+## Entry 13 — Character Colors Applied to All Text via `--char-color` CSS Variable (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+After the text stroke system was removed, all text defaulted to white regardless of which character was selected. The `--text-gradient` CSS variable system that previously drove text color was left inert.
+
+**What I chose instead:**
+I specified that when a character is selected, every text element on screen — title, subheader, detail stats (Age, Favorite Food, Favorite Place, Catchphrase), stat bar labels, card name — should shift to that character's `color.text` value. Implemented by replacing `--text-gradient` with a unified `--char-color` CSS custom property passed through inline styles, with `white` as the fallback when no character is selected.
+
+**Why this was my decision:**
+The screen needed to feel fully themed to the selected character — not just the background and borders, but all readable text. The `--char-color` system was my direction to unify every text element under a single, consistent per-character color switch.
+
+---
+
+## Entry 14 — Card Name Text: White by Default, Border Color When Selected (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+After the initial `--char-color` system was applied, card names first showed the character's muted `color.text` values at all times, then were refined to always show the border color, regardless of selection state.
+
+**What I chose instead:**
+I specified two distinct states for the card name text:
+- **Unselected:** white (same as all unselected text)
+- **Selected:** character's `color.border` (the lighter pastel version — sky blue, mint, yellow, peach)
+
+This was isolated from the `--char-color` system using its own `--card-border-color` CSS variable scoped only to `.card-name`.
+
+**Why this was my decision:**
+The card names needed lighter, more legible colors against the full-bleed character artwork. The border colors (`#7dd3fc`, `#86efac`, `#fde047`, `#fdba74`) are brighter and more readable over the card images than the dark `color.text` values. The distinction between the two color roles — dark text on backgrounds, light text on cards — was a deliberate legibility call.
+
+---
+
+## Entry 15 — SELECT YOUR RACER Title Color Set to `#51A0C8` (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+The default title ("SELECT YOUR RACER") displayed in white. With the `--char-color` fallback set to white, the idle screen had no color distinction in the title.
+
+**What I chose instead:**
+`#51A0C8` — a mid-tone sky blue — for the title in its default, unselected state. When a character is selected, the title still switches to that character's `color.text`. The change was scoped to the title element only by defaulting its `--char-color` variable to `#51A0C8` rather than relying on the CSS fallback.
+
+**Why this was my decision:**
+The idle screen needed a color presence before any character is selected. `#51A0C8` ties the default state to the beach/aquatic palette of the game's overall aesthetic without competing with the per-character colors that activate on selection.
+
+---
+
+## Entry 16 — Pixel Art Rendering: `image-rendering: pixelated` Applied Site-Wide (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+Character card images and background images appeared blurry on screen. The images were correctly sized and placed, but the browser's default bilinear filtering was smoothing the pixel art when scaling, destroying the sharp pixel edges that define the aesthetic.
+
+**What I chose instead:**
+I directed `image-rendering: pixelated` on both the character card `<img>` elements and the background `<div>` elements with `background-image`. This forces nearest-neighbor scaling — pixels stay sharp at any display size.
+
+**Why this was my decision:**
+The pixel art aesthetic is foundational to the entire Design Intent. Blurry pixel art is the opposite of the visual language this project is built on. Identifying the rendering issue as a CSS property problem (not an image resolution problem) and specifying the correct fix was my direction. The crispness of the pixel grid is non-negotiable.
 
 ---
 
