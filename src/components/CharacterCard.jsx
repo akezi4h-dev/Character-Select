@@ -12,7 +12,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
         flex flex-col items-center gap-4 p-5 rounded-2xl border-4
         transition-all duration-200 cursor-pointer select-none
         bg-white/50 backdrop-blur-sm
-        w-96 h-112
+        w-48 h-56
       "
       style={{
         borderColor: isSelected ? color.border : 'rgba(255,255,255,0.6)',
@@ -36,7 +36,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
     >
       {/* Avatar */}
       <div
-        className="w-48 h-48 rounded-2xl flex items-center justify-center text-9xl flex-shrink-0"
+        className="w-24 h-24 rounded-2xl flex items-center justify-center text-6xl flex-shrink-0"
         style={{ backgroundColor: color.pastel }}
       >
         {character.emoji}
