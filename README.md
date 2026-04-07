@@ -210,7 +210,7 @@ Character card images and background images appeared blurry due to browser bilin
 
 ## Records of Resistance
 
-> Documents technical obstacles encountered, what was attempted first, and how each was solved.
+> Documents every moment where AI went against my design intention or produced something wrong. Each entry records: what I wanted, what AI made, why it went wrong (vague prompt, ignored directions, hallucination, coding issue), and how I corrected it with a new prompt.
 
 ### Record 1 — No Local Node.js Environment *(2026-03-31, ongoing)*
 User's machine has no Node.js. All testing done via GitHub Pages deploys (~1 min turnaround). GitHub Actions as the sole preview mechanism.
