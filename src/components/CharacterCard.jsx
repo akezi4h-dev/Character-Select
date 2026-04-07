@@ -64,7 +64,6 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
       {/* Name — overlaid at bottom */}
       <span
         className="card-name text-base font-bold tracking-widest"
-        data-text={character.name.toUpperCase()}
         style={{
           position: 'absolute',
           bottom: '8px',

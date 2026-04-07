@@ -20,7 +20,6 @@ function StatRow({ label, fill, color, id, textGradient }) {
       {/* Label above bar */}
       <span
         className="gradient-title"
-        data-text={label}
         style={{
           fontFamily: "'Press Start 2P', monospace",
           fontSize: '16px',

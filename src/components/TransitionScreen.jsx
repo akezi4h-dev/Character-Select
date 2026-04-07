@@ -64,7 +64,6 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
         </h1>
         <p
           className="get-ready"
-          data-text="GET READY!"
           style={{
             fontFamily: "'Press Start 2P', monospace",
             fontSize: '24px',

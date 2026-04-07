@@ -50,7 +50,6 @@ export default function GameMenu() {
       }}>
         <h1
           className="gradient-title"
-          data-text={selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
           style={{
             fontFamily: "'Press Start 2P', monospace",
             fontSize: '57px',
@@ -78,7 +77,6 @@ export default function GameMenu() {
         {selected && (
           <p
             className="gradient-title"
-            data-text={selected.subheader}
             style={{
               fontFamily: "'Press Start 2P', monospace",
               fontSize: '16px',
@@ -127,7 +125,6 @@ export default function GameMenu() {
               <p
                 key={key}
                 className="gradient-title"
-                data-text={`${label}: ${selected.details[key]}`}
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: '16px',
