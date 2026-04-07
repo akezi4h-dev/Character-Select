@@ -68,22 +68,14 @@ body {
   z-index: -1;
 }
 
-/* Card name stroke — white, thinner, behind gradient text */
+/* Card name — gradient fill with white stroke using paint-order */
 .card-name {
-  position: relative;
   background: linear-gradient(to bottom, #D3F0FF, #6CC2EE);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.card-name::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
   -webkit-text-stroke: 2px white;
-  -webkit-text-fill-color: transparent;
-  z-index: -1;
+  paint-order: stroke fill;
 }
 
 /* Kart slide-in from the right on character select */
