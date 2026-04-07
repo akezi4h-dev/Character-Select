@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { THEMES } from '../data/themes'
 
 const CONFETTI_COLORS = [
   '#FF9BE8', '#FFE066', '#7FEFBD', '#80D8FF',
@@ -7,7 +8,8 @@ const CONFETTI_COLORS = [
 
 function generateConfetti(count = 80) {
   return Array.from({ length: count }, (_, i) => ({
-    id: i,
+    id: `c${i}`,
+    type: 'rect',
     color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
     left: `${Math.random() * 100}%`,
     width: `${6 + Math.random() * 8}px`,
@@ -19,9 +21,27 @@ function generateConfetti(count = 80) {
   }))
 }
 
+function generateEmojiConfetti(theme, count = 20) {
+  const emojis = (THEMES[theme]?.floaters ?? []).map(f => f.emoji)
+  if (!emojis.length) return []
+  return Array.from({ length: count }, (_, i) => ({
+    id: `e${i}`,
+    type: 'emoji',
+    emoji: emojis[i % emojis.length],
+    left: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 1.2}s`,
+    duration: `${1.8 + Math.random() * 1.4}s`,
+    drift: `${(Math.random() - 0.5) * 120}px`,
+    fontSize: `${18 + Math.random() * 14}px`,
+  }))
+}
+
 export default function TransitionScreen({ character, bgImage, onComplete }) {
   const [fading, setFading] = useState(false)
-  const confetti = useMemo(() => generateConfetti(80), [])
+  const confetti = useMemo(() => [
+    ...generateConfetti(80),
+    ...generateEmojiConfetti(character.theme, 20),
+  ], [])
 
   useEffect(() => {
     // Start fade-out after kart animation finishes (2.5s)
@@ -58,7 +78,26 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
       }} />
 
       {/* Confetti particles */}
-      {confetti.map((p) => (
+      {confetti.map((p) => p.type === 'emoji' ? (
+        <div
+          key={p.id}
+          style={{
+            position: 'absolute',
+            top: '-30px',
+            left: p.left,
+            fontSize: p.fontSize,
+            lineHeight: 1,
+            opacity: 0,
+            animation: `confettiFall ${p.duration} ${p.delay} ease-in forwards`,
+            '--drift': p.drift,
+            '--rotate': '0deg',
+            zIndex: 2,
+            userSelect: 'none',
+          }}
+        >
+          {p.emoji}
+        </div>
+      ) : (
         <div
           key={p.id}
           style={{
