@@ -82,7 +82,7 @@ export default function TitleScreen({ onPlay }) {
             src={kart.src}
             alt={kart.id}
             style={{
-              width: '600px',
+              width: '250px',
               height: 'auto',
               display: 'block',
               imageRendering: 'pixelated',
