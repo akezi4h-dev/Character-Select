@@ -153,7 +153,7 @@ export default function GameMenu() {
         overflow: 'visible',
         zIndex: 20,
       }}>
-        <KartDisplay key={selected?.id ?? 'empty'} character={selected} />
+        <KartDisplay key={selected?.id ?? 'empty'} character={selected} charColor={displayColor} />
       </div>
 
       {/* Kart shadow — fixed position x:995 y:720 */}

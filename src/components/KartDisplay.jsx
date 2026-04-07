@@ -1,4 +1,4 @@
-export default function KartDisplay({ character }) {
+export default function KartDisplay({ character, charColor }) {
   if (!character) return null
 
   return (
@@ -42,6 +42,7 @@ export default function KartDisplay({ character }) {
           letterSpacing: '0.06em',
           margin: 0,
           textAlign: 'center',
+          '--char-color': charColor,
         }}
       >
         {character.name.toUpperCase()}'S KART
