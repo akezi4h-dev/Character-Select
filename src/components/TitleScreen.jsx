@@ -1,36 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import DevGrid from './DevGrid'
 
-const KARTS = [
-  {
-    id: 'steve',
-    src: '/Character-Select/images/karts/steve-kart.png',
-    alt: "Steve's Kart",
-    keyframe: 'slideInLeft',
-    style: { bottom: '18%', left: '8%' },
-  },
-  {
-    id: 'gurchen',
-    src: '/Character-Select/images/karts/gurchen-kart.png',
-    alt: "Gurchen's Kart",
-    keyframe: 'slideInRight',
-    style: { bottom: '18%', right: '8%' },
-  },
-  {
-    id: 'gerald',
-    src: '/Character-Select/images/karts/gerald-kart.png',
-    alt: "Gerald's Kart",
-    keyframe: 'slideInBottomLeft',
-    style: { bottom: '8%', left: '22%' },
-  },
-  {
-    id: 'barry',
-    src: '/Character-Select/images/karts/barry-kart.png',
-    alt: "Barry's Kart",
-    keyframe: 'slideInBottomRight',
-    style: { bottom: '8%', right: '22%' },
-  },
+// Order: Gurchen (0), Gerald (1), Steve (2), Barry (3)
+const CHARACTERS = [
+  { id: 'gurchen', delay: '0.5s' },
+  { id: 'gerald',  delay: '0.9s' },
+  { id: 'steve',   delay: '1.3s' },
+  { id: 'barry',   delay: '1.7s' },
 ]
+
+const GROUP_IMG = '/Character-Select/images/characters/characters-group.png'
+const SECTION_W = 150
+const SECTION_H = 350
+const TOTAL_W   = SECTION_W * CHARACTERS.length // 600px
 
 export default function TitleScreen({ onPlay }) {
   const [fading, setFading] = useState(false)
@@ -50,6 +32,7 @@ export default function TitleScreen({ onPlay }) {
       opacity: fading ? 0 : 1,
       transition: 'opacity 0.6s ease',
     }}>
+
       {/* Background image */}
       <div style={{
         position: 'absolute', inset: 0,
@@ -65,7 +48,7 @@ export default function TitleScreen({ onPlay }) {
         background: 'rgba(255,255,255,0.3)',
       }} />
 
-      {/* Critter Cup title */}
+      {/* CRITTER CUP title */}
       <div style={{
         position: 'absolute',
         top: '12%',
@@ -89,24 +72,44 @@ export default function TitleScreen({ onPlay }) {
         </h1>
       </div>
 
-      {/* Kart images */}
-      {KARTS.map((kart) => (
-        <img
-          key={kart.id}
-          src={kart.src}
-          alt={kart.alt}
-          style={{
-            position: 'absolute',
-            ...kart.style,
-            width: '200px',
-            imageRendering: 'pixelated',
-            animation: `${kart.keyframe} 1s ease-out forwards`,
-            animationDelay: '0.5s',
-            opacity: 0,
-            zIndex: 2,
-          }}
-        />
-      ))}
+      {/* Character group — split into 4 clipped sections, staggered slide-up */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        width: `${TOTAL_W}px`,
+        zIndex: 2,
+      }}>
+        {CHARACTERS.map((char, i) => (
+          <div
+            key={char.id}
+            style={{
+              width: `${SECTION_W}px`,
+              height: `${SECTION_H}px`,
+              overflow: 'hidden',
+              position: 'relative',
+              flexShrink: 0,
+            }}
+          >
+            <img
+              src={GROUP_IMG}
+              alt="Critter Cup characters"
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: `${-i * SECTION_W}px`,
+                width: `${TOTAL_W}px`,
+                height: 'auto',
+                imageRendering: 'pixelated',
+                animation: `charSlideUp 0.6s ease-out ${char.delay} forwards`,
+                transform: 'translateY(100%)',
+              }}
+            />
+          </div>
+        ))}
+      </div>
 
       {/* PLAY button */}
       <div style={{
@@ -123,8 +126,8 @@ export default function TitleScreen({ onPlay }) {
           onClick={handlePlay}
           style={{
             fontFamily: "'Press Start 2P', monospace",
-            fontSize: '13px',
-            padding: '17px 48px',
+            fontSize: '26px',
+            padding: '34px 96px',
             borderRadius: '999px',
             border: 'none',
             cursor: 'pointer',
@@ -158,21 +161,9 @@ export default function TitleScreen({ onPlay }) {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes slideInLeft {
-          from { transform: translateX(-120vw); opacity: 0; }
-          to   { transform: translateX(0);      opacity: 1; }
-        }
-        @keyframes slideInRight {
-          from { transform: translateX(120vw);  opacity: 0; }
-          to   { transform: translateX(0);      opacity: 1; }
-        }
-        @keyframes slideInBottomLeft {
-          from { transform: translate(-120vw, 120vh); opacity: 0; }
-          to   { transform: translate(0, 0);          opacity: 1; }
-        }
-        @keyframes slideInBottomRight {
-          from { transform: translate(120vw, 120vh);  opacity: 0; }
-          to   { transform: translate(0, 0);           opacity: 1; }
+        @keyframes charSlideUp {
+          from { transform: translateY(300px); }
+          to   { transform: translateY(0);     }
         }
       `}</style>
     </div>
