@@ -23,6 +23,7 @@ export default function GameMenu() {
 
   const activeTheme = hovered?.theme ?? selected?.theme ?? 'default'
   const charColor = selected?.color.text
+  const displayColor = hovered?.color.text ?? selected?.color.text ?? '#51A0C8'
 
   const handleStart = () => {
     if (selected) setTransitioning(true)
@@ -53,7 +54,7 @@ export default function GameMenu() {
             fontSize: '57px',
             letterSpacing: '0.1em',
             margin: 0,
-            '--char-color': charColor ?? '#51A0C8',
+            '--char-color': displayColor,
           }}
         >
           {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
@@ -80,7 +81,7 @@ export default function GameMenu() {
               fontSize: '16px',
               margin: 0,
               letterSpacing: '0.05em',
-              '--char-color': charColor,
+              '--char-color': displayColor,
             }}
           >
             {selected.subheader}
