@@ -5,9 +5,9 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
 
   useEffect(() => {
     // Start fade-out after kart animation finishes (2.5s)
-    const fadeTimer = setTimeout(() => setFading(true), 2500)
-    // Hide and return to select after fade completes (2.5s + 0.5s)
-    const doneTimer = setTimeout(() => onComplete(), 3000)
+    const fadeTimer = setTimeout(() => setFading(true), 5000)
+    // Hide and return to select after fade completes (5s + 0.5s)
+    const doneTimer = setTimeout(() => onComplete(), 5500)
     return () => {
       clearTimeout(fadeTimer)
       clearTimeout(doneTimer)
@@ -81,7 +81,7 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
         left: 0,
         width: '500px',
         zIndex: 1,
-        animation: 'driveAcross 2.5s ease-in forwards',
+        animation: 'driveAcross 5s ease-in forwards',
       }}>
         <img
           src={character.kartImage}

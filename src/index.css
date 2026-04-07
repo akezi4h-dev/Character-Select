@@ -74,8 +74,8 @@ body {
 
 /* Kart drives across screen for transition animation */
 @keyframes driveAcross {
-  from { transform: translateX(-300px); }
-  to   { transform: translateX(calc(100vw + 300px)); }
+  from { transform: translateX(calc(100vw + 300px)); }
+  to   { transform: translateX(-300px); }
 }
 
 /* Kart slide-in from the right on character select */
