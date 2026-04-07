@@ -60,10 +60,10 @@ Single typeface throughout. Hierarchy is established by size only — no weight 
 
 | Character | Portrait | Theme | Text Color | Card Color Scheme | Intention |
 |-----------|----------|-------|------------|-------------------|-----------|
-| Steve | ![Steve](public/images/characters/Steve-Character.png) | Beach | `#10517B` | Pastel blues and yellows — border `#7dd3fc` | Steve is a beach seagull. Blues and yellows reflect sun, sky, and sand. |
+| Steve | ![Steve](public/images/characters/Steve-Character.png) | Beach | `#10517B` | Pastel blues and yellows — border `#7dd3fc` | Steve is a beach seagull who loves french fries. Blues and yellows reflect his fry, water, sky, and sand. |
 | Gurchen | ![Gurchen](public/images/characters/Gurchen-Character.png) | Swamp | `#436348` | Pastel greens and teals — border `#86efac` | I imagine Gurchen just living his croc life in the swamp. Greens and teals match murky water and swamp plants. |
 | Gerald | ![Gerald](public/images/characters/Gerald-Character.png) | Space | `#142341` | Pastel blues, yellows, and violets — border `#fde047` | I got Gerald from the Smithsonian Space Museum. Blues, yellows, and violets reflect stars, planets, and the cosmos. |
-| Barry | ![Barry](public/images/characters/Barry-Character.png) | River | `#295A57` | Pastel oranges and blues — border `#fdba74` | Barry is a platypus living peacefully by the river. Warm oranges against cool blues reflect the water and the earth. |
+| Barry | ![Barry](public/images/characters/Barry-Character.png) | River | `#295A57` | Pastel oranges and blues — border `#fdba74` | Barry I imagineis a platypus living peacefully by the river. Warm oranges against cool blues reflect the water and the earth. |
 
 ### Layout & Character Grid
 
