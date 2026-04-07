@@ -150,8 +150,19 @@ export default function TitleScreen({ onPlay }) {
           100% { background-position:  200% center; }
         }
         .critter-title {
-          -webkit-text-fill-color: #353290;
-          color: #353290;
+          background: linear-gradient(
+            105deg,
+            #353290 0%,
+            #6b68c4 40%,
+            white   50%,
+            #6b68c4 60%,
+            #353290 100%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shine 10s linear infinite;
         }
       `}</style>
     </div>
