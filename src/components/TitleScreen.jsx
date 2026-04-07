@@ -1,18 +1,12 @@
 import { useState } from 'react'
 import DevGrid from './DevGrid'
 
-// Order: Gurchen (0), Gerald (1), Steve (2), Barry (3)
 const CHARACTERS = [
-  { id: 'gurchen', delay: '0.5s' },
-  { id: 'gerald',  delay: '0.9s' },
-  { id: 'steve',   delay: '1.3s' },
-  { id: 'barry',   delay: '1.7s' },
+  { id: 'gurchen', src: '/Character-Select/images/characters/Gurchen-Character.png', delay: '0.5s' },
+  { id: 'gerald',  src: '/Character-Select/images/characters/Gerald-Character.png',  delay: '0.9s' },
+  { id: 'steve',   src: '/Character-Select/images/characters/Steve-Character.png',   delay: '1.3s' },
+  { id: 'barry',   src: '/Character-Select/images/characters/Barry-Character.png',   delay: '1.7s' },
 ]
-
-const GROUP_IMG = '/Character-Select/images/characters/characters-group.png'
-const SECTION_W = 150
-const SECTION_H = 350
-const TOTAL_W   = SECTION_W * CHARACTERS.length // 600px
 
 export default function TitleScreen({ onPlay }) {
   const [fading, setFading] = useState(false)
@@ -72,39 +66,35 @@ export default function TitleScreen({ onPlay }) {
         </h1>
       </div>
 
-      {/* Character group — split into 4 clipped sections, staggered slide-up */}
+      {/* Character images — staggered slide-up from bottom */}
       <div style={{
         position: 'absolute',
         bottom: 0,
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
-        width: `${TOTAL_W}px`,
+        gap: '20px',
+        alignItems: 'flex-end',
         zIndex: 2,
       }}>
-        {CHARACTERS.map((char, i) => (
+        {CHARACTERS.map((char) => (
           <div
             key={char.id}
             style={{
-              width: `${SECTION_W}px`,
-              height: `${SECTION_H}px`,
               overflow: 'hidden',
-              position: 'relative',
-              flexShrink: 0,
+              lineHeight: 0,
             }}
           >
             <img
-              src={GROUP_IMG}
-              alt="Critter Cup characters"
+              src={char.src}
+              alt={char.id}
               style={{
-                position: 'absolute',
-                bottom: 0,
-                left: `${-i * SECTION_W}px`,
-                width: `${TOTAL_W}px`,
+                width: '150px',
                 height: 'auto',
+                display: 'block',
                 imageRendering: 'pixelated',
                 animation: `charSlideUp 0.6s ease-out ${char.delay} forwards`,
-                transform: 'translateY(100%)',
+                transform: 'translateY(300px)',
               }}
             />
           </div>
