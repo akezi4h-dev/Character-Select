@@ -62,14 +62,16 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
         }}>
           {character.name.toUpperCase()}
         </h1>
-        <p style={{
-          fontFamily: "'Press Start 2P', monospace",
-          fontSize: '24px',
-          letterSpacing: '0.1em',
-          margin: '20px 0 0 0',
-          color: textColor,
-          WebkitTextFillColor: textColor,
-        }}>
+        <p
+          className="get-ready"
+          data-text="GET READY!"
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: '24px',
+            letterSpacing: '0.1em',
+            margin: '20px 0 0 0',
+          }}
+        >
           GET READY!
         </p>
       </div>

@@ -72,6 +72,21 @@ body {
   paint-order: stroke fill;
 }
 
+/* GET READY text on transition screen */
+.get-ready {
+  position: relative;
+  -webkit-text-fill-color: white;
+}
+
+.get-ready::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  -webkit-text-stroke: 2px black;
+  -webkit-text-fill-color: transparent;
+  z-index: -1;
+}
+
 /* Kart drives across screen for transition animation */
 @keyframes driveAcross {
   from { transform: translateX(calc(100vw + 300px)); }
