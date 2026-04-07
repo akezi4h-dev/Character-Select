@@ -69,8 +69,8 @@ export default function TitleScreen({ onPlay }) {
       {/* Karts — drive in from right to left, staggered */}
       <div style={{
         position: 'absolute',
-        top: '430px',
-        left: '10px',
+        top: '500px',
+        left: '2px',
         display: 'flex',
         gap: '80px',
         alignItems: 'flex-end',
