@@ -111,16 +111,16 @@ export default function TitleScreen({ onPlay }) {
             borderRadius: '999px',
             border: 'none',
             cursor: 'pointer',
-            backgroundColor: '#6CC2EE',
+            backgroundColor: '#353290',
             color: 'white',
-            boxShadow: '0 0 20px 6px rgba(108,194,238,0.6)',
+            boxShadow: '0 0 20px 6px rgba(53,50,144,0.6)',
             transition: 'box-shadow 0.3s, transform 0.1s',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = '0 0 32px 10px rgba(108,194,238,0.8)'
+            e.currentTarget.style.boxShadow = '0 0 32px 10px rgba(53,50,144,0.8)'
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = '0 0 20px 6px rgba(108,194,238,0.6)'
+            e.currentTarget.style.boxShadow = '0 0 20px 6px rgba(53,50,144,0.6)'
           }}
           onMouseDown={(e) => {
             e.currentTarget.style.transform = 'scale(0.95)'
@@ -150,19 +150,8 @@ export default function TitleScreen({ onPlay }) {
           100% { background-position:  200% center; }
         }
         .critter-title {
-          background: linear-gradient(
-            105deg,
-            #6CC2EE 0%,
-            #D3F0FF 40%,
-            white   50%,
-            #D3F0FF 60%,
-            #6CC2EE 100%
-          );
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: shine 10s linear infinite;
+          -webkit-text-fill-color: #353290;
+          color: #353290;
         }
       `}</style>
     </div>
