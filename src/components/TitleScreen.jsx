@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import DevGrid from './DevGrid'
 
 const KARTS = [
   {
@@ -148,6 +149,9 @@ export default function TitleScreen({ onPlay }) {
           <span style={{ color: 'white', WebkitTextFillColor: 'white' }}>PLAY ▶</span>
         </button>
       </div>
+
+      {/* Dev grid overlay */}
+      <DevGrid />
 
       <style>{`
         @keyframes titleFadeIn {
