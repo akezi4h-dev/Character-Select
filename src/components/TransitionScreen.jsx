@@ -77,7 +77,7 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
       {/* Kart driving across */}
       <div style={{
         position: 'absolute',
-        top: '200px',
+        top: '400px',
         left: 0,
         width: '500px',
         zIndex: 1,
