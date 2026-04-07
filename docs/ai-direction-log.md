@@ -381,5 +381,121 @@ The decision to throw away the accumulated work and start over was mine. It was 
 
 ---
 
+## Entry 22 — CRITTER CUP Title Screen Built and Iterated Through Direction (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+After specifying a title screen concept, Claude generated an initial version with the CRITTER CUP text fading in and four individual kart images sliding in from the screen corners (Steve from left, Gurchen from right, Gerald from bottom-left, Barry from bottom-right).
+
+**What I chose instead:**
+I iterated through the title screen across multiple passes:
+- Added a DevGrid overlay for layout alignment
+- Changed the kart animation from corner-sliding to a unified right-to-left drive formation — all four karts driving in from the right side in a row at the bottom, staggered by character
+- Adjusted kart size through several values (150px → 250px → 600px → 250px height) before landing on the right scale
+- Repositioned the kart group and PLAY button through many specific x/y coordinate passes
+- Replaced the Default-Image background with a dedicated pixel art road track image (Title-BG.png)
+- Changed the CRITTER CUP color from the default blue gradient to `#353290` (deep indigo) to match the new background
+
+**Why this was my decision:**
+The title screen is the first impression of the entire game. Every detail — kart behavior, positions, title scale, background — was iterated against the actual visual result until it felt right. Claude generated functional code but the aesthetic tuning was entirely mine.
+
+---
+
+## Entry 23 — Title and Subheader Preview Character Color on Hover (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+The `charColor` variable only updated when a character was selected. Hovering a card previewed the background but title and subheader text stayed at their selected (or default) color — no preview of the character's color until a click.
+
+**What I chose instead:**
+I specified that hovering a character should also update the title and subheader text to that character's color — not just the background. The color preview should be immediate on hover, not gated by selection.
+
+**Why this was my decision:**
+Hover feedback should preview the character's full identity — background, border glow, and text color — not just the background. The decision that text color should respond to hover (not just click) was a directional choice about how immediate and responsive the interaction should feel.
+
+---
+
+## Entry 24 — CRITTER CUP Title: 1.5x Bigger, Shimmer Gradient (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+The CRITTER CUP title was 64px white text with a simple fade-in.
+
+**What I chose instead:**
+I specified three changes:
+1. Scale the title 1.5× (64px → 96px)
+2. Apply the same blue gradient as the default SELECT YOUR RACER text (`#6CC2EE` family), implemented via `background-clip: text` with `-webkit-text-fill-color: transparent`
+3. Add a sweeping shimmer animation (`@keyframes shine`) that cycles every 10 seconds
+
+The color was then changed to `#353290` (deep indigo) to match the overall title screen color scheme, with the shimmer gradient built from indigo tones sweeping to white at the midpoint.
+
+**Why this was my decision:**
+The shimmer animation adds life to what would otherwise be static text. The 10-second interval feels like a slow breathing pulse rather than a distracting loop. The color choice (`#353290`) and the decision to build the shimmer from that color rather than the default blue were both aesthetic calls made in response to the new title screen background.
+
+---
+
+## Entry 25 — Title Screen Background Replaced with Pixel Art Track (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+The title screen used `Default-Image.png` (the default character select background) as its backdrop.
+
+**What I chose instead:**
+I replaced it with a dedicated pixel art racing track background (`Title-BG.png`) — a wide road with crosswalk stripes, pixel-art trees, and a blue sky. More thematically appropriate for a kart racing game title screen.
+
+**Why this was my decision:**
+The title screen should feel like the entrance to a racing game, not a preview of the character select screen. Using the same background as the default character screen made the two screens feel interchangeable. The track image establishes the racing context before any character is even seen.
+
+---
+
+## Entry 26 — Gerald's START Button Given a Dedicated Color Override (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+Gerald's `color.text` value (`#FFFAD9`, very pale yellow) was being applied to the START button background when Gerald was selected. The button was nearly invisible against the light screen.
+
+**What I chose instead:**
+I specified `#293964` (dark navy blue) as Gerald's START button color — completely different from his text color. Implemented by adding an optional `button` field to the character color object with a fallback to `color.text` for all other characters. Only Gerald has the override.
+
+**Why this was my decision:**
+The START button needs to be legible and functional. Gerald's very light text color reads well on the dark space background but is unacceptable as a button background. The `#293964` navy grounds the button visually and feels like a space-themed dark control element. The decision to solve this per-character rather than globally (which would have changed all other characters' buttons) was a targeted fix.
+
+---
+
+## Entry 27 — Gerald's Floating Emojis Changed to Astronomy Theme (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+Gerald's background theme was named "jungle" in `themes.js` — a holdover from an earlier character theme assignment. His floaters were 🍃 🌿 🐦 (jungle/forest). Gerald's actual character theme is outer space.
+
+**What I chose instead:**
+I directed the floaters changed to astronomy: 🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟 — moon, star, planet, rocket, comet, sparkle, and glowing star. Seven floaters instead of five, spread across the screen.
+
+**Why this was my decision:**
+Gerald is a space monkey. Every visual element of his theme — background image, color palette, character biography ("Favorite Place: Outer Space") — is oriented around space. Jungle floaters were simply a legacy error from an earlier theme assignment. Astronomy floaters make the theme coherent from the floating particles down to the character facts.
+
+---
+
+## Entry 28 — Stat Bar Labels Changed to Title Case (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave me:**
+Stat bar labels displayed as "STRENGTH" and "ABILITY" (all-caps).
+
+**What I chose instead:**
+Changed to "Strength" and "Ability" (title case).
+
+**Why this was my decision:**
+All-caps labels felt more aggressive and shouty than the kawaii aesthetic calls for. Title case reads softer and more consistent with the overall friendly, playful tone of the screen. A small typographic call — but in a design where a single typeface is used at every size, casing is one of the few available levers.
+
+---
+
 *Last updated: 2026-04-07*
 *Update this log whenever a new session ends.*

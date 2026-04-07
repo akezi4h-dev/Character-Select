@@ -64,21 +64,24 @@ The screen is never static — it is always responding to what the user is doing
 
 | Role | Size | Font | Color Rule |
 |------|------|------|------------|
-| Screen title ("SELECT YOUR RACER" / character name) | 57px | Press Start 2P | `#51A0C8` default → character `color.text` when selected |
-| Character subheader (tagline) | 16px | Press Start 2P | character `color.text` |
-| Detail stats (Age, Food, Place, Catchphrase, labels) | 16px | Press Start 2P | character `color.text` |
-| Stat bar labels (STRENGTH / ABILITY) | 16px | Press Start 2P | character `color.text` |
-| Card name | 16px | Press Start 2P | white (unselected) → character `color.border` (selected) |
+| Screen title ("SELECT YOUR RACER" / character name) | 57px | Press Start 2P | `#51A0C8` default → character `color.text` on hover or select |
+| Character subheader (tagline) | 16px | Press Start 2P | character `color.text` on hover or select |
+| Detail stats (Age, Food, Place, Catchphrase, labels) | 16px | Press Start 2P | character `color.text` when selected |
+| Stat bar labels (Strength / Ability) | 16px | Press Start 2P | character `color.text` when selected |
+| Card name | 16px | Press Start 2P | white (unselected) → character `color.cardName` (selected) |
 | Kart label ("[Name]'S KART") | 8px | Press Start 2P | white |
 | GET READY! (transition screen) | 24px | Press Start 2P | character `color.text` |
-| START button | 16px | Press Start 2P | white |
+| START button | 16px | Press Start 2P | white label; character `color.button ?? color.text` background (Gerald uses dedicated `#293964`) |
+| CRITTER CUP title (title screen) | 96px | Press Start 2P | `#353290` indigo with sweeping shimmer animation (10s loop) |
 
 Single typeface throughout. Hierarchy is established by size only — no weight variation, no serif/sans mixing. Smaller text (8px kart label) is intentionally subordinate and decorative.
 
 ### Interaction Model
-- Hover a card → background fades to character's theme
-- Select a card → title updates to character name, stats panel appears, kart slides in
-- Click START → full-screen transition animation plays (kart drives across screen) → loops back to select
+- Page load → CRITTER CUP title screen appears: title fades in, 4 karts drive in from right one by one, PLAY button fades in
+- Click PLAY → title screen fades out, character select screen fades in
+- Hover a card → background fades to character's theme, title and subheader preview that character's text color
+- Select a card → title updates to character name, stats panel appears, kart slides in, all text shifts to character color
+- Click START → full-screen transition animation plays: confetti falls, kart drives right-to-left across character background → loops back to select
 
 ### Characters
 
@@ -129,9 +132,9 @@ Each character appears inside a rounded square selection card:
 - Name text: white when unselected, character border color when selected
 
 #### Hover & Selection Behavior
-- **Hover:** card scales up, border glows softly, background fades to character theme
-- **Selected:** stronger glow, selection ring, preview panel updates on the right
-- **Cursor off grid:** background returns to default soft pastel menu background
+- **Hover:** card scales up, border glows softly, background fades to character theme, **title and subheader text preview that character's color**
+- **Selected:** stronger glow, selection ring, preview panel updates on the right, all text shifts to character color
+- **Cursor off grid:** background returns to default soft pastel menu background, title returns to `#51A0C8`
 
 #### Character Theme Backgrounds
 
@@ -150,22 +153,24 @@ Background animations are very subtle — birds drifting, leaves moving, water f
 
 ```mermaid
 flowchart TD
-    A([Page Load]) --> B[Character Select Screen\nDefault background\n'SELECT YOUR RACER' title\nSTART disabled]
+    A([Page Load]) --> T[Title Screen\nCRITTER CUP fades in\nKarts drive in from right staggered\nPLAY button appears]
+
+    T -->|Click PLAY| B[Character Select Screen\nDefault background\n'SELECT YOUR RACER' title\nSTART disabled]
 
     B --> C{User Action}
 
-    C -->|Hover card| D[Background fades to\ncharacter theme\nCard glows + scales up]
+    C -->|Hover card| D[Background fades to\ncharacter theme\nCard glows + scales up\nTitle + subheader preview\ncharacter text color]
     D -->|Mouse leave| B
 
-    C -->|Click card| E[Character Selected\nBackground = character image\nTitle = character name\nSubheader = tagline\nStats panel appears\nKart image slides in\nSTART activates]
+    C -->|Click card| E[Character Selected\nBackground = character image\nTitle = character name\nSubheader = tagline\nStats panel appears\nKart image slides in\nAll text = character color\nSTART activates]
 
     E --> F{User Action}
 
     F -->|Click different card| E
-    F -->|Hover other card| G[Background previews\nhovered character theme]
+    F -->|Hover other card| G[Background previews\nhovered character theme\nTitle color previews\nhovered character]
     G -->|Mouse leave| E
 
-    F -->|Click START| H[Transition Screen\nz-index 9999 overlay\nCharacter background\nWhite overlay 0.3 opacity\nCharacter name + GET READY!]
+    F -->|Click START| H[Transition Screen\nz-index 9999 overlay\nCharacter background\nConfetti falls\nCharacter name + GET READY!]
 
     H --> I[Kart drives\nright to left\n3 seconds ease-in]
 
@@ -243,6 +248,27 @@ All character biography data was written by the Art Director personally — ages
 ### Entry 21 — Full Rebuild Spec: Decided to Start Fresh Rather Than Keep Patching *(2026-04-06)*
 After accumulated patches broke the layout beyond repair, the Art Director made the call to start fresh. Claude chat diagnosed the problem ("too many conflicting instructions") and wrote a comprehensive rebuild spec covering every component, position, color, and animation. The decision to throw away the patched code and rebuild from a clean slate was the Art Director's judgment call.
 
+### Entry 22 — CRITTER CUP Title Screen Built and Iterated Through Direction *(2026-04-07)*
+A full pre-game title screen was specified and iterated through many passes: kart animation changed from corner-sliding to unified right-to-left drive formation, sizes and positions tuned, background replaced with pixel art track scene, CRITTER CUP color changed to `#353290` indigo.
+
+### Entry 23 — Title and Subheader Preview Character Color on Hover *(2026-04-07)*
+The Art Director specified that hovering a character should also preview that character's text color in the title and subheader — not just the background. Required a separate `displayColor` variable that responds to hover independently of selection.
+
+### Entry 24 — CRITTER CUP Title: 1.5x Bigger, Shimmer Gradient *(2026-04-07)*
+Title scaled to 96px; blue shimmer gradient added (`@keyframes shine`, 10s loop); color changed to `#353290` to match title screen aesthetic. PLAY button also scaled 1.5× to match.
+
+### Entry 25 — Title Screen Background Replaced with Pixel Art Track *(2026-04-07)*
+Dedicated pixel art racing track (`Title-BG.png`) replaces the default character select background on the title screen — more appropriate for a kart racing game entrance.
+
+### Entry 26 — Gerald's START Button Given Dedicated Color Override *(2026-04-07)*
+Gerald's very light `color.text` (`#FFFAD9`) was illegible as a button background. A dedicated `button: '#293964'` field was added to his color object, falling back to `color.text` for all other characters.
+
+### Entry 27 — Gerald's Floating Emojis Changed to Astronomy Theme *(2026-04-07)*
+Gerald's floaters changed from jungle (🍃 🌿 🐦) to astronomy (🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟) to match his Outer Space character theme.
+
+### Entry 28 — Stat Bar Labels Changed to Title Case *(2026-04-07)*
+STRENGTH → Strength, ABILITY → Ability. Title case reads softer and more consistent with the kawaii aesthetic than all-caps.
+
 [Full log with detailed entries →](docs/ai-direction-log.md)
 
 ---
@@ -290,6 +316,15 @@ After rapid pushes during a debugging session, the deployment queue backed up an
 ### Record 20 — Card Grid Shifting on Click: Identified via Claude Chat *(2026-04-01–05)*
 The card grid visibly jumped on every character click. Claude Code tried padding adjustments — a symptomatic fix. Claude chat identified the root cause: title text switching between "SELECT YOUR RACER" and "STEVE" caused browser layout reflow. Fixed with fixed-height title container + `white-space: nowrap` and right panel decoupled from flex flow via `position: absolute`.
 
+### Record 21 — Background Too Dark: Needed Explicit Overlay Instructions *(2026-04-07)*
+Pixel art backgrounds felt too vivid/dark without any lightening modifier. Claude placed images without an overlay by default. Fixed by adding a `rgba(255,255,255,0.X)` white overlay div in each screen component — opacity tuned per screen for the right visual weight.
+
+### Record 22 — GET READY Text: Duplicate Copy and Broken Outline *(2026-04-07)*
+Asking for a text outline on GET READY! produced two copies of the text and a broken stroke using the `::before` pseudo-element approach. Fixed by abandoning pseudo-elements and rewriting with `text-shadow` outline technique — no duplicates, no stacking context issues. Stroke system later removed entirely.
+
+### Record 23 — Transition Screen Background Appeared More Washed Out *(2026-04-07)*
+The transition screen had a `rgba(255,255,255,0.3)` white overlay that the character select background did not. The same background looked 30% lighter on the transition screen than during selection — a jarring visual discontinuity. Identified and fixed by removing the overlay from TransitionScreen to match BackgroundLayer.
+
 [Full log with detailed entries →](docs/records-of-resistance.md)
 
 ---
@@ -312,4 +347,35 @@ The card grid visibly jumped on every character click. Claude Code tried padding
 | `StatBars` | Glass morphism animated stat bars |
 | `StartButton` | Fixed bottom center, color-synced to character |
 | `TransitionScreen` | Full-screen kart drive animation on START |
+| `TitleScreen` | Full-screen pre-game title with CRITTER CUP title, staggered kart drive-in, PLAY button |
 | `DevGrid` | Developer grid overlay (toggle with G key) |
+
+---
+
+## Project Checkpoints
+
+> Significant milestones in the build, in order. Each checkpoint marks a moment where the project meaningfully advanced in design, architecture, or visual identity.
+
+| # | Date | Checkpoint | What Changed |
+|---|------|------------|--------------|
+| 1 | 2026-03-31 | **Project initialized** | Vite + React + Tailwind scaffolded; GitHub Pages deployment pipeline live via GitHub Actions |
+| 2 | 2026-04-01 | **Press Start 2P font locked in** | Retro pixel font added and committed as the sole typeface; full retro restyle rejected — kawaii aesthetic established as the permanent design foundation |
+| 3 | 2026-04-02 | **Character color system created** | Exact hex values assigned per character; color drives title, START button, and borders dynamically |
+| 4 | 2026-04-03 | **Two-panel layout built** | Character grid (left) + kart display (right) decoupled via `position: absolute`; right panel independent of flex flow |
+| 5 | 2026-04-03 | **Kart as hero display** | Kart scaled to 700px; no container box; ground shadow ellipse added; `slideInKart` animation triggers on each character select via `key` remount |
+| 6 | 2026-04-04 | **Title fixed-height container** | `white-space: nowrap` + fixed height prevents grid reflow when title text switches between "SELECT YOUR RACER" and character names |
+| 7 | 2026-04-06 | **Nav buttons replaced with stat bars** | ITEMS/POWER-UPS/KARTS tabs removed; glass morphism animated STRENGTH + ABILITY stat bars added with personally assigned character values |
+| 8 | 2026-04-06 | **Character biographies written** | Age, Favorite Food, Favorite Place, and Catchphrase added for all four characters — original authorship, no AI generation |
+| 9 | 2026-04-06 | **Full rebuild from clean spec** | After patch accumulation broke the layout, entire screen rebuilt from a Claude Chat–generated spec; all conflicts resolved in one pass |
+| 10 | 2026-04-07 | **Pixel art backgrounds added** | CSS gradient placeholders replaced with commissioned pixel art PNGs; opacity-fade cross-fade system retained; Default, Steve, Gurchen, Gerald, Barry backgrounds live |
+| 11 | 2026-04-07 | **Character card portraits added** | Full-bleed pixel art portraits replace emoji placeholders; second round of artwork finalizes Steve, Gurchen, Gerald, Barry visual identities |
+| 12 | 2026-04-07 | **`--char-color` CSS variable system** | Single custom property drives all text simultaneously — title, subheader, stats, card name, transition screen — all shift to selected character's color at once |
+| 13 | 2026-04-07 | **Text stroke system removed** | Iteratively simplified from 4px white → black → 2px → removed entirely; clean white text reads better against pixel art than stroked text |
+| 14 | 2026-04-07 | **Muted character text colors** | Saturated colors (`#6286FE`, `#6BF26B`, `#FFDA69`, `#FF8651`) replaced with dark muted tones that ground text against detailed pixel art backgrounds |
+| 15 | 2026-04-07 | **Transition screen built** | Full-screen START animation: character background, kart drives right-to-left, GET READY! text, fades back to select |
+| 16 | 2026-04-07 | **`image-rendering: pixelated` applied site-wide** | Nearest-neighbor scaling on all character card `<img>` and background `<div>` elements; pixel art renders crisp at all screen sizes |
+| 17 | 2026-04-07 | **CRITTER CUP title screen created** | Full-screen pre-game screen: title fades in, four karts drive in from right in staggered formation, PLAY button appears; title screen overlays character select |
+| 18 | 2026-04-07 | **Hover previews character color** | Hovering a card now updates title and subheader text color to preview the character's palette — not just the background |
+| 19 | 2026-04-07 | **Confetti on START** | 80 confetti particles generated and animated falling from top of transition screen when START is pressed |
+| 20 | 2026-04-07 | **Title screen background updated** | Pixel art racing track (`Title-BG.png`) replaces default background on title screen; CRITTER CUP title and PLAY button styled `#353290` with shimmer animation |
+| 21 | 2026-04-07 | **Gerald's theme completed** | Astronomy-themed floaters (🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟); dedicated START button color `#293964`; text color `#FFFAD9` preserved for screen text |

@@ -548,5 +548,90 @@ A stable card grid is the foundation of the selection interaction. Every click o
 
 ---
 
+## Record 21 — Background Too Dark: Needed Explicit Overlay Instructions
+
+**Date:** 2026-04-07
+
+**What I wanted:**
+The pixel art background images to read as bright, soft, and light — consistent with the kawaii pastel tone of the project.
+
+**What AI made:**
+When the background images were first placed, the pixel art felt visually heavy against the UI elements. Claude did not add any overlay or lightening treatment by default.
+
+**Why AI went wrong:**
+Prompt omission — I hadn't explicitly specified a lightening overlay when first directing the background images. Claude placed the images correctly but with no modifier, leaving the darker pixel art tones untouched.
+
+**How I fixed it:**
+I asked Claude chat how to lighten the backgrounds using transparency. Claude chat provided the technique and the exact prompt:
+
+> *"Add a white overlay on top of the background image to make it appear lighter: use a fixed overlay div with background: rgba(255,255,255,0.5). Start with 0.5 and adjust to taste."*
+
+Implemented as a separate `position: absolute; inset: 0` div on top of the background image layer in each relevant screen component. The `BackgroundLayer.jsx` used 0 (no overlay) — each character's background is vivid. The TitleScreen and TransitionScreen each used `rgba(255,255,255,0.3)`.
+
+**Why fixing it made it better:**
+The overlay system gave me fine control over how vivid each background appears in each context. The character select screen backgrounds are full-strength — immersive. The title screen background is gently softened. The precise level of lightening per screen is a deliberate atmospheric choice, not a technical default.
+
+---
+
+## Record 22 — GET READY Text: Duplicate Copy and Broken Outline
+
+**Date:** 2026-04-07
+
+**What I wanted:**
+Clean, centered GET READY! text on the transition screen with the same outline style as the rest of the text system.
+
+**What AI made (attempt 1):**
+Claude added an outline using the `::before` pseudo-element technique. The result: two copies of GET READY! appeared on screen — one centered (the actual element) and one in the upper-left corner (the pseudo-element rendering incorrectly). The outline was not visible on either copy.
+
+**Why AI went wrong (attempt 1):**
+Coding issue — the `::before` pseudo-element with `content: attr(data-text)` rendered as its own block-level element, appearing in the layout flow instead of overlaying the original text. Without `position: absolute` scoped correctly, both the original and pseudo copy were visible as siblings.
+
+**How I fixed it (attempt 1):**
+I reported the exact visual problem — two copies, broken outline — and told Claude to fix it.
+
+> *"Fix the GET READY text on the transition screen — there are two GET READY elements showing and the outline is broken."*
+
+Claude attempted to fix the pseudo-element approach but the duplicate persisted.
+
+**What AI made (attempt 2):**
+The pseudo-element was still creating a visible duplicate. Position corrections hadn't eliminated the extra copy.
+
+**How I fixed it (final):**
+I directed Claude to abandon the pseudo-element approach entirely and rewrite GET READY from scratch using `text-shadow` for the outline effect — a completely different technique with no duplicate risk.
+
+> *"Remove the duplicate GET READY text. Fix the GET READY text styling completely — rewrite it from scratch. Use text-shadow for the outline instead of pseudo elements."*
+
+The text-shadow approach (`-2px` and `+2px` offsets in all 8 directions) produces a clean visual outline with no duplicate content, no stacking context issues, and no z-index dependency.
+
+**Why fixing it made it better:**
+`text-shadow` is fundamentally more reliable for text outlines in complex React component trees than pseudo-elements. It applies directly to the text node, can't be buried by stacking contexts, and never creates layout artifacts. The text outline was later removed entirely (along with all outlines across the project) — but the clean rewrite first was necessary to confirm the technique before deciding to remove all outlines.
+
+---
+
+## Record 23 — Transition Screen Background Appeared More Washed Out Than Character Select
+
+**Date:** 2026-04-07
+
+**What I wanted:**
+The same character background that's visible during character selection to continue feeling the same when the transition screen plays — a seamless visual hand-off from select screen to START animation.
+
+**What AI made:**
+The transition screen used the character's background image but added a `rgba(255,255,255,0.3)` white overlay on top of it. The `BackgroundLayer.jsx` used in the character select screen had no white overlay. The result: clicking START made the background suddenly look 30% more washed out and lighter — a noticeable visual discontinuity.
+
+**Why AI went wrong:**
+The overlay was copy-pasted from the TitleScreen component where it made sense (lightening the default background for legibility). Applied to the TransitionScreen it created an unintended inconsistency — the same image looked different across screens without any deliberate reason.
+
+**How I fixed it:**
+I noticed the visual difference and asked Claude to investigate the cause.
+
+> *"Can you check why the transparency is different for the transition screen?"*
+
+Claude identified the `rgba(255,255,255,0.3)` overlay in TransitionScreen and the absence of any overlay in BackgroundLayer. Removing the overlay from TransitionScreen matched the two screens exactly.
+
+**Why fixing it made it better:**
+The transition from character select to the START animation should feel like the same world, not a cut to a different filter. Matching the background rendering between the two screens makes the transition feel seamless — the background is already there, the kart just drives across it. The visual continuity reinforces the sense that clicking START places you inside the world you've already been looking at.
+
+---
+
 *Last updated: 2026-04-07*
 *Update this document whenever a new session ends.*
