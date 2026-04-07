@@ -162,7 +162,7 @@ export default function TitleScreen({ onPlay }) {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          animation: shine 3s linear infinite;
+          animation: shine 10s linear infinite;
         }
       `}</style>
     </div>
