@@ -25,8 +25,6 @@ export default function BackgroundLayer({ activeTheme }) {
         />
       ))}
 
-      {/* Subtle checkerboard overlay (racing reference) */}
-      <div className="absolute inset-0 checkerboard-overlay" />
 
       {/* Floating theme elements */}
       {Object.entries(THEMES).map(([key, theme]) => (
