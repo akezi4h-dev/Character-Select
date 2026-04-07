@@ -70,10 +70,9 @@ export default function TitleScreen({ onPlay }) {
       <div style={{
         position: 'absolute',
         bottom: '40px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: '50px',
         display: 'flex',
-        gap: '40px',
+        gap: '80px',
         alignItems: 'flex-end',
         zIndex: 2,
       }}>
@@ -83,7 +82,7 @@ export default function TitleScreen({ onPlay }) {
             src={kart.src}
             alt={kart.id}
             style={{
-              width: '300px',
+              width: '600px',
               height: 'auto',
               display: 'block',
               imageRendering: 'pixelated',
