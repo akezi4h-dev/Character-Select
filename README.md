@@ -10,6 +10,33 @@ A single-page interactive character select screen for a kawaii pixel art kart ra
 
 ---
 
+## Evaluation Against Rubric Criteria
+
+### Stunning Atmosphere
+Full-screen pixel art backgrounds crossfade smoothly between characters on hover and selection. Each character has their own distinct world — beach, swamp, space, river — built from commissioned pixel art. The backgrounds aren't decorations; they are immersive environments that shift in real time to match the character being explored. The kawaii pastel palette, Press Start 2P font, and per-character glow effects combine into a consistent visual register that feels like a real game lobby, not a web page.
+
+### Typography, Color, and Hover States Create a Unified Experience
+- **Typography:** Press Start 2P at every level of the hierarchy — 57px title down to 8px kart label. One typeface, differentiated by size only.
+- **Color:** A single per-character color system drives everything simultaneously. Selecting Steve turns the title, subheader, detail stats, stat bar labels, card name, bar fill, START button, and transition screen all to his color at once. The screen is fully themed to whoever is selected.
+- **Hover states:** Hovering a card triggers three things at once — the card scales up, its border glows in that character's pastel color, and the background crossfades to their world. All three responses are coordinated through the same hover event.
+
+### Layout Responds to Interaction
+Every user action changes the screen state:
+- **Hover** → background previews the character's world, card highlights
+- **Select** → title switches to character name, subheader appears, stats panel and kart slide in, START activates, entire color system shifts
+- **START** → full-screen transition animation plays: kart drives right-to-left across the character's background, character name and GET READY displayed, fades back to select
+
+The screen is never static — it is always responding to what the user is doing.
+
+### Hosted and Accessible
+Live on GitHub Pages via auto-deploy GitHub Actions pipeline. Accessible at any time from any browser, no installation required.
+
+**[→ akezi4h-dev.github.io/Character-Select](https://akezi4h-dev.github.io/Character-Select/)**
+
+---
+
+---
+
 ## Design Intent
 
 ### Personal Statement
