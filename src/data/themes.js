@@ -36,11 +36,13 @@ export const THEMES = {
     image: '/Character-Select/images/backgrounds/Gerald-2.png',
     gradient: 'linear-gradient(180deg, #fef9c3 0%, #d9f99d 28%, #bbf7d0 55%, #86efac 100%)',
     floaters: [
-      { emoji: '🍃', top: '12%', left: '10%', delay: '0s', duration: '4s' },
-      { emoji: '🍃', top: '38%', left: '88%', delay: '0.7s', duration: '3s' },
-      { emoji: '🌿', top: '65%', left: '18%', delay: '1.5s', duration: '5s' },
-      { emoji: '🐦', top: '18%', left: '55%', delay: '1s', duration: '6s' },
-      { emoji: '🍃', top: '82%', left: '72%', delay: '2s', duration: '3.5s' },
+      { emoji: '🌙', top: '10%', left: '12%', delay: '0s', duration: '5s' },
+      { emoji: '⭐', top: '20%', left: '78%', delay: '0.8s', duration: '4s' },
+      { emoji: '🪐', top: '42%', left: '88%', delay: '1.5s', duration: '6s' },
+      { emoji: '🚀', top: '18%', left: '50%', delay: '1s', duration: '4.5s' },
+      { emoji: '☄️', top: '70%', left: '22%', delay: '2s', duration: '3.5s' },
+      { emoji: '✨', top: '60%', left: '68%', delay: '0.4s', duration: '5s' },
+      { emoji: '🌟', top: '82%', left: '80%', delay: '1.2s', duration: '4s' },
     ],
   },
   river: {
