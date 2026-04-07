@@ -53,7 +53,7 @@ export default function GameMenu() {
             fontSize: '57px',
             letterSpacing: '0.1em',
             margin: 0,
-            '--char-color': charColor,
+            '--char-color': charColor ?? '#51A0C8',
           }}
         >
           {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
