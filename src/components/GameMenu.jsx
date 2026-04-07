@@ -37,8 +37,12 @@ export default function GameMenu() {
           fontFamily: "'Press Start 2P', monospace",
           fontSize: '57px',
           letterSpacing: '0.1em',
-          color: selected ? selected.color.text : '#6CC2EE',
           margin: 0,
+          background: 'linear-gradient(to bottom, #D3F0FF, #6CC2EE)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          textShadow: '-2px -2px 0 #022232, 2px -2px 0 #022232, -2px 2px 0 #022232, 2px 2px 0 #022232',
         }}>
           {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
         </h1>
@@ -60,10 +64,13 @@ export default function GameMenu() {
           <p style={{
             fontFamily: "'Press Start 2P', monospace",
             fontSize: '16px',
-            color: selected.color.text,
-            opacity: 0.7,
             margin: 0,
             letterSpacing: '0.05em',
+            background: 'linear-gradient(to bottom, #D3F0FF, #6CC2EE)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textShadow: '-2px -2px 0 #022232, 2px -2px 0 #022232, -2px 2px 0 #022232, 2px 2px 0 #022232',
           }}>
             {selected.subheader}
           </p>
