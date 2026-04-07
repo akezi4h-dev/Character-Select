@@ -11,7 +11,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
       className="
         flex flex-col items-center gap-4 p-5 rounded-2xl border-4
         transition-all duration-200 cursor-pointer select-none
-        bg-white/50 backdrop-blur-sm
+        bg-white/50 backdrop-blur-sm overflow-hidden
         w-48 h-56
       "
       style={{
@@ -36,7 +36,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
     >
       {/* Avatar */}
       <div
-        className="w-24 h-24 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"
+        className="w-48 h-48 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"
         style={{ backgroundColor: color.pastel }}
       >
         {character.characterImage ? (
