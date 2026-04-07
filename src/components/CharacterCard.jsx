@@ -9,12 +9,13 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
       onClick={() => onSelect(character)}
       onMouseEnter={() => onHover(character)}
       className="
-        flex flex-col items-center gap-4 p-5 rounded-2xl border-4
+        rounded-2xl border-4
         transition-all duration-200 cursor-pointer select-none
-        bg-white/50 backdrop-blur-sm overflow-hidden
         w-48 h-56
       "
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         borderColor: isSelected ? color.border : 'rgba(255,255,255,0.6)',
         boxShadow: isSelected ? `0 0 24px 8px ${color.glow}` : 'none',
         transform: isSelected ? 'scale(1.06)' : '',
@@ -34,11 +35,13 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
         }
       }}
     >
-      {/* Avatar */}
-      <div
-        className="w-48 h-48 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"
-        style={{ backgroundColor: color.pastel }}
-      >
+      {/* Avatar — fills entire card */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0,
+        width: '100%', height: '100%',
+        backgroundColor: color.pastel,
+      }}>
         {character.characterImage ? (
           <img
             src={character.characterImage}
@@ -46,14 +49,20 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
-          <span className="text-6xl">{character.emoji}</span>
+          <span className="text-6xl" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>{character.emoji}</span>
         )}
       </div>
 
-      {/* Name — always below the avatar, never overlapping */}
+      {/* Name — overlaid at bottom */}
       <span
-        className="text-base font-bold tracking-widest mt-auto"
-        style={{ color: color.text }}
+        className="text-base font-bold tracking-widest"
+        style={{
+          position: 'absolute',
+          bottom: '8px',
+          left: 0, right: 0,
+          textAlign: 'center',
+          color: color.text,
+        }}
       >
         {character.name.toUpperCase()}
       </span>
