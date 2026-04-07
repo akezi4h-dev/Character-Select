@@ -33,17 +33,16 @@ export default function GameMenu() {
         zIndex: 20,
         whiteSpace: 'nowrap',
       }}>
-        <h1 style={{
-          fontFamily: "'Press Start 2P', monospace",
-          fontSize: '57px',
-          letterSpacing: '0.1em',
-          margin: 0,
-          background: 'linear-gradient(to bottom, #D3F0FF, #6CC2EE)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textShadow: '-2px -2px 0 #022232, 2px -2px 0 #022232, -2px 2px 0 #022232, 2px 2px 0 #022232',
-        }}>
+        <h1
+          className="gradient-title"
+          data-text={selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: '57px',
+            letterSpacing: '0.1em',
+            margin: 0,
+          }}
+        >
           {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
         </h1>
       </div>
@@ -61,17 +60,16 @@ export default function GameMenu() {
         alignItems: 'center',
       }}>
         {selected && (
-          <p style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: '16px',
-            margin: 0,
-            letterSpacing: '0.05em',
-            background: 'linear-gradient(to bottom, #D3F0FF, #6CC2EE)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textShadow: '-2px -2px 0 #022232, 2px -2px 0 #022232, -2px 2px 0 #022232, 2px 2px 0 #022232',
-          }}>
+          <p
+            className="gradient-title"
+            data-text={selected.subheader}
+            style={{
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: '16px',
+              margin: 0,
+              letterSpacing: '0.05em',
+            }}
+          >
             {selected.subheader}
           </p>
         )}
