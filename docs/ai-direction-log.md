@@ -273,5 +273,113 @@ The pixel art aesthetic is foundational to the entire Design Intent. Blurry pixe
 
 ---
 
+---
+
+## Entry 17 — Claude Chat Used as a Prompt Intermediary and Coding Advisor (4/1–4/7)
+
+**Date:** 2026-04-01 → 2026-04-07
+
+**What the workflow was:**
+Throughout the project I used a separate Claude.ai chat session as a middleman between my design intentions and Claude Code. Instead of typing raw instructions directly into Claude Code, I would describe what I wanted to Claude chat — often sharing reference images like the AngelKart Stamp Rally screenshot — and Claude chat would translate my vision into specific, technically correct prompts ready to paste into Claude Code.
+
+This created a three-layer process:
+1. I had an idea or saw a reference image I liked
+2. I described it (or showed it) to Claude chat
+3. Claude chat wrote the Claude Code prompt — including specific CSS, exact pixel values, and code snippets
+4. I pasted that prompt into Claude Code
+
+**Why this was my decision:**
+The decision to use Claude chat as a prompt advisor was mine. Without it, I would have typed vague instructions into Claude Code and gotten unpredictable results. Using Claude chat as a translator let me communicate design intent ("the kart should feel like a hero moment, like in this reference image") and receive back precise technical language ("set width to 450px, use position: absolute inside a fixed-size container with flex-shrink: 0"). This protected my vision from being lost in translation.
+
+**Specific coding advice Claude chat gave that shaped the project:**
+
+- **CSS variables for layout** — Claude chat suggested defining `--card-size`, `--card-gap`, and `--card-columns` as CSS custom properties so I could tweak one number and have everything update together
+- **DOM removal trick for animation retrigger** — Claude chat identified that CSS animations only play once unless the element is removed from and re-added to the DOM; this solved the kart slide-in not replaying on each character select
+- **Fixed-size kart container** — Claude chat suggested using a `position: relative; width: 500px; height: 280px; flex-shrink: 0` wrapper so the kart image could be resized without shifting the layout
+- **Character color lookup object** — Claude chat suggested storing colors as a JavaScript object `const characterColors = { steve: '#6286FE', ... }` and applying `characterColors[selectedCharacter]` dynamically to both the title and START button
+- **Glass morphism stat bars** — Claude chat specified `background: rgba(255,255,255,0.4); backdrop-filter: blur(8px); border: 2px solid rgba(255,255,255,0.7); border-radius: 999px` as the stat bar container style
+- **Layered character outfit system** — Claude chat explained how outfit customization works using stacked `position: absolute` PNG layers (base + hat + outfit + accessory), each with `top: 0; left: 0; width: 100%; height: 100%`, swapping `src` per layer on click
+
+---
+
+## Entry 18 — AngelKart Reference Images Drove Kart and Layout Direction (4/1–4/6)
+
+**Date:** 2026-04-01 → 2026-04-06
+
+**What I did:**
+I sent reference screenshots of the AngelKart Stamp Rally character select screen to Claude chat multiple times throughout the project. I used these images to show — not just describe — what I wanted the kart display, card sizing, and right panel layout to look like.
+
+**What Claude chat produced from the images:**
+Each time I shared the reference, Claude chat extracted specific measurements and behaviors from it and converted them into Claude Code prompts:
+- Identified that the kart in the reference is the dominant element of the right panel — not a thumbnail
+- Specified "at least 300px wide" escalating to 450–500px to match the reference proportion
+- Identified that the kart floats freely with no container box — just the character in their world
+- Specified `top: 55%` vertical position to place the kart in the lower half
+- Identified the static oval shadow beneath the kart as a separate non-animated element
+
+**Why this was my decision:**
+The reference images were my creative vision source. Claude chat could not have generated those specifications without the images — I had to supply the visual reference. Deciding which reference to use, when to show it again, and which aspects of it to prioritize were all my calls. Claude chat was the translator; the vision was mine.
+
+---
+
+## Entry 19 — Nav Buttons Removed, Replaced with Stat Bars by Direction (4/6)
+
+**Date:** 2026-04-06
+
+**What I had:**
+A row of nav buttons at the top (CHARACTERS, ITEMS, POWER-UPS, KARTS) that I had added earlier. I changed my mind about them — the space was better used for character stat information.
+
+**What I chose instead:**
+I directed Claude chat to generate a prompt that removed the nav buttons entirely and replaced that space with two animated stat bars — STRENGTH and ABILITY — styled as glass morphism pill bars with per-character color fills and a fill animation from 0% to their value on selection.
+
+Character stat values I assigned:
+- STEVE: Strength 80%, Ability 60%
+- GURCHEN: Strength 40%, Ability 90%
+- GERALD: Strength 70%, Ability 50%
+- BARRY: Strength 60%, Ability 75%
+
+I iterated on the bar style through Claude chat: dark border → white border → dark navy glossy → glass morphism → final style with thicker border matching the card opacity.
+
+**Why this was my decision:**
+The nav buttons were a convention (tabs for categories). I replaced them with stats because the character select screen is about knowing who you're picking — personality, strengths, and stats make the characters feel real. The specific stat values I assigned to each character reflect their personalities: Gurchen has high ability (he's nimble for a croc), Steve has high strength (surfer power). These were my characterizations.
+
+---
+
+## Entry 20 — Character Detail Stats Added with Real Personal Data (4/6)
+
+**Date:** 2026-04-06
+
+**What I chose:**
+I added a character details section to the right panel and populated it with real, personally written character data for each character:
+
+| Character | Age | Favorite Food | Favorite Place | Catchphrase |
+|-----------|-----|---------------|----------------|-------------|
+| Steve | 1 year | French Fry | Beach | SQWA |
+| Gurchen | 5 months | Pizza | Jungle | GRRR |
+| Gerald | 1 month | Freeze Dried Bananas | Outer Space | Hmmm |
+| Barry | 3 months | Fish | River | I'm not Perry, I'm Barry |
+
+**Why this was my decision:**
+Every piece of data in those fields is original character writing. Claude Code and Claude chat never generated this content — I wrote each character's biography. The ages, foods, places, and catchphrases were intentional personality choices: Gerald eats freeze dried bananas because he's a space monkey, Barry's catchphrase references Perry the Platypus as a joke, Steve's SQWA is a seagull noise. This is character authorship, not UI scaffolding.
+
+---
+
+## Entry 21 — Full Rebuild Spec Written via Claude Chat When Patches Broke the Layout (4/6)
+
+**Date:** 2026-04-06
+
+**What happened:**
+After many sessions of patching Claude Code's output, the layout had accumulated so many conflicting instructions that every fix broke something else — the kart kept shifting, the stats kept overlapping the title, the card grid kept moving. Claude chat diagnosed the problem as "too many conflicting patches."
+
+**What I chose:**
+I decided to start fresh rather than keep patching. Claude chat wrote a comprehensive full-rebuild spec — a single large prompt covering every component, position, color, animation, and layout rule — to give Claude Code a clean slate.
+
+The spec included exact CSS for both panels (`position: fixed`), fixed-height title container (`height: 80px; white-space: nowrap`) to prevent layout shift, the kart container with `flex-shrink: 0`, all character colors, stat values, animation keyframes, and the START button. It was designed so Claude Code could rebuild the entire screen without inheriting any prior conflicts.
+
+**Why this was my decision:**
+The decision to throw away the accumulated work and start over was mine. It was the right creative and technical call — a clean rebuild from a spec produces better results than endless patching. Knowing when to restart rather than keep fixing is a judgment call that required understanding both the design intent and the technical state of the project.
+
+---
+
 *Last updated: 2026-04-07*
 *Update this log whenever a new session ends.*

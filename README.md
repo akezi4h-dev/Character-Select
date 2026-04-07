@@ -204,6 +204,21 @@ The default title was white. The Art Director specified `#51A0C8` (sky blue) for
 ### Entry 16 — Pixel Art Rendering: `image-rendering: pixelated` Applied Site-Wide *(2026-04-07)*
 Character card images and background images appeared blurry due to browser bilinear upscaling. The Art Director identified the issue and directed `image-rendering: pixelated` on both the card `<img>` elements and the background `<div>` elements — forcing nearest-neighbor scaling to preserve crisp pixel art edges.
 
+### Entry 17 — Claude Chat Used as Prompt Intermediary and Coding Advisor *(2026-04-01–07)*
+The Art Director used a separate Claude.ai chat session to translate design intent — including reference images of the AngelKart Stamp Rally screen — into precise technical prompts for Claude Code. Claude chat provided CSS variable architecture, the DOM removal trick for animation retrigger, fixed-size kart container pattern, character color lookup object structure, glass morphism stat bar CSS, and the full rebuild spec. All creative decisions remained with the Art Director; Claude chat was the technical translator.
+
+### Entry 18 — AngelKart Reference Images Drove Kart and Layout Direction *(2026-04-01–06)*
+The Art Director shared AngelKart Stamp Rally screenshots with Claude chat repeatedly. Claude chat extracted specific measurements and behaviors from the images — kart dominance over the right panel, no container box, static oval shadow — and generated Claude Code prompts from them. The reference images were the creative source; Claude chat was the interpreter.
+
+### Entry 19 — Nav Buttons Removed, Replaced with Glass Morphism Stat Bars *(2026-04-06)*
+The Art Director replaced ITEMS/POWER-UPS/KARTS nav buttons with animated stat bars (STRENGTH and ABILITY). Stat values were personally assigned to reflect each character's personality. Iterated through four bar styles — dark border, white border, dark glossy, glass morphism — before settling on the glass morphism style matching the card opacity.
+
+### Entry 20 — Character Detail Stats: Original Character Writing *(2026-04-06)*
+All character biography data was written by the Art Director personally — ages, favorite foods, favorite places, catchphrases. Each reflects deliberate characterization: Gerald eats freeze dried bananas (space monkey), Barry's catchphrase references Perry the Platypus, Steve's catchphrase SQWA is a seagull noise. No AI generated this content.
+
+### Entry 21 — Full Rebuild Spec: Decided to Start Fresh Rather Than Keep Patching *(2026-04-06)*
+After accumulated patches broke the layout beyond repair, the Art Director made the call to start fresh. Claude chat diagnosed the problem ("too many conflicting instructions") and wrote a comprehensive rebuild spec covering every component, position, color, and animation. The decision to throw away the patched code and rebuild from a clean slate was the Art Director's judgment call.
+
 [Full log with detailed entries →](docs/ai-direction-log.md)
 
 ---
@@ -235,6 +250,21 @@ Browser doesn't support transitioning `background-image`. The existing stacked o
 
 ### Record 8 — Pixel Art Blurry at Card and Screen Scale *(2026-04-07)*
 Both character card images and full-screen background images appeared blurry. Browser bilinear filtering smooths pixel art when scaling up, destroying the crisp pixel edges. Applied `image-rendering: pixelated` to card `<img>` elements and to the background `<div>` elements using CSS `background-image`. The property works on both `<img>` tags and `background-image` divs — forcing nearest-neighbor scaling at any display size.
+
+### Record 16 — Claude Code Accumulated Conflicting Patches: Required Full Rebuild *(2026-04-06)*
+After many sessions of incremental fixes, every correction created a new problem. Claude Code was patching on top of contradictory CSS rules without resolving the conflicts. Claude chat diagnosed the issue and recommended starting fresh. The Art Director made the call to rebuild from a clean spec rather than keep patching.
+
+### Record 17 — Kart Overflow and Clipping: Multiple Failed Fix Attempts *(2026-04-03–06)*
+Claude Code repeatedly clipped the kart at panel edges. Each fix addressed the immediate symptom without checking the full container hierarchy — `overflow: hidden` anywhere in the parent chain clips child elements. Resolved by using a fixed-size kart container (`flex-shrink: 0; overflow: visible`) so the kart image cannot affect or be clipped by the flex layout.
+
+### Record 18 — Stats Panel Overlapping Title: Absolute Positioning Without Offset *(2026-04-06)*
+Claude Code placed the stats block using `position: absolute` from `top: 0` without subtracting the title height. Stats appeared over the title. Claude chat diagnosed the root cause: *"absolute positioned elements ignore other elements around them."* Fixed by adding explicit `padding-top` to clear the title area.
+
+### Record 19 — GitHub Pages Deployment Queue Stuck *(2026-04-06)*
+After rapid pushes during a debugging session, the deployment queue backed up and the workflow showed "waiting" for 10+ minutes. Not a code issue — earlier deployments were blocking newer ones. Fixed by cancelling all queued workflows in the Actions tab except the most recent.
+
+### Record 20 — Card Grid Shifting on Click: Identified via Claude Chat *(2026-04-01–05)*
+The card grid visibly jumped on every character click. Claude Code tried padding adjustments — a symptomatic fix. Claude chat identified the root cause: title text switching between "SELECT YOUR RACER" and "STEVE" caused browser layout reflow. Fixed with fixed-height title container + `white-space: nowrap` and right panel decoupled from flex flow via `position: absolute`.
 
 [Full log with detailed entries →](docs/records-of-resistance.md)
 

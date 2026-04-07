@@ -423,5 +423,130 @@ Applied `imageRendering: 'pixelated'` to both the `<img>` tags in `CharacterCard
 
 ---
 
+## Record 16 — Claude Code Accumulated Conflicting Patches: Required Full Rebuild
+
+**Date:** 2026-04-06
+
+**What I wanted:**
+A stable, polished character select screen where fixing one thing didn't break another. A layout where the kart was centered, the stats were in the right place, the card grid didn't shift, and text sizes were consistent.
+
+**What AI made:**
+After many sessions of incremental fixes, Claude Code's output had deteriorated to the point where every correction created a new problem. The kart would get repositioned but clip off-screen. The stats would move up but overlap the title. The text sizes would be corrected but the kart container would lose its background or change size unexpectedly. Fixing the card grid shift would reintroduce kart clipping. The layout was a stack of conflicting CSS rules that Claude Code could no longer resolve cleanly.
+
+**Why AI went wrong:**
+Claude Code did not follow directions cumulatively. Each session Claude Code was given a new instruction on top of the previous ones, but the underlying CSS from earlier sessions was still in the files. Newer rules conflicted with older rules. Claude Code kept patching without cleaning up the conflicts, so the codebase accumulated contradictions it couldn't resolve. This is a structural limitation of iterative prompting without a full-context architectural view.
+
+**How I fixed it:**
+I used Claude chat to diagnose the problem and write a comprehensive rebuild spec. Claude chat explicitly said: *"at this point Claude Code has accumulated too many conflicting instructions and is struggling to fix it cleanly. I'd recommend starting fresh."*
+
+I gave Claude Code the full spec as a single prompt, telling it to delete the old CSS and rebuild from scratch — not patch, but rewrite. The spec specified exact `position: fixed` values for both panels, fixed-height title container with `white-space: nowrap`, kart container with `flex-shrink: 0`, all character colors, stat values, and animation keyframes in one coherent document.
+
+**Why fixing it made it better:**
+Starting from a clean spec eliminated all the accumulated conflicts in one pass. The rebuilt screen had stable layout, correct positions, and consistent behavior from the first deploy. The full-rebuild approach is always better than patches when the codebase has been contradicted too many times — knowing when to restart rather than keep fixing is itself a skill.
+
+---
+
+## Record 17 — Kart Overflow and Clipping: Multiple Failed Fix Attempts
+
+**Date:** 2026-04-03 → 2026-04-06
+
+**What I wanted:**
+The kart image to be fully visible in the right panel — large, centered, no parts cut off.
+
+**What AI made:**
+Claude Code repeatedly clipped the kart at the edges of the screen. When I asked Claude Code to make the kart bigger, it would increase the size but forget to set `overflow: visible` on the parent containers. When I asked it to fix the overflow, it would add `overflow: hidden` to the wrong element, making the problem worse. The kart was variously: cut off on the right, cut off at the bottom, hidden behind a solid blue background, floating off-screen entirely, or invisible.
+
+**Why AI went wrong:**
+Claude Code did not follow directions precisely across multiple sessions. Each prompt fixed the symptom Claude Code was looking at without checking the surrounding container hierarchy. `overflow: hidden` anywhere in the parent chain clips child elements — Claude Code kept fixing the immediate container but leaving hidden overflow higher up in the tree. It also didn't account for the fact that a `position: absolute` kart inside a `position: fixed` panel with `overflow: hidden` will always clip.
+
+**How I fixed it:**
+I used Claude chat to generate progressively more specific fix prompts. The key prompt that resolved the core issue:
+
+> *"Set overflow: visible on the right panel and all its parent containers. Add padding: 20px 40px 20px 20px to the right panel so the kart has breathing room on all sides. Make sure the kart image has object-fit: contain so it scales down proportionally instead of getting cropped."*
+
+The final architectural fix was the fixed-size kart container (`position: relative; width: 420px; height: 240px; flex-shrink: 0; overflow: visible`) — by giving the container a fixed size, the kart image could be `position: absolute` inside it without affecting or being clipped by the flex layout.
+
+**Why fixing it made it better:**
+A fully visible kart is non-negotiable — it's the centerpiece of the character selection moment. The fixed-size container approach solved the problem permanently: the kart can be any size inside its container without the container growing, shrinking, or clipping it. `flex-shrink: 0` prevents the flex layout from squeezing it when other elements are present.
+
+---
+
+## Record 18 — Stats Panel Overlapping Title: Absolute Positioning Without Offset
+
+**Date:** 2026-04-06
+
+**What I wanted:**
+The character stats section (Age, Favorite Food, Favorite Place, Catchphrase) and the stat bars to appear in the right panel below the title and subheader — not overlapping them.
+
+**What AI made:**
+Claude Code placed the stats block using `position: absolute` from the top of the right panel without accounting for the height of the title and subheader. The stats appeared directly over the title text, making both unreadable. Every attempt to push it down created a new conflict — pushing it down too far hid it behind the kart, or pushing the kart down clipped it at the bottom.
+
+**Why AI went wrong:**
+Claude Code did not follow the layout intent. When using `position: absolute`, elements are placed relative to their nearest positioned ancestor — in this case the full-screen panel starting at `top: 0`. Claude Code set `top: 0` or a small value without subtracting the height of the title area (approximately 80–150px). It also did not flag that the title and the stats block were in different panels and couldn't directly affect each other's position.
+
+**How I fixed it:**
+I used Claude chat to identify the root cause and generate the correct fix prompt:
+
+> *"The character stats panel in the right side is overlapping the title and sitting too high up. Fix the positioning — the right panel content should begin at least 150px from the top of the screen to clear the title and subheader. Use padding-top: 150px or top: 150px on the right panel content container to push everything down enough to clear the title."*
+
+Claude chat diagnosed it clearly: *"The root cause is that absolute positioned elements ignore other elements around them — so the fix is just telling it exactly how far from the top to start."*
+
+**Why fixing it made it better:**
+Setting an explicit top offset gave the stats section a stable starting position that always clears the title regardless of how long the character name is or how the subheader wraps. The fix also established a clear spatial zone for the right panel — top area for stats, middle for bars, lower half for kart — which made the layout legible as a hierarchy.
+
+---
+
+## Record 19 — GitHub Pages Deployment Queue Stuck: Workflow Blocked
+
+**Date:** 2026-04-06
+
+**What I wanted:**
+Changes pushed to GitHub to deploy to the live site within the normal ~1 minute turnaround.
+
+**What AI made:**
+After pushing changes, the GitHub Actions workflow showed "waiting" for over 10 minutes with no deployment. The site was not updating.
+
+**Why AI went wrong:**
+This was an environment/infrastructure issue, not a code issue. GitHub Pages has a deployment queue — if multiple workflows are triggered in quick succession (from rapid pushes during a debugging session), earlier deployments block newer ones. The workflow was queued behind older stuck deployments that were not completing.
+
+**How I fixed it:**
+Claude chat explained the cause and provided the fix steps:
+
+> Go to your GitHub repo → Actions tab → find all workflows showing "in progress" or "queued" → cancel ALL of them except the most recent one → the latest will start running automatically.
+
+As a backup: go to repo Settings → Pages → change the branch and save → change it back and save to reset the deployment pipeline.
+
+**Why fixing it made it better:**
+Understanding that the queue issue was caused by rapid pushes — not broken code — prevented a long spiral of re-pushing changes to "fix" a deployment that was already correct. Cancelling the old queued workflows cleared the pipeline immediately. Going forward, waiting for one deployment to complete before pushing the next change prevents this entirely.
+
+---
+
+## Record 20 — Card Grid Shifting on Character Click: Identified via Claude Chat
+
+**Date:** 2026-04-01 → 2026-04-05
+
+**What I wanted:**
+The character card grid to stay completely still when a character is selected — no jumping, no shifting, no jitter.
+
+**What AI made:**
+Every time a character card was clicked, the entire grid visibly jumped position. Claude Code's first response was to adjust padding and margins around the title to visually compensate for the movement. This did not fix the problem — the grid still shifted.
+
+**Why AI went wrong:**
+Claude Code treated it as a visual problem when it was an architectural one. The real cause — identified via Claude chat — was layout reflow: the title text switching from "SELECT YOUR RACER" (long) to "STEVE" (short) caused the browser to recalculate the width of the title container, which then pushed the card grid. Claude chat diagnosed this specifically:
+
+> *"The grid shift is caused by the title text changing length (wrapping on some screens) and pushing the layout. The fix is to give the title a fixed height AND use absolute positioning for the right panel so it's completely independent of the flex layout."*
+
+Claude Code had seen the cards moving and tried to stop the movement with spacing adjustments — a symptomatic fix that never addressed the reflow.
+
+**How I fixed it:**
+Claude chat generated the correct structural prompt:
+
+> *"Give the title container a fixed height (e.g. height: 80px) so when the text changes between 'SELECT YOUR RACER' and a character name it never pushes anything below it. Add white-space: nowrap to the title so it never wraps to a second line. Change the right panel to position: absolute; top: 0; right: 0; width: 50%; height: 100% — this way the right panel is completely detached from the left side's flow and can never be pushed or shifted by title changes or card selections."*
+
+**Why fixing it made it better:**
+A stable card grid is the foundation of the selection interaction. Every click on a card must feel intentional and grounded — a grid that jumps on click feels broken, not polished. The fixed-height title and decoupled right panel solved the problem structurally. No amount of padding adjustment could have fixed it — only removing the coupling between the title width and the grid position worked.
+
+---
+
 *Last updated: 2026-04-07*
 *Update this document whenever a new session ends.*
