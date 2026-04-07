@@ -6,7 +6,7 @@
 
 ---
 
-> This document records every moment where AI went against my design intention or produced something wrong. Each entry documents: what I wanted, what AI made instead, why it went wrong (vague prompt, ignored directions, hallucination, coding error, etc.), and exactly how I corrected it through a new prompt.
+> This document records every moment where AI went against my design intention or produced something wrong. Each entry documents: what I wanted, what AI made, why it went wrong (vague prompt, ignored directions, hallucination, coding error, etc.), how I corrected it through a new prompt, and why the fix made the project better.
 
 ---
 
@@ -25,9 +25,14 @@ Claude returned a complete visual restyle of every component. It added pixel-dro
 AI did not follow design intent. Claude made an unsupported assumption: because the font was retro (Press Start 2P), the entire UI should match a retro pixel-art aesthetic. It associated one retro element with a full retro treatment and ran with it without checking against the Design Intent document that specified soft, round, kawaii, and pastel throughout.
 
 **How I fixed it:**
+I needed to reject the entire visual direction and roll back to only the change I actually wanted — the font — while undoing everything else. I gave Claude a clear total rejection with a single exception to keep.
+
 > *"I don't like it, please revert everything back except the font — keep the Press Start 2P font."*
 
 Claude used `git checkout [hash] -- [specific files]` to selectively revert only the component files, preserving the font changes in `index.html` and `index.css`. The rejection was total — every visual change except the font was undone.
+
+**Why fixing it made it better:**
+Reverting the restyle protected the emotional register the entire project is built on. If the harsh NES aesthetic had stayed, every subsequent design decision would have been built on the wrong foundation. The kawaii pastel identity — soft, round, collectible — was restored and held for the rest of the project. The font survived as the one retro touch it was always meant to be.
 
 ---
 
@@ -45,6 +50,8 @@ Claude placed the kart at roughly 250–300px — a standard UI preview thumbnai
 My prompt was vague. I asked for the kart to "be displayed on the right panel" without specifying how large or what emotional register it should hit. Claude defaulted to conventional UI proportions for a preview element.
 
 **How I fixed it (round 1):**
+I wanted Claude to understand this was about feeling, not just size — the kart needed to feel like the star of the screen, not a supporting element.
+
 > *"Make the kart image much larger — around 250–300px wide... The kart should feel like a hero moment."*
 
 Claude scaled it up but placed it inside a constrained container with `overflow: hidden`, causing the kart to clip at the edges. Bigger but now cut off.
@@ -56,9 +63,14 @@ Claude fixed the clipping by adding padding, but the kart was still ~400–500px
 AI did not fully grasp "hero moment." It treated the kart as a preview panel element and scaled it within that convention, instead of rethinking the entire display as a showcase.
 
 **How I fixed it (round 2):**
+I abandoned subtlety and gave Claude an exact number that no UI convention would ever produce — forcing it to abandon the "preview panel" mental model entirely.
+
 > *"Can you make it even bigger — 700 pixels?"*
 
-Claude scaled to 700px, updated the container to `maxWidth: 720px`, and set `overflow: visible` so nothing clips. 700px is nearly the full height of a laptop screen — that was intentional. No UI convention would suggest it. It was a design escalation, not a technical request.
+Claude scaled to 700px, updated the container to `maxWidth: 720px`, and set `overflow: visible` so nothing clips. 700px is nearly the full height of a laptop screen — that was intentional. It was a design escalation, not a technical request.
+
+**Why fixing it made it better:**
+700px transformed the kart from a UI detail into the centerpiece of the screen. When you select a character, their kart fills the right half of your view — it commands attention the way the character select screen in Mario Kart does. It made the "payoff moment" of selecting a character feel real.
 
 ---
 
@@ -76,9 +88,14 @@ Claude placed the kart inside a visible framed container: a card-like box with r
 AI followed a convention. A right-side detail panel is the conventional UI response to "show a preview of the selected item." Claude had no reason to deviate from it — the design intention of floating the character freely in the background was never stated explicitly in the prompt.
 
 **How I fixed it:**
+I needed to explicitly reject every element of the container — not just shrink it or restyle it, but eliminate it entirely. The prompt had to communicate that absence was the design.
+
 > *"No box, no background, no border — the kart should float in the background of the screen. Only the shadow ellipse below it."*
 
 Claude removed the container background, border, and padding entirely. The kart now appears directly against the full-screen background image with only a ground shadow beneath it.
+
+**Why fixing it made it better:**
+Removing the box completely changed the feeling of character selection. Instead of looking at a character *through* a UI panel, the screen feels like you're looking at the character *in their world*. The background shifts to their theme, and they float in it — immersive rather than interfaced. The only thing grounding them is the ellipse shadow, which feels like a game engine ground contact shadow, not a UI border.
 
 ---
 
@@ -96,11 +113,16 @@ After clicking a card, the entire character grid visibly shifted position — ca
 AI treated the symptom, not the cause. The real problem was a browser layout reflow: the title text was switching between "SELECT YOUR RACER" (wide) and "STEVE" (narrow), and because the title was in the normal document flow with no fixed size, the width change caused the surrounding layout to reflow and push the card grid. Claude saw the cards moving and tried to stabilize them with padding, which does not prevent reflow.
 
 **How I fixed it:**
+I rejected the cosmetic fix and demanded Claude find and eliminate the actual cause — making it clear that visual compensation wasn't acceptable and a structural solution was required.
+
 > *"Character cards must not move or shift when clicked. Figure out why this is happening and stop this completely."*
 
 I identified the root cause to Claude — variable-length title text causing reflow — and specified the structural fix:
 1. Fixed-height title container (`height: 60px`) + `white-space: nowrap` — bounding box stays constant regardless of text content
 2. Right panel decoupled from flex flow entirely via `position: absolute; top: 0; right: 0; width: 50%; height: 100%` — nothing on the right can affect the left
+
+**Why fixing it made it better:**
+Card stability is fundamental to the polish of the selection interaction. Before the fix, clicking any card looked like a layout glitch — it broke trust in the UI. After the fix, the grid is completely locked. Clicking a card feels intentional and clean. The title text changes, the background shifts, the stats panel appears — all without the grid moving a single pixel.
 
 ---
 
@@ -118,9 +140,14 @@ The right panel was placed as a flex sibling to the left panel inside the main l
 AI used a conventional layout approach. Two-column flex layout is the standard solution for a two-panel screen. Claude had no reason to deviate — the coupling problem wasn't stated as a requirement because I hadn't identified it yet at the time of the initial prompt.
 
 **How I fixed it:**
+I gave Claude the exact CSS values I needed, specifying that the panel must be completely removed from the flex flow — not just repositioned within it. I included the internal centering so the kart would remain centered regardless of what happened on the left.
+
 > *"Make the right panel position: absolute; top: 0; right: 0; width: 50%; height: 100% — completely removed from the flex flow. Use display: flex; align-items: center; justify-content: center inside it so the kart stays perfectly centered no matter what changes on the left."*
 
 This completely decoupled the two halves. The right panel is now independent of the flex layout — nothing on the left can push, shrink, or shift it.
+
+**Why fixing it made it better:**
+Decoupling the panels created two independent zones that each do their own thing without interfering. The left panel handles character selection — dynamic, interactive, constantly changing. The right panel handles the character showcase — stable, cinematic, always centered. The architectural separation mirrors the design intention: two halves of one screen that belong to different visual registers.
 
 ---
 
@@ -141,17 +168,24 @@ When I asked for the same stroke on the card names, the stroke disappeared entir
 Coding issue on attempt 2 — Claude didn't account for the button's stacking context when implementing the same technique that worked elsewhere. `z-index: -1` inside a stacking context clips to that context, making the pseudo-element invisible. Claude applied a pattern without checking if the container conditions were compatible.
 
 **How I fixed it (card name stroke):**
+I told Claude the stroke wasn't appearing and let it diagnose the stacking context problem and switch techniques.
+
 > *"The character name text inside the cards is not showing the stroke — fix it."*
 
-Claude switched to `paint-order: stroke fill` with `-webkit-text-stroke` applied directly on the element — no z-index, no pseudo-element needed. `paint-order` is a render order instruction, not a positioning one, so stacking context is irrelevant.
+Claude switched to `paint-order: stroke fill` with `-webkit-text-stroke` applied directly on the element — no z-index, no pseudo-element needed.
 
 **What I decided after all iterations:**
 After testing: white stroke → black stroke → 2px → 0.5px → I removed the stroke system entirely.
 
 **How I fixed it (final):**
+I gave a clean, sweeping instruction to remove every trace of the stroke system from the entire codebase — not just one element but all of them at once.
+
 > *"Remove all text outlines and strokes from every text element on the entire page."*
 
-Plain white text on pixel art backgrounds needed no stroke. The iterations taught me that the stroke was adding noise, not solving a problem. Removing it entirely was the right call.
+Plain white text on pixel art backgrounds needed no stroke.
+
+**Why fixing it made it better:**
+Removing the stroke made the text feel lighter and more intentional. The pixel art backgrounds have enough visual richness — adding a stroke on top created visual noise rather than legibility. Clean white text reads clearly against the backgrounds without competing with them. The simplification also made the CSS cleaner and easier to maintain going forward. Sometimes the right design decision is to remove something entirely.
 
 ---
 
@@ -169,9 +203,14 @@ The character color system used vibrant, saturated values: Steve `#6286FE`, Gurc
 AI did not follow design intent in context. The colors were technically correct based on my earlier hex specifications, but Claude applied them without considering that the background system had fundamentally changed. It didn't flag the visual conflict or suggest re-evaluating the palette.
 
 **How I fixed it:**
+I provided four new exact hex values — one per character — that I had chosen to work specifically against the pixel art backgrounds. The prompt gave Claude nothing to interpret; the exact values replaced the old ones directly.
+
 > *"Update the text colors and START button color for each character: Steve #10517B, Gurchen #436348, Gerald #142341, Barry #295A57."*
 
-I replaced all four with darker, more muted tones that ground the text against the lighter, more complex pixel art imagery. Each new color is still character-coded but sits in the scene rather than fighting it.
+I replaced all four with darker, more muted tones that ground the text against the lighter, more complex pixel art imagery.
+
+**Why fixing it made it better:**
+The darker palette made text feel like it belongs inside each character's world rather than floating over it. Steve's deep ocean blue reads naturally against a beach sky. Gurchen's forest green sits inside the swamp. Gerald's dark navy disappears into the space backdrop. Barry's dark teal matches the river's depth. The text stopped competing with the artwork and started complementing it.
 
 ---
 
@@ -189,9 +228,14 @@ After the text stroke system was removed, all text defaulted to white. The `--te
 AI did not follow directions completely. The `--text-gradient` variable had been set up in a previous session and the system for applying it was never updated when the stroke system changed. Claude left orphaned code in place without flagging that the text color system had been broken by the stroke removal.
 
 **How I fixed it:**
+I gave Claude a comprehensive list of every text element that needed to update — being explicit and exhaustive so nothing would be missed again. The prompt made the scope of the change undeniable.
+
 > *"Apply character colors to ALL of the following when a character is selected: title and subheader text, selected character card name text, all stats text (Age, Favorite Food, Favorite Place, Catchphrase, Strength, Ability labels and values), START button background color, stat bar fill color. Also apply the same character color to the transition screen: character name text, GET READY text."*
 
-Implemented by replacing `--text-gradient` with a unified `--char-color` CSS custom property passed through inline styles on each element, with `white` as the CSS fallback when no character is selected.
+Implemented by replacing `--text-gradient` with a unified `--char-color` CSS custom property, with `white` as the fallback when no character is selected.
+
+**Why fixing it made it better:**
+Full character color theming transformed the selection from a background-and-border change into a total screen shift. When Steve is selected, the beach background loads, the border glows sky blue, and every line of text on screen turns his deep ocean blue. The screen belongs to him entirely. The character's color became the visual language of the whole interface in that moment — not just a highlight, but a system.
 
 ---
 
@@ -203,15 +247,20 @@ Implemented by replacing `--text-gradient` with a unified `--char-color` CSS cus
 The GET READY! text on the transition screen should use the selected character's color — consistent with every other text element on the screen when a character is selected.
 
 **What AI made:**
-The transition screen's `<h1>` (character name) correctly used `WebkitTextFillColor: textColor` directly in the inline style, so it showed character color. But the GET READY! `<p>` element used the `.get-ready` CSS class, which had `-webkit-text-fill-color: white` hardcoded. The inline `--char-color` variable was never passed to that element, so the CSS class's white override won.
+The transition screen's `<h1>` (character name) correctly showed character color. But the GET READY! `<p>` element used the `.get-ready` CSS class, which had `-webkit-text-fill-color: white` hardcoded. The character color variable was never passed to that element, so the CSS class's white override won.
 
 **Why AI went wrong:**
-Coding issue — CSS specificity and cascade order. The `.get-ready` class was setting `-webkit-text-fill-color: white` directly, which takes precedence over a CSS variable fallback when the variable is not set on that element. Claude wired the `h1` correctly but missed that the `<p>` used a class with a hardcoded override rather than the variable system.
+Coding issue — CSS specificity and cascade order. The `.get-ready` class was setting `-webkit-text-fill-color: white` directly, which takes precedence over a CSS variable fallback when the variable is not set on that specific element. Claude wired the `h1` correctly but missed that the `<p>` used a hardcoded class override rather than the variable system.
 
 **How I fixed it:**
+I pointed out exactly which element was broken and what it should be doing instead — giving Claude a clear, targeted problem with an implied solution based on how the rest of the system worked.
+
 > *"Fix the GET READY text on the transition screen — it should use the character color, not white."*
 
-Added `'--char-color': textColor` to the GET READY `<p>` element's inline style, and updated the `.get-ready` CSS class to use `var(--char-color, white)` instead of a hardcoded white. The variable now propagates correctly from inline style into the class.
+Added `'--char-color': textColor` to the GET READY `<p>` element's inline style, and updated the `.get-ready` CSS class to use `var(--char-color, white)` instead of a hardcoded white.
+
+**Why fixing it made it better:**
+The transition screen now feels completely unified. Character name and GET READY! both appear in the same character color — the whole overlay belongs to that character's palette. Before the fix, the white GET READY! text felt disconnected from the name above it. After the fix, the transition screen reads as a single, coherent designed moment rather than a mix of hardcoded and dynamic styles.
 
 ---
 
@@ -223,19 +272,24 @@ Added `'--char-color': textColor` to the GET READY `<p>` element's inline style,
 Card name text should be white on unselected cards, and switch to the character's border color (lighter pastel: `#7dd3fc`, `#86efac`, `#fde047`, `#fdba74`) when that card is selected.
 
 **What AI made (attempt 1):**
-Claude first set the card name to always show `color.border` regardless of selection state. Every card name was colored at all times — not just the selected one.
+Claude set the card name to always show `color.border` regardless of selection state. Every card name was colored at all times — not just the selected one.
 
 **Why AI went wrong (attempt 1):**
 Prompt was partially vague. I said the card name should "match the border color" without specifying that this should only apply when selected. Claude applied the color universally.
 
 **How I fixed it (attempt 1):**
+I rewrote the instruction to explicitly define both states — selected and unselected — leaving no room for interpretation.
+
 > *"When a card is NOT selected: card name text should be white. When a card IS selected: card name text should change to that character's color."*
 
 **What AI made (attempt 2):**
-Claude then applied `isSelected ? color.border : undefined` — correct in principle, but the CSS class `.card-name` was still using `var(--char-color, white)` rather than its own isolated variable. This caused the card name to potentially inherit `--char-color` from a parent if the variable happened to be set in scope.
+Claude applied `isSelected ? color.border : undefined` — correct in principle, but the CSS class `.card-name` was using the shared `--char-color` variable, which could inherit from a parent element.
 
 **How I fixed it (final):**
-Scoped the card name to its own dedicated CSS variable `--card-border-color`, completely isolated from the `--char-color` system. `.card-name` only responds to `--card-border-color` — no bleed from any other color system on the page.
+Scoped the card name to its own dedicated CSS variable `--card-border-color`, completely isolated from the `--char-color` system. `.card-name` only responds to `--card-border-color` — no bleed from any other color system.
+
+**Why fixing it made it better:**
+The two-state card name behavior makes selection feel immediate and readable. Unselected cards show clean white names — neutral, equal, waiting. The selected card's name lights up in its character color — sky blue for Steve, mint for Gurchen, yellow for Gerald, peach for Barry. The color shift is a clear visual signal of which character is active without needing any other indicator. It also reads better against the full-bleed card artwork than the darker `color.text` values would have.
 
 ---
 
@@ -247,21 +301,26 @@ Scoped the card name to its own dedicated CSS variable `--card-border-color`, co
 A gradient border on the character cards — `linear-gradient(to bottom, #51A0C8, #6CC2EE, #B3E5FF)` — with rounded corners preserved.
 
 **What AI made:**
-Claude set `borderColor` to a gradient string in the inline style. CSS does not support gradient values for `border-color` — it only accepts solid color values. The gradient was silently ignored and the border showed as transparent.
+Claude set `borderColor` to a gradient string in the inline style. CSS does not support gradient values for `border-color`. The gradient was silently ignored and the border showed as transparent.
 
 **Why AI went wrong:**
 Coding issue / hallucination. Claude wrote syntactically plausible-looking code that CSS does not actually support. `border-color: linear-gradient(...)` is not valid CSS and has no effect, but Claude produced it as if it were a valid solution.
 
 **How I fixed it:**
+I reported the visible problem — the border wasn't appearing — and asked Claude to find a working solution. This forced it to look for a valid CSS approach rather than defend broken code.
+
 > *"The border color isn't showing — fix it so the gradient border works with the rounded corners."*
 
 The correct approach is the `background-clip` technique:
 - `border: 4px solid transparent`
-- `backgroundImage: 'linear-gradient(transparent, transparent), linear-gradient(to bottom, #51A0C8, #6CC2EE, #B3E5FF)'`
+- Two-layer `backgroundImage`: transparent fill layer + gradient border layer
 - `backgroundOrigin: 'padding-box, border-box'`
 - `backgroundClip: 'padding-box, border-box'`
 
-This renders the gradient in the border zone only, while preserving both the rounded corners and the transparent card background. `border-image` (the alternative) would have destroyed `border-radius`.
+This renders the gradient in the border zone only while preserving rounded corners. `border-image` (the other option) kills `border-radius` entirely.
+
+**Why fixing it made it better:**
+The gradient border gives each unselected card a soft, unified blue-to-white glow that reads as a consistent default state — all four cards belong to the same game before any is selected. The gradient also subtly references the beach/sky palette of the game's overall aesthetic. Once a character is selected, the border switches to that character's solid `color.border` — the gradient disappears and the card takes on its unique identity. The two border states work together to communicate the idle-vs-selected difference clearly.
 
 ---
 
@@ -270,18 +329,23 @@ This renders the gradient in the border zone only, while preserving both the rou
 **Date:** 2026-04-07
 
 **What I wanted:**
-Text stroke visible on the character name inside each card, matching the stroke on the title and stats.
+Text stroke visible on the character name inside each card — matching the stroke system on the title and stats text.
 
 **What AI made:**
-The `::before` pseudo-element stroke technique that worked on the title (`z-index: -1` to sit behind the fill) was applied to the card name. On the card, the stroke was completely invisible — the pseudo-element disappeared entirely.
+The `::before` pseudo-element stroke technique (`z-index: -1`) that worked on the title was applied to the card name. On the card, the stroke was completely invisible — the pseudo-element disappeared entirely.
 
 **Why AI went wrong:**
-Coding issue — stacking context. The card name sits inside a `<button>` element with `position: relative` and `overflow: hidden`. Buttons create their own stacking context. A `z-index: -1` pseudo-element inside a stacking context is clipped to that context — it renders behind the button's own background, not behind the text fill. Claude reused a working technique without checking whether the container environment was compatible.
+Coding issue — stacking context. The card name sits inside a `<button>` with `position: relative` and `overflow: hidden`. Buttons create their own stacking context. A `z-index: -1` pseudo-element inside a stacking context renders behind that context's background — not behind the text fill. Claude reused a working technique without checking whether the container environment was compatible.
 
 **How I fixed it:**
+I reported that the stroke wasn't visible and let Claude diagnose the problem. The fix required switching to an entirely different CSS technique that doesn't depend on z-index at all.
+
 > *"The card name stroke is not visible — fix it."*
 
-Switched to `paint-order: stroke fill` with `-webkit-text-stroke` applied directly on the element — no pseudo-element, no z-index involved. `paint-order` tells the browser to render the stroke first in the normal paint order, then fill on top. Since it's not using z-index positioning at all, stacking context is irrelevant.
+Switched to `paint-order: stroke fill` with `-webkit-text-stroke` directly on the element. `paint-order` is a render order instruction — it tells the browser to paint the stroke layer before the fill layer. No pseudo-element, no z-index, no stacking context issues.
+
+**Why fixing it made it better:**
+Finding the `paint-order` solution was itself valuable — it's a cleaner implementation than the pseudo-element technique because it applies directly to the text element without needing a duplicate layer. The stroke rendered correctly and consistently across all card states. (The stroke system was later removed entirely in Record 6 — but the stacking context bug had to be solved first to discover that the stroke wasn't the right direction at all.)
 
 ---
 
@@ -290,16 +354,21 @@ Switched to `paint-order: stroke fill` with `-webkit-text-stroke` applied direct
 **Date:** 2026-04-07
 
 **What I wanted:**
-Smooth, animated transitions between the character background images when hovering or selecting a different character. No harsh snapping.
+Smooth, animated cross-fades between character background images when hovering or selecting — no harsh snapping between themes.
 
 **What AI made:**
 The initial background image swap used direct `background-image` property changes, which cannot be transitioned in CSS. Backgrounds snapped instantly with no fade.
 
 **Why AI went wrong:**
-Coding issue / browser limitation. `transition: background-image` is not supported by any browser — background images cannot be interpolated. Claude attempted a transition that the browser fundamentally cannot perform.
+Coding issue / browser limitation. `transition: background-image` is not supported by any browser. Claude attempted a transition that the browser fundamentally cannot perform.
 
 **How I fixed it:**
-The existing `BackgroundLayer.jsx` architecture already had the correct solution from a previous session — stacked `position: absolute; inset: 0` divs, one per theme, each controlled by `opacity: 0 → 1` with `transition: opacity 0.7s ease-in-out`. The fix required no architectural change. Each theme div already existed and was already fading. Swapping from CSS gradients to background images just meant changing what each div rendered — the transition system was untouched.
+The existing `BackgroundLayer.jsx` architecture already had the correct solution built in from an earlier session. The fix was recognizing that the transition system didn't need to change — only the content of each layer needed updating from gradient to image.
+
+The stacked `position: absolute; inset: 0` divs, one per theme, each fading via `opacity: 0 → 1` with `transition: opacity 0.7s ease-in-out`, already created a perfect cross-fade. No new prompt was needed — just applying the background images to the existing opacity-fading divs.
+
+**Why fixing it made it better:**
+The 0.7s opacity cross-fade between background images is one of the most polished interactions on the screen. Hovering from Steve to Gurchen dissolves the beach into the swamp in real time. The transition is GPU-accelerated and smooth at any frame rate. The architecture that made this possible — stacked divs with opacity — was already in place. Understanding that the structure was correct and only the content needed updating was the key insight.
 
 ---
 
@@ -308,18 +377,23 @@ The existing `BackgroundLayer.jsx` architecture already had the correct solution
 **Date:** 2026-04-07
 
 **What I wanted:**
-Push completed changes from the worktree to `origin/main` so they'd deploy to GitHub Pages.
+Push completed changes to `origin/main` so they'd deploy to GitHub Pages.
 
 **What AI made:**
 Claude attempted to merge the worktree branch into the local `main` branch first. Git rejected it: `fatal: 'main' is already checked out at 'C:/Users/.../Character-Select'`. The main branch was already in use by the primary worktree — you cannot check it out in a second worktree simultaneously.
 
 **Why AI went wrong:**
-Coding issue — environment constraint. The standard push workflow (checkout main → merge → push) assumed only one working directory. In a git worktree setup, multiple branches are checked out simultaneously in different directories. The standard workflow broke because it didn't account for the worktree isolation.
+Coding issue — environment constraint. The standard push workflow (checkout main → merge → push) assumed a single working directory. In a git worktree setup, multiple branches are checked out simultaneously in separate directories. The standard workflow broke because it didn't account for the isolation between worktrees.
 
 **How I fixed it:**
+I asked Claude to find a way to push without touching the main branch checkout — forcing it to use a different git mechanism that bypassed the worktree conflict entirely.
+
 > *"Push directly to origin/main without checking out the branch."*
 
-Used the git ref syntax to push directly: `git push origin claude/competent-haibt:main`. This pushes the worktree branch directly to the `origin/main` remote ref without ever needing to checkout `main` locally. Since the worktree branch was a direct fast-forward of `origin/main`, no merge was needed. This became the standard push method for every deploy throughout the project.
+Used the git ref syntax: `git push origin claude/competent-haibt:main`. This pushes the worktree branch directly to the `origin/main` remote ref — no local checkout of `main` required. This became the standard deploy command for the rest of the project.
+
+**Why fixing it made it better:**
+Finding the direct push syntax `source:destination` unlocked a reliable, repeatable deployment workflow that worked cleanly within the worktree environment every single time. Rather than working around the constraint, the fix turned it into a non-issue. Every subsequent deploy was one command with no git conflicts, no branch switching, no risk of overwriting the wrong state.
 
 ---
 
@@ -328,23 +402,24 @@ Used the git ref syntax to push directly: `git push origin claude/competent-haib
 **Date:** 2026-04-07
 
 **What I wanted:**
-Sharp, crisp pixel art — both the character card portraits and the full-screen background images. Pixel art is defined by its hard edges and visible pixel grid. Blurry pixel art defeats the entire aesthetic.
+Sharp, crisp pixel art for both character card portraits and full-screen background images. Pixel art is defined by its hard edges and visible pixel grid. Blurry pixel art defeats the entire aesthetic.
 
 **What AI made:**
-Images appeared blurry at display scale. The images were correctly loaded and positioned — the blurriness was a browser rendering behavior, not a file problem.
+Images appeared blurry at display scale. They were correctly loaded and positioned — the blurriness was a browser rendering behavior, not a file or placement problem.
 
 **Why AI went wrong:**
-Coding issue — browser default behavior. Browsers apply bilinear filtering to all scaled images by default. For photographs this creates smooth scaling. For pixel art it blurs the hard pixel edges, destroying the visual language entirely. Claude placed the images without specifying a rendering mode that would preserve pixel-art crispness.
+Coding issue — browser default behavior. Browsers apply bilinear filtering to all scaled images by default. For photographs this creates smooth scaling. For pixel art it destroys the hard pixel edges. Claude placed the images without specifying a rendering mode that would preserve pixel-art crispness.
 
 **How I fixed it:**
+I identified the exact CSS property that would solve the problem and named it directly, telling Claude both what was wrong and exactly how to fix it.
+
 > *"The character cards are blurry — can you fix it using image-rendering: pixelated?"*
 > *"The background is also blurry — apply the same fix."*
 
-Applied `imageRendering: 'pixelated'` to:
-1. The `<img>` tags in `CharacterCard.jsx`
-2. The background `<div>` elements in `BackgroundLayer.jsx` — `image-rendering` works on CSS `background-image` on divs as well as `<img>` elements
+Applied `imageRendering: 'pixelated'` to both the `<img>` tags in `CharacterCard.jsx` and the background `<div>` elements in `BackgroundLayer.jsx`. The property works on CSS `background-image` divs as well as `<img>` elements.
 
-Nearest-neighbor scaling preserves the pixel grid at any display size. Every pixel maps to a clean, sharp block. No smoothing. No blurring.
+**Why fixing it made it better:**
+`image-rendering: pixelated` is the difference between pixel art and a blurry mess. Nearest-neighbor scaling preserves every hard edge — each pixel maps to a clean, sharp block at any screen size. After the fix, the character portraits looked exactly as the artist drew them, and the background environments read as intentional pixel art worlds rather than upscaled photographs. The crispness of the pixel grid is the entire visual language of this project — without it, the Design Intent collapses.
 
 ---
 
