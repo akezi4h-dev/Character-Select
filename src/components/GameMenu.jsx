@@ -93,7 +93,7 @@ export default function GameMenu() {
       {selected && (
         <div style={{
           position: 'fixed',
-          left: '500px',
+          left: '775px',
           top: '170px',
           zIndex: 20,
         }}>
@@ -104,7 +104,7 @@ export default function GameMenu() {
             {DETAIL_KEYS.map(({ label, key }) => (
               <p key={key} style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: '24px',
+                fontSize: '16px',
                 margin: 0,
                 color: selected.color.text,
                 letterSpacing: '0.04em',

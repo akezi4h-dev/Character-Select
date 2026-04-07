@@ -5,8 +5,8 @@ export default function StatBars({ character }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
-      <StatRow label="Strength" fill={strength} color={color} id={character?.id} />
-      <StatRow label="Ability"  fill={ability}  color={color} id={character?.id} />
+      <StatRow label="STRENGTH" fill={strength} color={color} id={character?.id} />
+      <StatRow label="ABILITY"  fill={ability}  color={color} id={character?.id} />
     </div>
   )
 }
@@ -17,8 +17,9 @@ function StatRow({ label, fill, color, id }) {
       {/* Label above bar */}
       <span style={{
         fontFamily: "'Press Start 2P', monospace",
-        fontSize: '24px',
+        fontSize: '16px',
         color: color,
+        textShadow: '1px 1px 0 rgba(0,0,0,0.15)',
       }}>
         {label}
       </span>
