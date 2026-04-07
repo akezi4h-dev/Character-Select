@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import DevGrid from './DevGrid'
 
-const CHARACTERS = [
-  { id: 'gurchen', src: '/Character-Select/images/characters/Gurchen-Character.png', delay: '0.5s' },
-  { id: 'gerald',  src: '/Character-Select/images/characters/Gerald-Character.png',  delay: '0.9s' },
-  { id: 'steve',   src: '/Character-Select/images/characters/Steve-Character.png',   delay: '1.3s' },
-  { id: 'barry',   src: '/Character-Select/images/characters/Barry-Character.png',   delay: '1.7s' },
+const KARTS = [
+  { id: 'gurchen', src: '/Character-Select/images/karts/gurchen-kart.png', delay: '0.5s' },
+  { id: 'gerald',  src: '/Character-Select/images/karts/gerald-kart.png',  delay: '0.9s' },
+  { id: 'steve',   src: '/Character-Select/images/karts/steve-kart.png',   delay: '1.3s' },
+  { id: 'barry',   src: '/Character-Select/images/karts/barry-kart.png',   delay: '1.7s' },
 ]
 
 export default function TitleScreen({ onPlay }) {
@@ -66,10 +66,10 @@ export default function TitleScreen({ onPlay }) {
         </h1>
       </div>
 
-      {/* Character images — staggered slide-up from bottom */}
+      {/* Karts — drive in from right to left, staggered */}
       <div style={{
         position: 'absolute',
-        bottom: 0,
+        bottom: '40px',
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
@@ -77,27 +77,20 @@ export default function TitleScreen({ onPlay }) {
         alignItems: 'flex-end',
         zIndex: 2,
       }}>
-        {CHARACTERS.map((char) => (
-          <div
-            key={char.id}
+        {KARTS.map((kart) => (
+          <img
+            key={kart.id}
+            src={kart.src}
+            alt={kart.id}
             style={{
-              overflow: 'hidden',
-              lineHeight: 0,
+              width: '150px',
+              height: 'auto',
+              display: 'block',
+              imageRendering: 'pixelated',
+              animation: `driveInFromRight 0.6s ease-out ${kart.delay} forwards`,
+              transform: 'translateX(120vw)',
             }}
-          >
-            <img
-              src={char.src}
-              alt={char.id}
-              style={{
-                width: '150px',
-                height: 'auto',
-                display: 'block',
-                imageRendering: 'pixelated',
-                animation: `charSlideUp 0.6s ease-out ${char.delay} forwards`,
-                transform: 'translateY(300px)',
-              }}
-            />
-          </div>
+          />
         ))}
       </div>
 
@@ -151,9 +144,9 @@ export default function TitleScreen({ onPlay }) {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes charSlideUp {
-          from { transform: translateY(300px); }
-          to   { transform: translateY(0);     }
+        @keyframes driveInFromRight {
+          from { transform: translateX(120vw); }
+          to   { transform: translateX(0);     }
         }
       `}</style>
     </div>
