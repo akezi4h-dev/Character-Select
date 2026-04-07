@@ -20,7 +20,16 @@ export default function KartDisplay({ character }) {
           overflow: 'visible',
         }}
       >
-        <span style={{ fontSize: '640px', lineHeight: 1, display: 'block' }}>🏎️</span>
+        <img
+            src={character.kartImage}
+            alt={`${character.name}'s kart`}
+            style={{
+              width: '100%',
+              height: 'auto',
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
       </div>
 
 
