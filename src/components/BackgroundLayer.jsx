@@ -17,6 +17,7 @@ export default function BackgroundLayer({ activeTheme }) {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              imageRendering: 'pixelated',
             } : {
               background: theme.gradient,
             }),
