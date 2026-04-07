@@ -1,8 +1,9 @@
 // START button — fixed, centered at the bottom of the screen.
-export default function StartButton({ disabled, activeColor = '#6CC2EE' }) {
+export default function StartButton({ disabled, activeColor = '#6CC2EE', onClick }) {
   return (
     <button
       disabled={disabled}
+      onClick={onClick}
       style={{
         position: 'fixed',
         bottom: '24px',

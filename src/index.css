@@ -72,6 +72,12 @@ body {
   paint-order: stroke fill;
 }
 
+/* Kart drives across screen for transition animation */
+@keyframes driveAcross {
+  from { transform: translateX(-300px); }
+  to   { transform: translateX(calc(100vw + 300px)); }
+}
+
 /* Kart slide-in from the right on character select */
 .kart-slide-in {
   animation: slideInKart 0.6s ease-out forwards;

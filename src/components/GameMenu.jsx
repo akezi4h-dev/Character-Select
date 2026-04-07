@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
+import { THEMES } from '../data/themes'
 import BackgroundLayer from './BackgroundLayer'
 import CharacterGrid from './CharacterGrid'
 import StartButton from './StartButton'
 import StatBars from './StatBars'
 import KartDisplay from './KartDisplay'
+import TransitionScreen from './TransitionScreen'
 import DevGrid from './DevGrid'
 
 const DETAIL_KEYS = [
@@ -17,11 +19,21 @@ const DETAIL_KEYS = [
 export default function GameMenu() {
   const [selected, setSelected] = useState(null)
   const [hovered,  setHovered]  = useState(null)
+  const [transitioning, setTransitioning] = useState(false)
 
   const activeTheme = hovered?.theme ?? selected?.theme ?? 'default'
   const textGradient = selected
     ? `linear-gradient(to bottom, ${selected.color.text}, ${selected.color.text})`
     : undefined
+
+  const handleStart = () => {
+    if (selected) setTransitioning(true)
+  }
+
+  const handleTransitionComplete = () => {
+    setTransitioning(false)
+    setSelected(null)
+  }
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
@@ -165,7 +177,16 @@ export default function GameMenu() {
 
 
       {/* START — fixed, centered at bottom */}
-      <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
+      <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} onClick={handleStart} />
+
+      {/* Transition screen */}
+      {transitioning && (
+        <TransitionScreen
+          character={selected}
+          bgImage={THEMES[selected.theme]?.image}
+          onComplete={handleTransitionComplete}
+        />
+      )}
 
       {/* Dev grid overlay */}
       <DevGrid />
