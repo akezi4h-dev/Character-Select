@@ -12,7 +12,14 @@ export default function BackgroundLayer({ activeTheme }) {
           className="absolute inset-0 transition-opacity duration-700 ease-in-out"
           style={{
             opacity: activeTheme === key ? 1 : 0,
-            background: theme.gradient,
+            ...(theme.image ? {
+              backgroundImage: `url('${theme.image}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            } : {
+              background: theme.gradient,
+            }),
           }}
         />
       ))}

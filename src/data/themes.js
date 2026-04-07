@@ -10,6 +10,7 @@ export const THEMES = {
     ],
   },
   beach: {
+    image: '/Character-Select/images/backgrounds/Steve.png',
     gradient: 'linear-gradient(180deg, #7dd3fc 0%, #bae6fd 40%, #fef3c7 70%, #fde68a 100%)',
     floaters: [
       { emoji: '🐦', top: '8%', left: '20%', delay: '0s', duration: '4s' },
@@ -20,6 +21,7 @@ export const THEMES = {
     ],
   },
   swamp: {
+    image: '/Character-Select/images/backgrounds/Gurchen.png',
     gradient: 'linear-gradient(180deg, #d1fae5 0%, #bbf7d0 30%, #86efac 65%, #d1fae5 100%)',
     floaters: [
       { emoji: '🫧', top: '70%', left: '22%', delay: '0s', duration: '3s' },
@@ -30,6 +32,7 @@ export const THEMES = {
     ],
   },
   jungle: {
+    image: '/Character-Select/images/backgrounds/Gerald.png',
     gradient: 'linear-gradient(180deg, #fef9c3 0%, #d9f99d 28%, #bbf7d0 55%, #86efac 100%)',
     floaters: [
       { emoji: '🍃', top: '12%', left: '10%', delay: '0s', duration: '4s' },
@@ -40,6 +43,7 @@ export const THEMES = {
     ],
   },
   river: {
+    image: '/Character-Select/images/backgrounds/Barry.png',
     gradient: 'linear-gradient(180deg, #bae6fd 0%, #7dd3fc 32%, #38bdf8 62%, #fed7aa 100%)',
     floaters: [
       { emoji: '💧', top: '38%', left: '14%', delay: '0s', duration: '3s' },
