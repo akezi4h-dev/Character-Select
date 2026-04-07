@@ -57,13 +57,6 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
         backgroundRepeat: 'no-repeat',
       }} />
 
-      {/* White overlay */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'rgba(255,255,255,0.3)',
-      }} />
-
       {/* Confetti particles */}
       {confetti.map((p) => (
         <div
