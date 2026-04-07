@@ -53,10 +53,7 @@ body {
 /* Gradient title text with stroke behind via pseudo-element */
 .gradient-title {
   position: relative;
-  background: var(--text-gradient, linear-gradient(to bottom, #D3F0FF, #6CC2EE));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-text-fill-color: white;
 }
 
 .gradient-title::before {
@@ -70,10 +67,7 @@ body {
 
 /* Card name — gradient fill with black stroke using paint-order */
 .card-name {
-  background: var(--card-gradient, linear-gradient(to bottom, #D3F0FF, #6CC2EE));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-text-fill-color: white;
   -webkit-text-stroke: 0.5px black;
   paint-order: stroke fill;
 }
