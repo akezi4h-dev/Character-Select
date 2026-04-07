@@ -34,7 +34,7 @@ export default function StartButton({ disabled, activeColor = '#6CC2EE' }) {
         if (!disabled) e.currentTarget.style.transform = 'translateX(-50%)'
       }}
     >
-      <span className="gradient-title" data-text="START ▶">START ▶</span>
+      <span style={{ color: 'white', WebkitTextFillColor: 'white' }}>START ▶</span>
     </button>
   )
 }

@@ -19,6 +19,9 @@ export default function GameMenu() {
   const [hovered,  setHovered]  = useState(null)
 
   const activeTheme = hovered?.theme ?? selected?.theme ?? 'default'
+  const textGradient = selected
+    ? `linear-gradient(to bottom, ${selected.color.text}, ${selected.color.text})`
+    : undefined
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
@@ -41,6 +44,7 @@ export default function GameMenu() {
             fontSize: '57px',
             letterSpacing: '0.1em',
             margin: 0,
+            '--text-gradient': textGradient,
           }}
         >
           {selected ? selected.name.toUpperCase() : 'SELECT YOUR RACER'}
@@ -68,6 +72,7 @@ export default function GameMenu() {
               fontSize: '16px',
               margin: 0,
               letterSpacing: '0.05em',
+              '--text-gradient': textGradient,
             }}
           >
             {selected.subheader}
@@ -116,6 +121,7 @@ export default function GameMenu() {
                   fontSize: '16px',
                   margin: 0,
                   letterSpacing: '0.04em',
+                  '--text-gradient': textGradient,
                 }}
               >
                 {label}: {selected.details[key]}
