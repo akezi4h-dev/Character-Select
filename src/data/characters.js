@@ -3,6 +3,7 @@ export const CHARACTERS = [
     id: 'steve',
     name: 'Steve',
     emoji: '🏄',
+    characterImage: '/Character-Select/images/characters/Steve-Character.png',
     theme: 'beach',
     color: {
       pastel: '#bae6fd',
@@ -19,6 +20,7 @@ export const CHARACTERS = [
     id: 'gurchen',
     name: 'Gurchen',
     emoji: '🐸',
+    characterImage: '/Character-Select/images/characters/Gurchen-Character.png',
     theme: 'swamp',
     color: {
       pastel: '#bbf7d0',
@@ -35,6 +37,7 @@ export const CHARACTERS = [
     id: 'gerald',
     name: 'Gerald',
     emoji: '🐒',
+    characterImage: '/Character-Select/images/characters/Gerald-Character.png',
     theme: 'jungle',
     color: {
       pastel: '#fef08a',
@@ -51,6 +54,7 @@ export const CHARACTERS = [
     id: 'barry',
     name: 'Barry',
     emoji: '🦦',
+    characterImage: '/Character-Select/images/characters/Barry-Character.png',
     theme: 'river',
     color: {
       pastel: '#fed7aa',

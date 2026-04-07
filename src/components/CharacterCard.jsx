@@ -36,10 +36,18 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
     >
       {/* Avatar */}
       <div
-        className="w-24 h-24 rounded-2xl flex items-center justify-center text-6xl flex-shrink-0"
+        className="w-24 h-24 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"
         style={{ backgroundColor: color.pastel }}
       >
-        {character.emoji}
+        {character.characterImage ? (
+          <img
+            src={character.characterImage}
+            alt={character.name}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <span className="text-6xl">{character.emoji}</span>
+        )}
       </div>
 
       {/* Name — always below the avatar, never overlapping */}
