@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { CHARACTERS } from '../data/characters'
 import BackgroundLayer from './BackgroundLayer'
 import CharacterGrid from './CharacterGrid'
-import BackButton from './BackButton'
 import StartButton from './StartButton'
 import StatBars from './StatBars'
 import KartDisplay from './KartDisplay'
@@ -149,8 +148,6 @@ export default function GameMenu() {
         }} />
       )}
 
-      {/* Back button */}
-      <BackButton />
 
       {/* START — fixed, centered at bottom */}
       <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} />
