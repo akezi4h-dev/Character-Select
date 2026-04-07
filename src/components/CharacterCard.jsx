@@ -69,7 +69,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
           bottom: '8px',
           left: 0, right: 0,
           textAlign: 'center',
-          '--char-color': isSelected ? color.text : undefined,
+          '--card-border-color': color.border,
         }}
       >
         {character.name.toUpperCase()}
