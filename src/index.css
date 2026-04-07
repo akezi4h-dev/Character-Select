@@ -50,19 +50,19 @@ body {
   to   { width: var(--fill); }
 }
 
-/* Title and stats text — white fill, no stroke */
+/* Title and stats text — character color when selected, white by default */
 .gradient-title {
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: var(--char-color, white);
 }
 
-/* Card name — white fill, no stroke */
+/* Card name — character color when selected, white by default */
 .card-name {
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: var(--char-color, white);
 }
 
-/* GET READY text on transition screen — white fill, no stroke */
+/* GET READY text on transition screen — character color */
 .get-ready {
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: var(--char-color, white);
 }
 
 /* Kart drives across screen for transition animation */

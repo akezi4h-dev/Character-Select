@@ -2,19 +2,17 @@ export default function StatBars({ character }) {
   const color = character ? character.color.text : '#6CC2EE'
   const strength = character ? character.stats.strength : 0
   const ability  = character ? character.stats.ability  : 0
-  const textGradient = character
-    ? `linear-gradient(to bottom, ${character.color.text}, ${character.color.text})`
-    : undefined
+  const charColor = character?.color.text
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
-      <StatRow label="STRENGTH" fill={strength} color={color} id={character?.id} textGradient={textGradient} />
-      <StatRow label="ABILITY"  fill={ability}  color={color} id={character?.id} textGradient={textGradient} />
+      <StatRow label="STRENGTH" fill={strength} color={color} id={character?.id} charColor={charColor} />
+      <StatRow label="ABILITY"  fill={ability}  color={color} id={character?.id} charColor={charColor} />
     </div>
   )
 }
 
-function StatRow({ label, fill, color, id, textGradient }) {
+function StatRow({ label, fill, color, id, charColor }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       {/* Label above bar */}
@@ -23,7 +21,7 @@ function StatRow({ label, fill, color, id, textGradient }) {
         style={{
           fontFamily: "'Press Start 2P', monospace",
           fontSize: '16px',
-          '--text-gradient': textGradient,
+          '--char-color': charColor,
         }}
       >
         {label}

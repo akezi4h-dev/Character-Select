@@ -69,6 +69,7 @@ export default function TransitionScreen({ character, bgImage, onComplete }) {
             fontSize: '24px',
             letterSpacing: '0.1em',
             margin: '20px 0 0 0',
+            '--char-color': textColor,
           }}
         >
           GET READY!

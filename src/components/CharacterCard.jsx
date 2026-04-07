@@ -69,9 +69,7 @@ export default function CharacterCard({ character, isSelected, onSelect, onHover
           bottom: '8px',
           left: 0, right: 0,
           textAlign: 'center',
-          '--card-gradient': isSelected
-            ? `linear-gradient(to bottom, ${color.text}, ${color.text})`
-            : undefined,
+          '--char-color': isSelected ? color.text : undefined,
         }}
       >
         {character.name.toUpperCase()}
