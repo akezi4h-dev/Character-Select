@@ -107,13 +107,17 @@ export default function GameMenu() {
             marginBottom: '12px',
           }}>
             {DETAIL_KEYS.map(({ label, key }) => (
-              <p key={key} style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '16px',
-                margin: 0,
-                color: selected.color.text,
-                letterSpacing: '0.04em',
-              }}>
+              <p
+                key={key}
+                className="gradient-title"
+                data-text={`${label}: ${selected.details[key]}`}
+                style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: '16px',
+                  margin: 0,
+                  letterSpacing: '0.04em',
+                }}
+              >
                 {label}: {selected.details[key]}
               </p>
             ))}

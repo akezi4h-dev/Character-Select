@@ -15,12 +15,14 @@ function StatRow({ label, fill, color, id }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       {/* Label above bar */}
-      <span style={{
-        fontFamily: "'Press Start 2P', monospace",
-        fontSize: '16px',
-        color: color,
-        textShadow: '1px 1px 0 rgba(0,0,0,0.15)',
-      }}>
+      <span
+        className="gradient-title"
+        data-text={label}
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: '16px',
+        }}
+      >
         {label}
       </span>
 

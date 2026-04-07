@@ -34,14 +34,17 @@ export default function KartDisplay({ character }) {
 
 
       {/* Kart label */}
-      <p style={{
-        fontFamily: "'Press Start 2P', monospace",
-        fontSize: '8px',
-        color: character.color.text,
-        letterSpacing: '0.06em',
-        margin: 0,
-        textAlign: 'center',
-      }}>
+      <p
+        className="gradient-title"
+        data-text={`${character.name.toUpperCase()}'S KART`}
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: '8px',
+          letterSpacing: '0.06em',
+          margin: 0,
+          textAlign: 'center',
+        }}
+      >
         {character.name.toUpperCase()}'S KART
       </p>
 
