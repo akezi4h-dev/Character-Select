@@ -6,8 +6,8 @@ export default function StatBars({ character }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
-      <StatRow label="STRENGTH" fill={strength} color={color} id={character?.id} charColor={charColor} />
-      <StatRow label="ABILITY"  fill={ability}  color={color} id={character?.id} charColor={charColor} />
+      <StatRow label="Strength" fill={strength} color={color} id={character?.id} charColor={charColor} />
+      <StatRow label="Ability"  fill={ability}  color={color} id={character?.id} charColor={charColor} />
     </div>
   )
 }
