@@ -47,6 +47,7 @@ export const CHARACTERS = [
       glow: 'rgba(253,224,71,0.6)',
       text: '#FFFAD9',
       cardName: '#FFFCE5',
+      button: '#293964',
     },
     kartImage: '/Character-Select/images/karts/gerald-kart.png',
     stats: { strength: 70, ability: 50 },

@@ -173,7 +173,7 @@ export default function GameMenu() {
 
 
       {/* START — fixed, centered at bottom */}
-      <StartButton disabled={!selected} activeColor={selected ? selected.color.text : '#6CC2EE'} activeGlow={selected ? selected.color.glow : 'rgba(108,194,238,0.6)'} onClick={handleStart} />
+      <StartButton disabled={!selected} activeColor={selected ? (selected.color.button ?? selected.color.text) : '#6CC2EE'} activeGlow={selected ? selected.color.glow : 'rgba(108,194,238,0.6)'} onClick={handleStart} />
 
       {/* Transition screen */}
       {transitioning && (
