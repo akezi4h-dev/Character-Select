@@ -106,5 +106,67 @@ This was a layout architecture decision. The default behavior (two flex children
 
 ---
 
-*Last updated: 2026-04-06*
+---
+
+## Record 6 — CSS Gradient Borders Don't Support Border-Radius (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave:**
+When I asked for a gradient border on the character cards (`linear-gradient(to bottom, #51A0C8, #6CC2EE, #B3E5FF)`), Claude's first instinct was to set `borderColor` to a gradient string — which CSS doesn't support.
+
+**What we did instead:**
+Used the `background-clip` trick: set `border: 4px solid transparent`, then `backgroundImage: 'linear-gradient(transparent, transparent), linear-gradient(...)'`, `backgroundOrigin: 'padding-box, border-box'`, `backgroundClip: 'padding-box, border-box'`. This renders the gradient only in the border zone while keeping the content area transparent. Also required updating the `onMouseOver`/`onMouseOut` handlers to toggle the background-image on and off when switching to solid character colors on hover.
+
+**Why this works:**
+The background-clip technique is the only CSS-native way to achieve gradient borders with border-radius. `border-image` (the other option) kills `border-radius` entirely.
+
+---
+
+## Record 7 — Pseudo-Element Stroke Hidden by Stacking Context (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave:**
+The `::before` pseudo-element stroke technique (used for title and stat text) uses `z-index: -1` to render behind the text fill. This works on most elements. On the character card name — which sits inside a `<button>` with `overflow: hidden` and `position: relative` — the `z-index: -1` caused the pseudo-element to disappear entirely. The button's own stacking context buried it behind the button's background.
+
+**What we did instead:**
+Switched the card name stroke to `paint-order: stroke fill` with `-webkit-text-stroke` applied directly to the element. `paint-order` instructs the browser to render the stroke first, then the fill on top, eliminating the need for a separate pseudo-element layer. No z-index required.
+
+**Why this works:**
+`paint-order` avoids the stacking context problem entirely — it's a rendering order instruction, not a z-index positioning instruction. The stroke paints first in the same layer as the element, so no stacking context can bury it.
+
+---
+
+## Record 8 — CSS `transition: background-image` Doesn't Work (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave:**
+When background images were introduced, the user requested smooth transitions between backgrounds. CSS `transition: background-image` is not supported by browsers — background images snap instantly.
+
+**What we did instead:**
+The existing `BackgroundLayer.jsx` already used the correct pattern: stacked `position: absolute; inset: 0` divs, one per theme, all always rendered but controlled via `opacity: 0/1` with `transition: opacity 0.7s ease-in-out`. Swapping from gradient to image just required changing what each div renders — the transition mechanism needed no changes at all.
+
+**Why this works:**
+Opacity transitions are fully supported and GPU-accelerated. The stacked-div approach creates a cross-fade effect identical to what `transition: background-image` would do if it existed. Building the transition on opacity rather than image change is robust and theme-agnostic.
+
+---
+
+## Record 9 — Git Worktree Cannot Checkout a Branch Already Active Elsewhere (4/7)
+
+**Date:** 2026-04-07
+
+**What AI gave:**
+After changes were committed on the `claude/competent-haibt` worktree branch, Claude needed to push them to `origin/main`. Standard approach would be to merge into the local `main` branch. Git rejected this: `fatal: 'main' is already used by worktree at C:/Users/.../Character-Select`.
+
+**What we did instead:**
+Pushed the worktree branch directly to `origin/main` using `git push origin claude/competent-haibt:main`. Since the worktree branch was a direct fast-forward ahead of `origin/main`, this worked cleanly every time without needing to touch the local `main` checkout.
+
+**Why this works:**
+Git allows pushing any local branch to any remote branch ref regardless of what's checked out. The `source:destination` ref syntax (`claude/competent-haibt:main`) bypasses the local checkout requirement entirely and deploys directly from the worktree branch.
+
+---
+
+*Last updated: 2026-04-07*
 *Update this document whenever a new session ends.*
