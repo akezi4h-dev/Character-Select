@@ -24,6 +24,8 @@ This character screen is to represent my childhood of playing retro games, and p
 
 I feel like youth and plushies have been forgotten — like Toy Story — so my goal was to combine a pastel aesthetic, with toys and plushies, to revive childhood through the toys we played with and the scenarios we put our toys in: making stories, going on adventures, racing each other. This screen is about that feeling. It is not just a UI — it is a love letter to imagination.
 
+This game select audience is made for children and adults that love cute and nostalgic games.
+
 ### Moodboard
 
 ![Moodboard](docs/Moodboard.png)
