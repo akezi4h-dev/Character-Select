@@ -16,10 +16,10 @@
 **Commit reference:** `ff74c9f` (reverted by `570547b`)
 
 **What AI gave me:**
-When I asked for visual polish and larger character cards, Claude interpreted the "retro pixel art" aesthetic too literally. It restyled every component with sharp corners, hard pixel-drop shadows, angular button shapes, and an overall aesthetic that looked like a classic 8-bit game UI. Everything was harsh and blocky — the cards, the navigation buttons, the layout borders.
+When I was expermimenting, because I didn't know 100% the font/ I asked for visual polish based on the design intent and larger character cards, Claude interpreted the "retro pixel art" aesthetic too literally. It restyled every component with sharp corners, hard pixel drop shadows, angular button shapes, and an overall aesthetic that looked like a classic 8-bit game UI. Everything was harsh and blocky the cards, the navigation buttons, the layout borders.
 
 **What I chose instead:**
-I told Claude to revert everything except the Press Start 2P font. I wanted the *feeling* of retro without the visual harshness. The aesthetic I had defined in my Design Intent was kawaii pastel — soft, round, cute, bubbly — inspired by Mario Kart × Sanrio, not Atari. The font was the right retro touch; the pixel shadows and sharp corners broke the softness I was going for.
+I told Claude to revert everything except the Press Start 2P font. I wanted the *feeling* of retro without the visual harshness. The aesthetic I had defined in my Design Intent was kawaii pastel soft, round, cute, bubbly inspired by Mario Kart × Sanrio, not Atari. The font was the right retro touch; the pixel shadows and sharp corners broke the softness I was going for.
 
 **Why this was my decision:**
 The Design Intent I wrote describes a specific visual register. Claude defaulted to a common association between "pixel font = full retro aesthetic." I had to draw the line between typographic nostalgia (keep) and harsh visual language (cut). That distinction was a creative judgment only I could make because it lives in the design intent document I wrote before we started building.
@@ -31,7 +31,7 @@ The Design Intent I wrote describes a specific visual register. Claude defaulted
 **Date:** 2026-04-02
 
 **What AI gave me:**
-Claude's initial color assignments for the characters used a generic pastel palette — it made decisions like assigning soft teal to Steve, muted green to Gurchen, etc. When the per-character theme system was built, those colors were carried forward into text, glows, and borders without input from me.
+When I was experimenting initially, I didn't have an exact hex code, but the colors I wanted to go for. Claude's initial color assignments for the characters used a generic pastel palette it made decisions like assigning soft teal to Steve, muted green to Gurchen, etc. When the per character theme system was built, those colors were carried forward into text, glows, and borders without input from me.
 
 **What I chose instead:**
 I gave Claude exact hex values for every character:
@@ -44,7 +44,7 @@ I gave Claude exact hex values for every character:
 I also specified that the title text and START button must dynamically update to the selected character's color.
 
 **Why this was my decision:**
-The colors I chose were not random. Each one reflects the character's personality and their associated theme (Beach/Swamp/Jungle/River). Steve's blue is vibrant and surfer-coded. Gurchen's lime is froggy and bright. Gerald's yellow is warm and mischievous. Barry's orange is cozy and otter-like. These were intentional visual characterizations, not palette-generated choices. The default sky blue ties the idle screen to the beach/aquatic framing of the overall game aesthetic.
+The colors I chose were not random. Each one reflects the character's personality and their associated theme (Beach/Swamp/Jungle/River). Steve's blue is vibrant and surfer coded. Gurchen's lime is froggy and bright. Gerald's yellow is warm and mischievous. Barry's orange is cozy and otter-like. These were intentional visual characterizations, not palette-generated choices. The default sky blue ties the idle screen to the beach/aquatic framing of the overall game aesthetic.
 
 ---
 
@@ -63,7 +63,7 @@ Over two sessions I drove the kart display toward:
 4. The right panel completely removed from flex flow using `position: absolute; top: 0; right: 0; width: 50%; height: 100%` with `overflow: visible` — so the kart can extend beyond its container without clipping
 
 **Why this was my decision:**
-The kart is supposed to be the hero moment — the big visual payoff when you select a character. Claude's instinct was to fit it neatly inside a UI box. I wanted it to feel massive and cinematic, like the showcase displays in Mario Kart character select screens. Every specific measurement (700px, ellipse 340×35px shadow, slide-in animation) and the layout architecture change (absolute positioning to decouple from flex flow) came from my direction. Claude implemented it but would not have arrived there on its own.
+The kart is supposed to be the hero moment the big visual payoff when you select a character. Claude's instinct was to fit it neatly inside a UI box. I wanted it to feel massive and cinematic, like the showcase displays in Mario Kart character select screens. Every specific measurement 700px, ellipse 340×35px shadow, slide-in animation and the layout architecture change absolute positioning to decouple from flex flow came from my direction. Claude implemented it but would not have arrived there on its own.
 
 ---
 
@@ -72,13 +72,13 @@ The kart is supposed to be the hero moment — the big visual payoff when you se
 **Date:** 2026-04-04 → 2026-04-05
 
 **What AI gave me:**
-Claude implemented the dynamic title — showing "SELECT YOUR RACER" by default and switching to the character's name when one is selected. The title was placed in normal document flow without a fixed height container. This caused the card grid to visibly shift position every time a character was selected, because short names like "STEVE" and long labels like "SELECT YOUR RACER" have different rendered widths.
+Claude implemented the dynamic title showing "SELECT YOUR RACER" by default and switching to the character's name when one is selected. The title was placed in normal document flow without a fixed height container. This caused the card grid to visibly shift position every time a character was selected, because short names like "STEVE" and long labels like "SELECT YOUR RACER" have different rendered widths.
 
 **What I chose instead:**
 I identified the layout shift as a problem and specified the fix: give the title a fixed-height container (`height: 60px`) with `white-space: nowrap` so the text never wraps and the container never changes size. The title content changes but its bounding box stays constant, keeping everything below it locked in place.
 
 **Why this was my decision:**
-This was a UI feel issue — the jitter when clicking cards broke the polish of the interaction. Claude had implemented the dynamic title as requested but hadn't anticipated the reflow side effect. Diagnosing it as a layout shift problem (vs. an animation problem, or a font problem) and specifying `white-space: nowrap` + fixed height as the solution was my direction. The solution required understanding how browser layout reflow works in relation to the surrounding flex structure.
+This was a UI feel issue the jitter when clicking cards broke the polish of the interaction. Claude had implemented the dynamic title as requested but hadn't anticipated the reflow side effect. Diagnosing it as a layout shift problem (vs. an animation problem, or a font problem) and specifying `white-space: nowrap` + fixed height as the solution was my direction. The solution required understanding how browser layout reflow works in relation to the surrounding flex structure.
 
 ---
 
@@ -87,10 +87,10 @@ This was a UI feel issue — the jitter when clicking cards broke the polish of 
 **Date:** 2026-04-03
 
 **What AI gave me:**
-When the kart preview was first designed, Claude placed it inside a visible container panel — a card-like box on the right half of the screen with padding, rounded corners, and some background tint to frame the character preview. This is the conventional UI pattern for a "detail panel."
+When the kart preview was first designed, Claude placed it inside a visible container panel a card like box on the right half of the screen with padding, rounded corners, and some background tint to frame the character preview. This is the conventional UI pattern for a "detail panel."
 
 **What I chose instead:**
-I specified that the kart display should have no box, no background, no border — nothing that frames or contains it visually. The character should appear to float in the space of the right half of the screen, against the live background, with only the shadow ellipse beneath it grounding it.
+I specified that the kart display should have no box, no background, no border nothing that frames or contains it visually. The character should appear to float in the space of the right half of the screen, against the live background, with only the shadow ellipse beneath it grounding it.
 
 **Why this was my decision:**
 Boxes make interfaces feel safe and contained. I wanted the selected character to feel like they're *in the world* of the game, not displayed inside a UI chrome element. Removing the box was a deliberate choice to push the design toward atmosphere over interface convention. That kind of "absence as a decision" is something a design eye catches; Claude's default is always to frame content.
@@ -123,7 +123,7 @@ When I asked to replace card emoji with real images, Claude placed them in a `w-
 I immediately reverted the doubled card size. Then I directed Claude to make the image fill the entire card edge to edge using `position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover` — with the character name overlaid at the bottom using `position: absolute; bottom: 8px`.
 
 **Why this was my decision:**
-Doubling the card size broke the 2×2 grid. Full-bleed was the right solution — it gives the artwork maximum presence within the fixed card frame and turns each card into a mini portrait, which matches the "collectible character" aesthetic from the Design Intent. The overlay name treatment was also my call — it's common in trading card and game UI design.
+Doubling the card size broke the 2×2 grid. Full-bleed was the right solution it gives the artwork maximum presence within the fixed card frame and turns each card into a mini portrait, which matches the "collectible character" aesthetic from the Design Intent. The overlay name treatment was also my call it's common in trading card and game UI design.
 
 ---
 
@@ -172,7 +172,7 @@ Each character theme used a CSS linear gradient (e.g., beach: `#7dd3fc → #bae6
 I provided full-screen pixel art PNG background images — one per character theme plus a default. Directed Claude to wire each theme's `image` field in `themes.js` and update `BackgroundLayer.jsx` to render `background-image: url(...)` with `background-size: cover` when an image is available, falling back to the gradient otherwise.
 
 **Why this was my decision:**
-The CSS gradient backgrounds were functional placeholders. The pixel art backgrounds are original artwork that establishes the visual world of each character. The decision to commission and provide the artwork — and the technical decision to keep the existing opacity-fade transition system rather than replacing it — were both mine.
+The CSS gradient backgrounds were functional placeholders. The pixel art backgrounds are original artwork that establishes the visual world of each character. The decision to commission and provide the artwork and the technical decision to keep the existing opacity fade transition system rather than replacing it  were both mine.
 
 ---
 
@@ -199,13 +199,13 @@ Every timing and directional choice in an animation is a feel decision. Right-to
 **Date:** 2026-04-07
 
 **What AI gave me:**
-The first-round character card images had been placed in the correct slots. The images were functional but not final — the art was still being iterated on.
+The first-round character card images had been placed in the correct slots. The images were functional but not final the art was still being iterated on.
 
 **What I chose instead:**
 I provided a second round of pixel art character portraits, fully replacing the previous set. Final character identities: Steve as a white duck/seagull in a blue kart, Gurchen as a green crocodile, Gerald as a monkey in a spacesuit, Barry as an orange platypus. Each image was matched to the correct character by name and overwritten in place.
 
 **Why this was my decision:**
-Character visual identity is a creative decision entirely outside Claude's scope. The artwork reflects each character's personality and backstory. The matching of image to character — seagull to Steve, croc to Gurchen, monkey to Gerald, platypus to Barry — was my authorship. Claude only handled the file wiring.
+Character visual identity is a creative decision entirely outside Claude's scope. The artwork reflects each character's personality and backstory. The matchinng of image to character — seagull to Steve, croc to Gurchen, monkey to Gerald, platypus to Barry — was my authorship. Claude only handled the file wiring.
 
 ---
 
@@ -220,7 +220,7 @@ After the text stroke system was removed, all text defaulted to white regardless
 I specified that when a character is selected, every text element on screen — title, subheader, detail stats (Age, Favorite Food, Favorite Place, Catchphrase), stat bar labels, card name — should shift to that character's `color.text` value. Implemented by replacing `--text-gradient` with a unified `--char-color` CSS custom property passed through inline styles, with `white` as the fallback when no character is selected.
 
 **Why this was my decision:**
-The screen needed to feel fully themed to the selected character — not just the background and borders, but all readable text. The `--char-color` system was my direction to unify every text element under a single, consistent per-character color switch.
+The screen needed to feel fully themed to the selected character not just the background and borders, but all readable text. The `--char-color` system was my direction to unify every text element under a single, consistent per-character color switch.
 
 ---
 
@@ -266,7 +266,7 @@ The idle screen needed a color presence before any character is selected. `#51A0
 Character card images and background images appeared blurry on screen. The images were correctly sized and placed, but the browser's default bilinear filtering was smoothing the pixel art when scaling, destroying the sharp pixel edges that define the aesthetic.
 
 **What I chose instead:**
-I directed `image-rendering: pixelated` on both the character card `<img>` elements and the background `<div>` elements with `background-image`. This forces nearest-neighbor scaling — pixels stay sharp at any display size.
+I asked claude chat what could be the issue with the blurrines because I wanted the image to be pixalted and high quality it then directed `image-rendering: pixelated` on both the character card `<img>` elements and the background `<div>` elements with `background-image`. This forces nearest-neighbor scaling — pixels stay sharp at any display size.
 
 **Why this was my decision:**
 The pixel art aesthetic is foundational to the entire Design Intent. Blurry pixel art is the opposite of the visual language this project is built on. Identifying the rendering issue as a CSS property problem (not an image resolution problem) and specifying the correct fix was my direction. The crispness of the pixel grid is non-negotiable.
@@ -280,16 +280,16 @@ The pixel art aesthetic is foundational to the entire Design Intent. Blurry pixe
 **Date:** 2026-04-01 → 2026-04-07
 
 **What the workflow was:**
-Throughout the project I used a separate Claude.ai chat session as a middleman between my design intentions and Claude Code. Instead of typing raw instructions directly into Claude Code, I would describe what I wanted to Claude chat — often sharing reference images like the AngelKart Stamp Rally screenshot — and Claude chat would translate my vision into specific, technically correct prompts ready to paste into Claude Code.
+Throughout the project I used a separate Claude.ai chat session as a middleman between my design intentions and Claude Code when I was struggling to tell claude what to do after multiple attempts. After these attempts, instead of typing raw instructions directly into Claude Code, I would describe what I wanted to Claude chat often sharing reference images like the AngelKart Stamp Rally screenshot and my design vision on figma Claude chat would translate my vision into specific, technically correct prompts ready to paste into Claude Code.
 
 This created a three-layer process:
-1. I had an idea or saw a reference image I liked
+1. I had an idea with figjam or saw a reference image I liked
 2. I described it (or showed it) to Claude chat
-3. Claude chat wrote the Claude Code prompt — including specific CSS, exact pixel values, and code snippets
+3. Claude chat helped write the Claude Code prompt — including specific CSS, and code snippets
 4. I pasted that prompt into Claude Code
 
 **Why this was my decision:**
-The decision to use Claude chat as a prompt advisor was mine. Without it, I would have typed vague instructions into Claude Code and gotten unpredictable results. Using Claude chat as a translator let me communicate design intent ("the kart should feel like a hero moment, like in this reference image") and receive back precise technical language ("set width to 450px, use position: absolute inside a fixed-size container with flex-shrink: 0"). This protected my vision from being lost in translation.
+The decision to use Claude chat as a prompt advisor was mine. Without it, I would have typed vague instructions into Claude Code and gotten unpredictable results. Using Claude chat as a translator let me communicate design intent ("the kart should feel like a hero moment, like in this reference image. I want it to be bigger like 450px) and receive back precise technical language ("set width to 450px, use position: absolute inside a fixed-size container with flex-shrink: 0"). This protected my vision from being lost in translation.
 
 **Specific coding advice Claude chat gave that shaped the project:**
 
@@ -299,26 +299,6 @@ The decision to use Claude chat as a prompt advisor was mine. Without it, I woul
 - **Character color lookup object** — Claude chat suggested storing colors as a JavaScript object `const characterColors = { steve: '#6286FE', ... }` and applying `characterColors[selectedCharacter]` dynamically to both the title and START button
 - **Glass morphism stat bars** — Claude chat specified `background: rgba(255,255,255,0.4); backdrop-filter: blur(8px); border: 2px solid rgba(255,255,255,0.7); border-radius: 999px` as the stat bar container style
 - **Layered character outfit system** — Claude chat explained how outfit customization works using stacked `position: absolute` PNG layers (base + hat + outfit + accessory), each with `top: 0; left: 0; width: 100%; height: 100%`, swapping `src` per layer on click
-
----
-
-## Entry 18 — AngelKart Reference Images Drove Kart and Layout Direction (4/1–4/6)
-
-**Date:** 2026-04-01 → 2026-04-06
-
-**What I did:**
-I sent reference screenshots of the AngelKart Stamp Rally character select screen to Claude chat multiple times throughout the project. I used these images to show — not just describe — what I wanted the kart display, card sizing, and right panel layout to look like.
-
-**What Claude chat produced from the images:**
-Each time I shared the reference, Claude chat extracted specific measurements and behaviors from it and converted them into Claude Code prompts:
-- Identified that the kart in the reference is the dominant element of the right panel — not a thumbnail
-- Specified "at least 300px wide" escalating to 450–500px to match the reference proportion
-- Identified that the kart floats freely with no container box — just the character in their world
-- Specified `top: 55%` vertical position to place the kart in the lower half
-- Identified the static oval shadow beneath the kart as a separate non-animated element
-
-**Why this was my decision:**
-The reference images were my creative vision source. Claude chat could not have generated those specifications without the images — I had to supply the visual reference. Deciding which reference to use, when to show it again, and which aspects of it to prioritize were all my calls. Claude chat was the translator; the vision was mine.
 
 ---
 
@@ -341,7 +321,7 @@ Character stat values I assigned:
 I iterated on the bar style through Claude chat: dark border → white border → dark navy glossy → glass morphism → final style with thicker border matching the card opacity.
 
 **Why this was my decision:**
-The nav buttons were a convention (tabs for categories). I replaced them with stats because the character select screen is about knowing who you're picking — personality, strengths, and stats make the characters feel real. The specific stat values I assigned to each character reflect their personalities: Gurchen has high ability (he's nimble for a croc), Steve has high strength (surfer power). These were my characterizations.
+The nav buttons were a convention (tabs for categories). I replaced them with stats because the character select screen is about knowing who you're picking personality, strengths, and stats make the characters feel real. The specific stat values I assigned to each character reflect their personalities: Gurchen has high ability (he's nimble for a croc), Steve has high strength (surfer power). These were my characterizations.
 
 ---
 
@@ -364,24 +344,7 @@ Every piece of data in those fields is original character writing. Claude Code a
 
 ---
 
-## Entry 21 — Full Rebuild Spec Written via Claude Chat When Patches Broke the Layout (4/6)
-
-**Date:** 2026-04-06
-
-**What happened:**
-After many sessions of patching Claude Code's output, the layout had accumulated so many conflicting instructions that every fix broke something else — the kart kept shifting, the stats kept overlapping the title, the card grid kept moving. Claude chat diagnosed the problem as "too many conflicting patches."
-
-**What I chose:**
-I decided to start fresh rather than keep patching. Claude chat wrote a comprehensive full-rebuild spec — a single large prompt covering every component, position, color, animation, and layout rule — to give Claude Code a clean slate.
-
-The spec included exact CSS for both panels (`position: fixed`), fixed-height title container (`height: 80px; white-space: nowrap`) to prevent layout shift, the kart container with `flex-shrink: 0`, all character colors, stat values, animation keyframes, and the START button. It was designed so Claude Code could rebuild the entire screen without inheriting any prior conflicts.
-
-**Why this was my decision:**
-The decision to throw away the accumulated work and start over was mine. It was the right creative and technical call — a clean rebuild from a spec produces better results than endless patching. Knowing when to restart rather than keep fixing is a judgment call that required understanding both the design intent and the technical state of the project.
-
----
-
-## Entry 22 — CRITTER CUP Title Screen Built and Iterated Through Direction (4/7)
+## Entry 21 — CRITTER CUP Title Screen Built and Iterated Through Direction (4/7)
 
 **Date:** 2026-04-07
 
@@ -407,13 +370,13 @@ The title screen is the first impression of the entire game. Every detail — ka
 **Date:** 2026-04-07
 
 **What AI gave me:**
-The `charColor` variable only updated when a character was selected. Hovering a card previewed the background but title and subheader text stayed at their selected (or default) color — no preview of the character's color until a click.
+The `charColor` variable only updated when a character was selected. Hovering a card previewed the background but title and subheader text stayed at their selected (or default) color no preview of the character's color until a click.
 
 **What I chose instead:**
 I specified that hovering a character should also update the title and subheader text to that character's color — not just the background. The color preview should be immediate on hover, not gated by selection.
 
 **Why this was my decision:**
-Hover feedback should preview the character's full identity — background, border glow, and text color — not just the background. The decision that text color should respond to hover (not just click) was a directional choice about how immediate and responsive the interaction should feel.
+Hover feedback should preview the character's full identity background, border glow, and text color not just the background. The decision that text color should respond to hover (not just click) was a directional choice about how immediate and responsive the interaction should feel.
 
 ---
 
@@ -460,10 +423,10 @@ The title screen should feel like the entrance to a racing game, not a preview o
 Gerald's `color.text` value (`#FFFAD9`, very pale yellow) was being applied to the START button background when Gerald was selected. The button was nearly invisible against the light screen.
 
 **What I chose instead:**
-I specified `#293964` (dark navy blue) as Gerald's START button color — completely different from his text color. Implemented by adding an optional `button` field to the character color object with a fallback to `color.text` for all other characters. Only Gerald has the override.
+I specified `#293964` (dark navy blue) as Gerald's START button color completely different from his text color. Implemented by adding an optional `button` field to the character color object with a fallback to `color.text` for all other characters. Only Gerald has the override.
 
 **Why this was my decision:**
-The START button needs to be legible and functional. Gerald's very light text color reads well on the dark space background but is unacceptable as a button background. The `#293964` navy grounds the button visually and feels like a space-themed dark control element. The decision to solve this per-character rather than globally (which would have changed all other characters' buttons) was a targeted fix.
+The START button needs to be legible and functional. Gerald's very light text color reads well on the dark space background but is unacceptable as a button background as it was the same color as the moon. The `#293964` navy grounds the button visually and feels like a space-themed dark control element. The decision to solve this per-character rather than globally (which would have changed all other characters' buttons) was a targeted fix.
 
 ---
 
