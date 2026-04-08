@@ -633,5 +633,55 @@ The transition from character select to the START animation should feel like the
 
 ---
 
-*Last updated: 2026-04-07*
+## Record 24 — Kart Label Not Responding to Character Color System
+
+**Date:** 2026-04-08
+
+**What I wanted:**
+All text elements — including the kart label ("[Name]'S KART") — to change color when hovering or selecting a character, consistent with the title, subheader, and stats.
+
+**What AI made:**
+The kart label used the `.gradient-title` CSS class but had no `--char-color` variable passed to it. It always rendered white regardless of which character was hovered or selected.
+
+**Why AI went wrong:**
+Incomplete implementation. When the `--char-color` system was built for the other text elements, `KartDisplay` was never updated to accept or pass the color variable. Claude wired the major text elements but missed the kart label entirely.
+
+**How I fixed it:**
+I pointed out the inconsistency and asked Claude to connect the kart label to the same system.
+
+> *"Make the kart label color based on the character's color — same effect as the title, subheader, and stats on hover and select."*
+
+Added a `charColor` prop to `KartDisplay` and passed `displayColor` from `GameMenu` — the same value already driving every other text element.
+
+**Why fixing it made it better:**
+Every text element now responds to the character color system at the same time. Hovering Steve turns the title, subheader, stats, kart label, and card name all to his color simultaneously — the whole screen shifts as one unified action, not a patchwork of independent elements.
+
+---
+
+## Record 25 — Confetti Had No Character Identity
+
+**Date:** 2026-04-08
+
+**What I wanted:**
+The transition screen confetti to feel like it belonged to the selected character's world — not generic party confetti.
+
+**What AI made:**
+80 randomly colored rectangles falling from the top. No connection to any character theme or visual identity.
+
+**Why AI went wrong:**
+The initial confetti implementation was a standalone feature with its own hardcoded color palette. Claude built it functionally but in isolation — it had no awareness of the character theme system that already existed in `themes.js`.
+
+**How I fixed it:**
+I asked Claude to pull the existing theme emoji floaters into the confetti system.
+
+> *"Add the emojis used per character to the confetti."*
+
+Claude imported `THEMES`, extracted the floater emojis per character theme, and generated 20 emoji confetti pieces alongside the existing rectangles — each emoji sized 18–32px, falling with the same staggered animation.
+
+**Why fixing it made it better:**
+The confetti now tells you which character you picked without any text. Gerald's transition rains down 🌙 🚀 ☄️ — you feel the space theme in the moment. Steve's rains 🐦 🌊 ☀️ — pure beach. The transition screen went from generic celebration to a character-specific moment.
+
+---
+
+*Last updated: 2026-04-08*
 *Update this document whenever a new session ends.*

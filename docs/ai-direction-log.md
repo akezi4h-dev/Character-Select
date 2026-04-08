@@ -460,5 +460,47 @@ All-caps labels felt more aggressive and shouty than the kawaii aesthetic calls 
 
 ---
 
-*Last updated: 2026-04-07*
+## Entry 29 — Kart Label Color Follows Hover and Select System (4/8)
+
+**Date:** 2026-04-08
+
+**What AI gave me:**
+The kart label ("[Name]'S KART") used the `.gradient-title` class but had no `--char-color` variable set, so it always rendered white regardless of character hover or selection.
+
+**What I chose instead:**
+I specified the kart label should follow the same color system as the title, subheader, and stats — previewing the character's color on hover and locking to it on select. Implemented by adding a `charColor` prop to `KartDisplay` and passing `displayColor` from `GameMenu`.
+
+**Why this was my decision:**
+Visual consistency — every readable text element on screen should respond to the character color system simultaneously. The kart label was the one outlier that hadn't been connected to the system. Identifying and closing that gap was a deliberate completeness call.
+
+---
+
+## Entry 30 — Character-Themed Emoji Added to Transition Confetti (4/8)
+
+**Date:** 2026-04-08
+
+**What AI gave me:**
+The transition screen confetti was 80 generic colored rectangles — no character-specific theming.
+
+**What I chose instead:**
+I directed Claude to pull the emoji floaters from each character's theme in `themes.js` and mix 20 emoji confetti pieces into the falling particles alongside the rectangles. Steve gets 🐦 ☀️ 🌊, Gurchen gets 🫧 🌿 💨, Gerald gets 🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟, Barry gets 💧 🪨 🌊.
+
+**Why this was my decision:**
+The transition screen should feel like it belongs to that character's world. Generic confetti felt disconnected from the character's identity. Reusing the existing theme emoji system was the right solution — no new art, no new data, just connecting two systems that were already there.
+
+---
+
+## Entry 31 — Moodboard Added to Documentation (4/8)
+
+**Date:** 2026-04-08
+
+**What I did:**
+I added a visual moodboard image to the project documentation — placed in `docs/Moodboard.png` and referenced in both the README and `design-intent.md` immediately after the personal statement.
+
+**Why this was my decision:**
+The moodboard captures the visual references that informed the design before a single line of code was written — kawaii pixel games, plushie aesthetics, cute animal characters, pastel game UIs. Documenting it in the repo gives the AI direction system a visual anchor that written descriptions alone can't fully convey. It also demonstrates that the creative vision existed prior to any AI-assisted development.
+
+---
+
+*Last updated: 2026-04-08*
 *Update this log whenever a new session ends.*

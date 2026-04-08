@@ -28,6 +28,13 @@ I feel like youth and plushies have been forgotten — like Toy Story — so my 
 
 > This design intent was written before any AI-assisted development began. It serves as the evaluative standard against which all AI output was judged throughout the project.
 
+---
+
+## Moodboard
+
+![Moodboard](docs/Moodboard.png)
+
+---
 
 The app should feel like a **cute pixelated pastel racing game lobby** inspired by Japanese kawaii UI and casual Nintendo-style game menus.
 
@@ -85,12 +92,12 @@ Single typeface throughout. Hierarchy is established by size only — no weight 
 
 ### Characters
 
-| Character | Portrait | Theme | Text Color | Card Color Scheme | Intention |
-|-----------|----------|-------|------------|-------------------|-----------|
-| Steve | ![Steve](public/images/characters/Steve-Character.png) | Beach | `#10517B` | Pastel blues and yellows — border `#7dd3fc` | Steve is a beach seagull who loves french fries. Blues and yellows reflect his fry, water, sky, and sand. |
-| Gurchen | ![Gurchen](public/images/characters/Gurchen-Character.png) | Swamp | `#436348` | Pastel greens and teals — border `#86efac` | I imagine Gurchen just living his croc life in the swamp. Greens and teals match murky water and swamp plants. |
-| Gerald | ![Gerald](public/images/characters/Gerald-Character.png) | Space | `#142341` | Pastel blues, yellows, and violets — border `#fde047` | I got Gerald from the Smithsonian Space Museum. Blues, yellows, and violets reflect stars, planets, and the cosmos. |
-| Barry | ![Barry](public/images/characters/Barry-Character.png) | River | `#295A57` | Pastel oranges and blues — border `#fdba74` | Barry I imagineis a platypus living peacefully by the river. Warm oranges against cool blues reflect the water and the earth. |
+| Character | Portrait | Background | Theme | Text Color | Card Color Scheme | Intention |
+|-----------|----------|------------|-------|------------|-------------------|-----------|
+| Steve | ![Steve](public/images/characters/Steve-Character.png) | ![Steve BG](public/images/backgrounds/Steve-2.png) | Beach | `#10517B` | Pastel blues and yellows — border `#7dd3fc` | Steve is a beach seagull who loves french fries. Blues and yellows reflect his fry, water, sky, and sand. |
+| Gurchen | ![Gurchen](public/images/characters/Gurchen-Character.png) | ![Gurchen BG](public/images/backgrounds/Gurchen-2.png) | Swamp | `#436348` | Pastel greens and teals — border `#86efac` | I imagine Gurchen just living his croc life in the swamp. Greens and teals match murky water and swamp plants. |
+| Gerald | ![Gerald](public/images/characters/Gerald-Character.png) | ![Gerald BG](public/images/backgrounds/Gerald-2.png) | Space | `#142341` | Pastel blues, yellows, and violets — border `#fde047` | I got Gerald from the Smithsonian Space Museum. Blues, yellows, and violets reflect stars, planets, and the cosmos. |
+| Barry | ![Barry](public/images/characters/Barry-Character.png) | ![Barry BG](public/images/backgrounds/Barry-2.png) | River | `#295A57` | Pastel oranges and blues — border `#fdba74` | Barry I imagine is a platypus living peacefully by the river. Warm oranges against cool blues reflect the water and the earth. |
 
 ### Layout & Character Grid
 
@@ -269,6 +276,15 @@ Gerald's floaters changed from jungle (🍃 🌿 🐦) to astronomy (🌙 ⭐ �
 ### Entry 28 — Stat Bar Labels Changed to Title Case *(2026-04-07)*
 STRENGTH → Strength, ABILITY → Ability. Title case reads softer and more consistent with the kawaii aesthetic than all-caps.
 
+### Entry 29 — Kart Label Color Follows Hover and Select System *(2026-04-08)*
+The kart label ("[Name]'S KART") was the one text element not connected to the `--char-color` system. Added `charColor` prop to `KartDisplay` passing `displayColor` from `GameMenu` — now all text responds simultaneously.
+
+### Entry 30 — Character-Themed Emoji Added to Transition Confetti *(2026-04-08)*
+Each character's theme floater emojis (from `themes.js`) mixed into the confetti on the transition screen. 20 emoji pieces fall alongside 80 colored rectangles — Steve gets birds and waves, Gerald gets rockets and moons.
+
+### Entry 31 — Moodboard Added to Documentation *(2026-04-08)*
+Visual moodboard capturing the kawaii pixel game references that informed the design added to `docs/Moodboard.png`, referenced in README and design-intent.md after the personal statement.
+
 [Full log with detailed entries →](docs/ai-direction-log.md)
 
 ---
@@ -325,6 +341,12 @@ Asking for a text outline on GET READY! produced two copies of the text and a br
 ### Record 23 — Transition Screen Background Appeared More Washed Out *(2026-04-07)*
 The transition screen had a `rgba(255,255,255,0.3)` white overlay that the character select background did not. The same background looked 30% lighter on the transition screen than during selection — a jarring visual discontinuity. Identified and fixed by removing the overlay from TransitionScreen to match BackgroundLayer.
 
+### Record 24 — Kart Label Not Responding to Character Color System *(2026-04-08)*
+The kart label always showed white even though every other text element responded to hover/select color. Claude had wired the major text elements but missed `KartDisplay`. Fixed by adding `charColor` prop and passing `displayColor` from `GameMenu`.
+
+### Record 25 — Confetti Had No Character Identity *(2026-04-08)*
+Generic colored rectangle confetti had no connection to the selected character's theme. Fixed by importing `THEMES` and mixing 20 character-themed emoji pieces (pulled from the existing floater system) into the confetti alongside the rectangles.
+
 [Full log with detailed entries →](docs/records-of-resistance.md)
 
 ---
@@ -379,3 +401,7 @@ The transition screen had a `rgba(255,255,255,0.3)` white overlay that the chara
 | 19 | 2026-04-07 | **Confetti on START** | 80 confetti particles generated and animated falling from top of transition screen when START is pressed |
 | 20 | 2026-04-07 | **Title screen background updated** | Pixel art racing track (`Title-BG.png`) replaces default background on title screen; CRITTER CUP title and PLAY button styled `#353290` with shimmer animation |
 | 21 | 2026-04-07 | **Gerald's theme completed** | Astronomy-themed floaters (🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟); dedicated START button color `#293964`; text color `#FFFAD9` preserved for screen text |
+| 22 | 2026-04-08 | **Kart label wired to color system** | `[Name]'S KART` label now previews character color on hover and locks on select — last text element connected to the `--char-color` system |
+| 23 | 2026-04-08 | **Character emoji confetti** | Transition screen confetti mixes 20 character-themed emoji (from `themes.js` floaters) with 80 colored rectangles — each character's world rains down on START |
+| 24 | 2026-04-08 | **Moodboard documented** | Visual moodboard added to `docs/Moodboard.png` and referenced in README and design-intent.md — captures the kawaii pixel game references that informed the design |
+| 25 | 2026-04-08 | **Final background images** | Default, Gerald, and Gurchen backgrounds updated to final pixel art versions |

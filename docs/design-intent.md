@@ -18,6 +18,12 @@ I feel like youth and plushies have been forgotten — like Toy Story — so my 
 
 ---
 
+## Moodboard
+
+![Moodboard](Moodboard.png)
+
+---
+
 ## Overall Experience
 
 The app should feel like a **cute pixelated pastel racing game lobby** inspired by Japanese kawaii UI and casual Nintendo-style game menus.
