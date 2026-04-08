@@ -1,4 +1,4 @@
-# Design Intent
+# Design Intent 2 (New)
 ## AI 201 — Hero Faction Screen | Spring 2026
 **Student:** Art Director
 **Tool:** Claude (claude-sonnet-4-6, Claude Code CLI)

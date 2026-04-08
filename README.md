@@ -16,7 +16,7 @@ A single-page interactive character select screen for a kawaii pixel art kart ra
 
 ---
 
-## Design Intent
+## Design Intent 2 (New)
 
 ### Personal Statement
 
