@@ -403,5 +403,4 @@ Generic colored rectangle confetti had no connection to the selected character's
 | 21 | 2026-04-07 | **Gerald's theme completed** | Astronomy-themed floaters (🌙 ⭐ 🪐 🚀 ☄️ ✨ 🌟); dedicated START button color `#293964`; text color `#FFFAD9` preserved for screen text |
 | 22 | 2026-04-08 | **Kart label wired to color system** | `[Name]'S KART` label now previews character color on hover and locks on select — last text element connected to the `--char-color` system |
 | 23 | 2026-04-08 | **Character emoji confetti** | Transition screen confetti mixes 20 character-themed emoji (from `themes.js` floaters) with 80 colored rectangles — each character's world rains down on START |
-| 24 | 2026-04-08 | **Moodboard documented** | Visual moodboard added to `docs/Moodboard.png` and referenced in README and design-intent.md — captures the kawaii pixel game references that informed the design |
-| 25 | 2026-04-08 | **Final background images** | Default, Gerald, and Gurchen backgrounds updated to final pixel art versions |
+| 24 | 2026-04-08 | **Final background images** | Default, Gerald, and Gurchen backgrounds updated to final pixel art versions |
