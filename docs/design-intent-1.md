@@ -30,7 +30,7 @@ I wanted the app to feel like this Angel Kart scene reference I saw on Instagram
 
 ![Angel Kart Reference](angel-kart.png)
 
-This game is a character screen with an overall pastel 2000s vibe and is a selection screen based on my 4 plushies. The typography should be fun and entertaining.
+This game is a character screen with an overall pastel 2000s vibe and is a selection screen based on my 4 plushies. The typography should be fun and entertaining. Instead of completely being like this reference image. I wanted it be a completely pixelated art style from my backgrounds and even my characters to represent the retro. I wanted it to also be a 2x2 character grid because I only had 4 characters.
 
 ---
 
