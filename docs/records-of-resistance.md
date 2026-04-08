@@ -16,7 +16,7 @@
 **Commits:** `ff74c9f` (rejected) → `570547b` (revert)
 
 **What I wanted:**
-Larger character cards and more visual polish — still within the kawaii pastel aesthetic defined in my Design Intent. I wanted softness, roundness, and a cute game lobby feel. The Press Start 2P font was already in place and I liked it.
+Larger character cards and more visual polish still within the kawaii pastel aesthetic defined in my Design Intent. I wanted softness, roundness, and a cute game lobby feel. The Press Start 2P font was already in place and I liked it.
 
 **What AI made:**
 Claude returned a complete visual restyle of every component. It added pixel-drop shadows to all elements, changed card corners from rounded to sharp right angles, applied heavy pixel-art borders, and styled buttons with angular 8-bit shapes. The entire screen shifted from kawaii pastel to harsh NES game UI. The font was kept but surrounded by everything I didn't want.
@@ -85,17 +85,17 @@ The selected character's kart should float freely in the right half of the scree
 Claude placed the kart inside a visible framed container: a card-like box with rounded corners, padding, and a subtle background tint. This is the standard UI pattern for a "detail panel" or "preview area."
 
 **Why AI went wrong:**
-AI followed a convention. A right-side detail panel is the conventional UI response to "show a preview of the selected item." Claude had no reason to deviate from it — the design intention of floating the character freely in the background was never stated explicitly in the prompt.
+AI followed a convention. A right-side detail panel is the conventional UI response to "show a preview of the selected item." Claude had no reason to deviate from it the design intention of floating the character freely in the background was never stated explicitly in the prompt.
 
 **How I fixed it:**
-I needed to explicitly reject every element of the container — not just shrink it or restyle it, but eliminate it entirely. The prompt had to communicate that absence was the design.
+I needed to explicitly reject every element of the container not just shrink it or restyle it, but eliminate it entirely. The prompt had to communicate that absence was the design.
 
-> *"No box, no background, no border — the kart should float in the background of the screen. Only the shadow ellipse below it."*
+> *"No box, no background, no border the kart should float in the background of the screen. Only the shadow ellipse below it."*
 
 Claude removed the container background, border, and padding entirely. The kart now appears directly against the full-screen background image with only a ground shadow beneath it.
 
 **Why fixing it made it better:**
-Removing the box completely changed the feeling of character selection. Instead of looking at a character *through* a UI panel, the screen feels like you're looking at the character *in their world*. The background shifts to their theme, and they float in it — immersive rather than interfaced. The only thing grounding them is the ellipse shadow, which feels like a game engine ground contact shadow, not a UI border.
+Removing the box completely changed the feeling of character selection. Instead of looking at a character *through* a UI panel, the screen feels like you're looking at the character *in their world*. The background shifts to their theme, and they float in it immersive rather than interfaced. The only thing grounding them is the ellipse shadow, which feels like a game engine ground contact shadow, not a UI border.
 
 ---
 
