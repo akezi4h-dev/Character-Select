@@ -436,6 +436,24 @@ Generic colored rectangle confetti had no connection to the selected character's
 [Full log with detailed entries →](docs/records-of-resistance.md)
 
 ---
+## 5 Questions
+
+
+### 1. Can I defend this?
+I can defend this because every major decision was made through iteration. In my first attempts I tried using pastel text for each character, but once I added the backgrounds it became too saturated to read. Every decision that wasn't in my original design intent was made for a reason whether that was adapting to swapping out placeholder images for my actual artwork, or adjusting things to better match my design direction. Nothing was changed randomly
+
+### 2. Is this mine?
+During my first iterations I struggled finding a design direction because we only had a week to fully build this. But my design intent never changed I always wanted the theme of the game and the character select screen to be built around my characters Barry, Gerald, Steve, and Gurchen, and reflect my moodboard. So yes, this is 100% my design. I never just followed AI suggestions blindly. Throughout the whole process I kept sharing reference images in Claude Chat to show my intent, and I always reviewed what it gave me before passing anything to Claude Code.
+
+### 3. Did I verify?
+Yes. Whenever I wasn't sure how something worked I asked Claude Chat to explain it before I applied it. I also added a grid overlay and learned how to ask about CSS positioning so I could be more specific and precise with my instructions to Claude Code. That process of checking and verifying is actually what helped me iterate faster and get closer to what I actually wanted.
+
+### 4. Would I teach this?
+Honestly, not yet and I think being aware of that is important. I'm still at the beginning of this class and I struggled a lot with being vague and ran into a lot of errors before getting to where I wanted. I want to learn more about UI, understand panels better, and get more comfortable being specific when prompting both Claude Chat and Claude Code before I could confidently teach this to someone else.
+
+### 5. Is my documentation honest?
+Yes, completely. Throughout the whole project I kept asking Claude Code to update my AI Direction Log and Records of Resistance whenever I added something new. I also personally edited the intent sections of the AI Resistance log to make sure it truly reflected my design direction and not just what the AI did because that distinction mattered to me.
+
 
 ## Tech Stack
 
