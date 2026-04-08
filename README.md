@@ -436,6 +436,7 @@ Generic colored rectangle confetti had no connection to the selected character's
 [Full log with detailed entries →](docs/records-of-resistance.md)
 
 ---
+
 ## 5 Questions
 
 
@@ -454,6 +455,7 @@ Honestly, not yet and I think being aware of that is important. I'm still at the
 ### 5. Is my documentation honest?
 Yes, completely. Throughout the whole project I kept asking Claude Code to update my AI Direction Log and Records of Resistance whenever I added something new. I also personally edited the intent sections of the AI Resistance log to make sure it truly reflected my design direction and not just what the AI did because that distinction mattered to me.
 
+---
 
 ## Tech Stack
 
