@@ -371,9 +371,6 @@ The kart label ("[Name]'S KART") was the one text element not connected to the `
 ### Entry 30 — Character-Themed Emoji Added to Transition Confetti *(2026-04-08)*
 Each character's theme floater emojis (from `themes.js`) mixed into the confetti on the transition screen. 20 emoji pieces fall alongside 80 colored rectangles — Steve gets birds and waves, Gerald gets rockets and moons.
 
-### Entry 31 — Moodboard Added to Documentation *(2026-04-08)*
-Visual moodboard capturing the kawaii pixel game references that informed the design added to `docs/Moodboard.png`, referenced in README and design-intent.md after the personal statement.
-
 [Full log with detailed entries →](docs/ai-direction-log.md)
 
 ---
