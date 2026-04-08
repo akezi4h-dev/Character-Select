@@ -30,6 +30,91 @@ I feel like youth and plushies have been forgotten — like Toy Story — so my 
 
 > This design intent was written before any AI-assisted development began. It serves as the evaluative standard against which all AI output was judged throughout the project.
 
+---
+
+### Design Intent 1 v.1 — Human Written
+
+I wanted the app to feel like this Angel Kart scene reference I saw on Instagram but also I wanted it to be based on my own 4 characters who are Steve, Gurchen, Gerald, and Barry:
+
+![Angel Kart Reference](docs/angel-kart.png)
+
+This game is a character screen with an overall pastel 2000s vibe and is a selection screen based on my 4 plushies. The typography should be fun and entertaining.
+
+#### Barry
+
+Barry is a Platypus based on the Platypus Palm Pals Plush:
+
+![Barry Plush](docs/barry-plush.png)
+
+Barry is river themed and when hovering over him it plays his color: **Pastel Orange**
+Barry has a river themed background.
+
+#### Steve
+
+Steve is a Seagull based on the Seagull Palm Pals Plush:
+
+![Steve Plush](docs/steve-plush.png)
+
+Steve is beach themed and when hovering over him it plays his color: **Pastel Blue**
+Steve's intent is to have a more beach related theme. Make flying bird animations in the background.
+
+#### Gurchen
+
+Gurchen is a Crocodile based on the Crocodile Plush I had that my boyfriend gave to me:
+
+![Gurchen Plush](docs/gurchen-plush.png)
+
+Gurchen is swamp themed and when hovering over him it plays his color: **Pastel Green**
+Gurchen is more swamp themed so try having a swamp background.
+
+#### Gerald
+
+Gerald is a Monkey based on the Monkey Plush I bought in the Smithsonian Space Museum:
+
+![Gerald Plush](docs/gerald-plush.png)
+
+Gerald is jungle themed and when hovering over him it plays his color: **Pastel Yellow**
+
+#### Hover Interaction (v.1)
+
+When hovering over the characters I wanted:
+- The border of the character card to change
+- The size of the character card to be bigger
+- The background to change to that specific character's theme when hovering
+
+---
+
+### Design Intent 1 v.2 — AI Assisted but Human Written
+
+The app should feel like a cute pastel racing game lobby inspired by Japanese kawaii UI and casual Nintendo-style game menus. The experience should feel playful, soft and dreamy, friendly and collectible, lighthearted and whimsical — somewhere between **Mario Kart and Sanrio aesthetics**.
+
+**Color Palette:** Baby blue background, soft pink accents, creamy yellows, mint green, lavender. Cotton-candy-like and dreamy — no harsh colors or dark tones.
+
+**UI Elements:** Rounded corners, soft shadows, pill-shaped buttons, thick friendly outlines, subtle glow. Everything soft and toy-like, like plastic game pieces.
+
+**Character Selection Grid:** 2×2 grid of square character cards. Each card: rounded square frame, pastel border, character avatar, name underneath. Hover → card scales up, border glows, soft bounce animation, background changes to character's theme.
+
+**Characters:**
+
+| Character | Emoji | Theme | Hover Color |
+|-----------|-------|-------|-------------|
+| Steve | 🏄 | Beach | Pastel Blue |
+| Gurchen | 🐸 | Swamp | Pastel Green |
+| Gerald | 🐒 | Jungle/Space | Pastel Yellow |
+| Barry | 🦦 | River | Pastel Orange |
+
+**Themed Backgrounds:**
+- *Steve — Beach:* Light blue sky, pixel ocean horizon, sandy tones, small flying bird animations
+- *Gurchen — Swamp:* Murky green water, swamp plants, dark green tones, occasional bubbles or swamp mist
+- *Gerald — Jungle/Space:* Dense green leaves / stars, vines, layered foliage / cosmic silhouettes
+- *Barry — River:* Flowing water, smooth stones, soft reflections, water movement animation
+
+**Reset Behavior:** If the user moves the cursor off the character grid, the background returns to the default soft pastel menu background.
+
+**Typography:** Rounded sans-serif, bubbly shapes, slightly thick, readable but playful. No corporate fonts.
+
+**Motion:** Floating stars, gentle background movement, character idle animation, UI hover bounce, button squish. Soft, springy, slow and satisfying.
+
 [Full Design Intent 1 →](docs/design-intent-1.md)
 
 ---
