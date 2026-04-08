@@ -489,17 +489,6 @@ I directed Claude to pull the emoji floaters from each character's theme in `the
 The transition screen should feel like it belongs to that character's world. Generic confetti felt disconnected from the character's identity. Reusing the existing theme emoji system was the right solution — no new art, no new data, just connecting two systems that were already there.
 
 ---
-
-## Entry 31 — Moodboard Added to Documentation (4/8)
-
-**Date:** 2026-04-08
-
-**What I did:**
-I added a visual moodboard image to the project documentation — placed in `docs/Moodboard.png` and referenced in both the README and `design-intent.md` immediately after the personal statement.
-
-**Why this was my decision:**
-The moodboard captures the visual references that informed the design before a single line of code was written — kawaii pixel games, plushie aesthetics, cute animal characters, pastel game UIs. Documenting it in the repo gives the AI direction system a visual anchor that written descriptions alone can't fully convey. It also demonstrates that the creative vision existed prior to any AI-assisted development.
-
 ---
 
 *Last updated: 2026-04-08*
